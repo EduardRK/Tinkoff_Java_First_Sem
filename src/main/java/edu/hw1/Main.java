@@ -3,25 +3,37 @@ package edu.hw1;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public final class Main {
-    private final static Logger LOGGER = LogManager.getLogger();
-
     private Main() {
     }
 
+    private final static Logger LOGGER = LogManager.getLogger();
+
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        LOGGER.info("Hello and welcome!");
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 0; i <= 2; i++) {
+//        Task7
+//        LOGGER.info(Task7.rotateRight(8, 1));
+//        LOGGER.info(Task7.rotateRight(10, -9));
+//        LOGGER.info(Task7.rotateRight(-100, 1));
+//        LOGGER.info(Task7.rotateRight(900, 4));
+//        LOGGER.info(Task7.rotateLeft(16, 1));
+//        LOGGER.info(Task7.rotateLeft(17, 2));
+//        LOGGER.info(Task7.rotateLeft(17, -4));
+//        LOGGER.info(Task7.rotateLeft(-2, 2));
+//        LOGGER.info(Task7.rotateLeft(34, 1));
+//        LOGGER.info(Task7.rotateLeft(25, 7));
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            LOGGER.info("i = {}", i);
-        }
+        //        Task_1
+//        LOGGER.info(Task_1.minutesToSeconds("123:12")); // true
+//        LOGGER.info(Task_1.minutesToSeconds("3:59")); // true
+//        LOGGER.info(Task_1.minutesToSeconds("-123:12")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("  123:12 ")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("  12:3:12 ")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("dogfood")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("1310")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("123:100")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("10:1s2")); // false
+//        LOGGER.info(Task_1.minutesToSeconds("0:0")); // true
     }
 }
