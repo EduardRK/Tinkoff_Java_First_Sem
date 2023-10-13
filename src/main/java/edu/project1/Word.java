@@ -4,8 +4,8 @@ public class Word {
     private final String hiddenWord;
     private String encryptedWord;
 
-    public Word(String hiddenWord) {
-        this.hiddenWord = hiddenWord;
+    public Word(Dictionary dictionary) {
+        this.hiddenWord = dictionary.randomWord();
         this.encryptedWord = "*".repeat(hiddenWord.length());
     }
 

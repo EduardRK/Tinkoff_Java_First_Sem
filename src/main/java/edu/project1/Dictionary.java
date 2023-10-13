@@ -3,19 +3,19 @@ package edu.project1;
 import java.util.Random;
 
 public class Dictionary {
-    private String[] dictionary = new String[] {"hello", "hutao", "sunshine"};
+    private final String[] dictionary;
 
-    private Dictionary() {
+    public Dictionary(String[] words) {
+        dictionary = words;
     }
 
     public String[] getDictionary() {
         return this.dictionary;
     }
 
-    public static String randomWord() {
+    public String randomWord() {
         Random rand = new Random();
-        Dictionary dictionary = new Dictionary();
-        int randomNumber = rand.nextInt(dictionary.getDictionary().length);
-        return dictionary.getDictionary()[randomNumber];
+        int randomNumber = rand.nextInt(dictionary.length);
+        return dictionary[randomNumber];
     }
 }

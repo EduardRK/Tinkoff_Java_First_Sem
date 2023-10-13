@@ -1,10 +1,25 @@
 package edu.project1;
 
+import java.security.PublicKey;
+
 public final class Checker {
     private Checker() {
     }
 
     private static final String LOOKUP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public static boolean isCorrectDictionary(Dictionary dictionary) {
+        for (String word : dictionary.getDictionary()) {
+            if ((word == null) || (word.length() < 2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isDictionaryEmpty(Dictionary dictionary) {
+        return (dictionary.getDictionary().length == 0) || (dictionary.getDictionary() == null);
+    }
 
     public static boolean isMisspell(Answer answer) {
         return (answer.getAnswerArray().length != 1) || (!LOOKUP.contains(answer.getAnswerString()));

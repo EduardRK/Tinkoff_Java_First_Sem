@@ -4,7 +4,7 @@ public final class WinnerChecker {
     private WinnerChecker() {
     }
 
-    public static boolean isWordWasGuessed(Word word) {
+    public static boolean isPlayerWon(Word word) {
         return word.getHiddenWord().equals(word.getEncryptedWord());
     }
 }

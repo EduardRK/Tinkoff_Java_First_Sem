@@ -5,38 +5,42 @@ public final class ConsoleHangman {
     }
 
     public static void gameStart() {
-        Player player = new Player(0);
-        Word word = new Word(Dictionary.randomWord());
-        Answer answer = new Answer();
+        Dictionary dictionary = new Dictionary(new String[] {"hutao"});
+        if (Checker.isCorrectDictionary(dictionary) && !Checker.isDictionaryEmpty(dictionary)) {
+            Player player = new Player();
+            Word word = new Word(dictionary);
+            Answer answer = new Answer();
 
-        SystemMessages.welcomeMessage();
-        SystemMessages.rulesMessage();
+            Statements.startGamePhase();
 
-        while (true) {
-            Statement.inputLetterPhase(answer);
+            while (true) {
+                Statements.inputLetterPhase(answer);
 
-            if (Checker.isMisspell(answer)) {
-                if (Checker.isEnd(answer)) {
-                    SystemMessages.forcedEndGame();
-                    break;
-                }
-                Statement.misspellLetterPhase(answer, word);
+                if (Checker.isMisspell(answer)) {
+                    if (Checker.isEnd(answer)) {
+                        Statements.forcedEndGamePhase();
+                        break;
+                    }
+                    Statements.misspellLetterPhase(answer, word);
 
-            } else if (!Checker.isRightLetter(answer, word)) {
-                Statement.wrongAnswerPhase(player, answer, word);
-                if (LoserChecker.isMistakesMoreThanFive(player)) {
-                    SystemMessages.loseMessage();
-                    break;
-                }
+                } else if (!Checker.isRightLetter(answer, word)) {
+                    Statements.wrongAnswerPhase(player, answer, word);
+                    if (LoserChecker.isPlayerLost(player)) {
+                        Statements.losingPhase();
+                        break;
+                    }
 
-            } else if (Checker.isRightLetter(answer, word)) {
-                Statement.rightAnswerPhase(answer, word);
-                if (WinnerChecker.isWordWasGuessed(word)) {
-                    SystemMessages.winMessage();
-                    break;
+                } else if (Checker.isRightLetter(answer, word)) {
+                    Statements.rightAnswerPhase(answer, word);
+                    if (WinnerChecker.isPlayerWon(word)) {
+                        Statements.winningPhase();
+                        break;
+                    }
                 }
             }
+            Statements.endGamePhase();
+        } else {
+            Statements.incorrectDictionaryPhase();
         }
-        SystemMessages.endGameMessage();
     }
 }

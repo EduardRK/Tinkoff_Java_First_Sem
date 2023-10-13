@@ -14,6 +14,10 @@ public class Answer {
         return answer[0];
     }
 
+    public void setAnswer(String answer) {
+        this.answer = answer.toCharArray();
+    }
+
     public String getAnswerString() {
         return new String(answer);
     }

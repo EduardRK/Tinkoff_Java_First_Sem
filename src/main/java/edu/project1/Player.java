@@ -3,8 +3,8 @@ package edu.project1;
 public class Player {
     private int countOfMistakes;
 
-    Player(int countOfMistakes) {
-        this.countOfMistakes = countOfMistakes;
+    Player() {
+        this.countOfMistakes = 0;
     }
 
     public int getCountOfMistakes() {
