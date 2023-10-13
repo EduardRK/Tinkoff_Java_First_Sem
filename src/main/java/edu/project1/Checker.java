@@ -1,7 +1,5 @@
 package edu.project1;
 
-import java.security.PublicKey;
-
 public final class Checker {
     private Checker() {
     }
