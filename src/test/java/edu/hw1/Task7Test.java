@@ -59,6 +59,18 @@ public class Task7Test {
     }
 
     @Test
+    @DisplayName("Zero")
+    void zero() {
+        int actual = Task7.rotateRight(0, 2);
+        int expected = 0;
+        Assertions.assertEquals(expected, actual);
+
+        actual = Task7.rotateLeft(0, -1);
+        expected = 0;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     @DisplayName("Negative number")
     void negativeNumber() {
         int actual = Task7.rotateRight(-10, -9);

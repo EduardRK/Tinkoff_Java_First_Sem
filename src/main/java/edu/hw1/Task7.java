@@ -4,8 +4,8 @@ public final class Task7 {
     private Task7() {
     }
 
-    private static boolean isPositiveNumber(int number) {
-        return number > 0;
+    private static boolean isNegativeNumber(int number) {
+        return number < 0;
     }
 
     private static boolean isShiftNegative(int shift) {
@@ -13,7 +13,7 @@ public final class Task7 {
     }
 
     public static int rotateRight(int number, int shift) {
-        if (!isPositiveNumber(number)) {
+        if (isNegativeNumber(number)) {
             return -1;
         }
         if (isShiftNegative(shift)) {
@@ -27,16 +27,13 @@ public final class Task7 {
     }
 
     public static int rotateLeft(int number, int shift) {
-        if (!isPositiveNumber(number)) {
+        if (isNegativeNumber(number)) {
             return -1;
         }
         if (isShiftNegative(shift)) {
             return rotateRight(number, -shift);
         }
         int countDigitInBinary = Utility.countDigitInBinaryNumber(number);
-        int bitMask = (int) (Math.pow(2, countDigitInBinary) - 1);
-        int remainsShift = (shift % countDigitInBinary);
-        int modifiedNumber = (number << remainsShift) | (number >> (countDigitInBinary - remainsShift));
-        return modifiedNumber & bitMask;
+        return rotateRight(number, countDigitInBinary - shift);
     }
 }
