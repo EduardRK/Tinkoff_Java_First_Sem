@@ -1,6 +1,5 @@
 package edu.hw3;
 
-import edu.hw3.task4.InvalidArgumentException;
 import edu.hw3.task4.Task4;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +9,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Example test")
-    public void exampleTest() throws InvalidArgumentException {
+    public void exampleTest() {
         String actual = Task4.convertToRoman(2);
         String expected = "II";
         Assertions.assertEquals(expected, actual);
@@ -26,7 +25,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("More complex cases #1")
-    public void moreComplexCases1() throws InvalidArgumentException {
+    public void moreComplexCases1() {
         String actual = Task4.convertToRoman(341);
         String expected = "CCCXLI";
         Assertions.assertEquals(expected, actual);
@@ -42,7 +41,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("More complex cases #2")
-    public void moreComplexCases2() throws InvalidArgumentException {
+    public void moreComplexCases2() {
         String actual = Task4.convertToRoman(2389);
         String expected = "MMCCCLXXXIX";
         Assertions.assertEquals(expected, actual);
@@ -59,7 +58,7 @@ public class Task4Test {
     @Test
     @DisplayName("Negative number")
     public void negativeNumber() {
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             String actual = Task4.convertToRoman(-19);
         });
     }
@@ -67,7 +66,7 @@ public class Task4Test {
     @Test
     @DisplayName("Zero number")
     public void zeroNumber() {
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             String actual = Task4.convertToRoman(0);
         });
     }

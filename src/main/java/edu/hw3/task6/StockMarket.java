@@ -1,14 +1,19 @@
 package edu.hw3.task6;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class StockMarket implements IStockMarket {
-    private final PriorityQueue<Stock> stockMarket = new PriorityQueue<>();
+    private final Queue<Stock> stockMarket = new PriorityQueue<>();
 
     public StockMarket(Stock... stocks) {
-        for (Stock stock : stocks) {
-            add(stock);
-        }
+        stockMarket.addAll(Arrays.asList(stocks));
+    }
+
+    public StockMarket(List<Stock> stocks) {
+        stockMarket.addAll(stocks);
     }
 
     @Override

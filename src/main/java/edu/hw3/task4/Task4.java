@@ -4,10 +4,10 @@ import edu.hw3.Validator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Task4 {
-    private Task4() {
-    }
 
     private static final int I_IN_DECIMAL = 1;
     private static final int IV_IN_DECIMAL = 4;
@@ -23,29 +23,34 @@ public class Task4 {
     private static final int CM_IN_DECIMAL = 900;
     private static final int M_IN_DECIMAL = 1000;
 
-    private static final HashMap<Integer, String> ROMAN_DIGITS = new HashMap<>() {{
-        put(I_IN_DECIMAL, "I");
-        put(IV_IN_DECIMAL, "IV");
-        put(V_IN_DECIMAL, "V");
-        put(IX_IN_DECIMAL, "IX");
-        put(X_IN_DECIMAL, "X");
-        put(XL_IN_DECIMAL, "XL");
-        put(L_IN_DECIMAL, "L");
-        put(XC_IN_DECIMAL, "XC");
-        put(C_IN_DECIMAL, "C");
-        put(CD_IN_DECIMAL, "CD");
-        put(D_IN_DECIMAL, "D");
-        put(CM_IN_DECIMAL, "CM");
-        put(M_IN_DECIMAL, "M");
-    }};
+    private static final Map<Integer, String> ROMAN_DIGITS = new HashMap<>();
 
-    public static String convertToRoman(int number) throws InvalidArgumentException {
+    static {
+        ROMAN_DIGITS.put(I_IN_DECIMAL, "I");
+        ROMAN_DIGITS.put(IV_IN_DECIMAL, "IV");
+        ROMAN_DIGITS.put(V_IN_DECIMAL, "V");
+        ROMAN_DIGITS.put(IX_IN_DECIMAL, "IX");
+        ROMAN_DIGITS.put(X_IN_DECIMAL, "X");
+        ROMAN_DIGITS.put(XL_IN_DECIMAL, "XL");
+        ROMAN_DIGITS.put(L_IN_DECIMAL, "L");
+        ROMAN_DIGITS.put(XC_IN_DECIMAL, "XC");
+        ROMAN_DIGITS.put(C_IN_DECIMAL, "C");
+        ROMAN_DIGITS.put(CD_IN_DECIMAL, "CD");
+        ROMAN_DIGITS.put(D_IN_DECIMAL, "D");
+        ROMAN_DIGITS.put(CM_IN_DECIMAL, "CM");
+        ROMAN_DIGITS.put(M_IN_DECIMAL, "M");
+    }
+
+    private Task4() {
+    }
+
+    public static String convertToRoman(int number) {
         if (!Validator.isPositiveNumber(number)) {
-            throw new InvalidArgumentException();
+            throw new IllegalArgumentException();
         }
 
         int modifiedNumber = number;
-        ArrayList<Integer> keyArray = new ArrayList<>(ROMAN_DIGITS.keySet());
+        List<Integer> keyArray = new ArrayList<>(ROMAN_DIGITS.keySet());
         Collections.sort(keyArray);
         int keyArrayLength = keyArray.size();
         StringBuilder romanNumber = new StringBuilder();
@@ -60,6 +65,6 @@ public class Task4 {
             }
         }
 
-        return new String(romanNumber);
+        return romanNumber.toString();
     }
 }

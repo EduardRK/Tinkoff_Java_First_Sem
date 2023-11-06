@@ -3,6 +3,7 @@ package edu.hw3.task5;
 import edu.hw3.Validator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Task5 {
     private static final int ASCII_CODE_FIRST_UPPER_CASE_LETTER = 65;
@@ -15,28 +16,26 @@ public class Task5 {
     private Task5() {
     }
 
-    public static ArrayList<Contact> parseContacts(ArrayList<String> contacts, Sort typeOfSort)
+    public static List<Contact> parseContacts(List<String> contacts, Sort typeOfSort)
         throws InvalidContactList {
-        if (Validator.isArrayNull(contacts) || Validator.isArrayEmpty(contacts)) {
+        if (Validator.isListNull(contacts) || contacts.isEmpty()) {
             return new ArrayList<>();
         }
         if (!isCorrectContacts(contacts)) {
             throw new InvalidContactList();
         }
 
-        ArrayList<Contact> contactsList = convertStringArrayToPersonArray(contacts);
+        List<Contact> contactsList = convertStringArrayToPersonArray(contacts);
         Collections.sort(contactsList);
-        if (typeOfSort == Sort.ASC) {
-            return contactsList;
-        } else {
+        if (typeOfSort != Sort.ASC) {
             Collections.reverse(contactsList);
-            return contactsList;
         }
+        return contactsList;
     }
 
-    private static boolean isCorrectContacts(ArrayList<String> contacts) {
+    private static boolean isCorrectContacts(List<String> contacts) {
         for (String contact : contacts) {
-            if (Validator.isStringEmpty(contact)) {
+            if (Validator.isStringNull(contact) || contact.isEmpty()) {
                 return false;
             } else if (!isContactHasFirstNameOrLastName(contact)) {
                 return false;
@@ -48,7 +47,7 @@ public class Task5 {
     }
 
     private static boolean isContactHasFirstNameOrLastName(String contact) {
-        String[] firstNameAndLastName = contact.split(" ");
+        String[] firstNameAndLastName = contact.split("\\s+");
         return firstNameAndLastName.length <= 2;
     }
 
@@ -74,8 +73,8 @@ public class Task5 {
                 && (int) letter <= ASCII_CODE_LAST_UPPER_CASE_LETTER);
     }
 
-    private static ArrayList<Contact> convertStringArrayToPersonArray(ArrayList<String> array) {
-        ArrayList<Contact> personArrayList = new ArrayList<>();
+    private static List<Contact> convertStringArrayToPersonArray(List<String> array) {
+        List<Contact> personArrayList = new ArrayList<>();
         for (String contact : array) {
             personArrayList.add(new Contact(contact));
         }

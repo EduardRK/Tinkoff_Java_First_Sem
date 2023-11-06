@@ -2,26 +2,23 @@ package edu.hw3.task3;
 
 import edu.hw3.Validator;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Task3 {
     private Task3() {
     }
 
-    public static HashMap<Object, Integer> freqDict(Object[] objectsArray) {
+    public static Map<Object, Integer> freqDict(Object[] objectsArray) {
         if (Validator.isArrayNull(objectsArray)) {
             return null;
         }
-        HashMap<Object, Integer> frequencyDictionary = new HashMap<>();
+        Map<Object, Integer> frequencyDictionary = new HashMap<>();
         if (Validator.isArrayEmpty(objectsArray)) {
             return frequencyDictionary;
         }
 
         for (var object : objectsArray) {
-            if (frequencyDictionary.containsKey(object)) {
-                frequencyDictionary.put(object, frequencyDictionary.get(object) + 1);
-            } else {
-                frequencyDictionary.put(object, 1);
-            }
+            frequencyDictionary.put(object, frequencyDictionary.getOrDefault(object, 0) + 1);
         }
         return frequencyDictionary;
     }

@@ -2,27 +2,27 @@ package edu.hw3.task2;
 
 import edu.hw3.Validator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Task2 {
     private Task2() {
     }
 
-    public static ArrayList<String> clusterize(String stringOfBrackets)
-        throws InvalidArgumentException, InvalidBracketsSequence {
-        if (Validator.isStringEmpty(stringOfBrackets)) {
-            return new ArrayList<>() {{
-                add(stringOfBrackets);
-            }};
+    public static List<String> clusterize(String stringOfBrackets)
+        throws InvalidBracketsSequence {
+        if (Validator.isStringNull(stringOfBrackets) || stringOfBrackets.isEmpty()) {
+            return Collections.singletonList(stringOfBrackets);
         }
 
         if (!isCorrectString(stringOfBrackets)) {
-            throw new InvalidArgumentException();
+            throw new IllegalArgumentException();
         }
 
         char[] stringOfBracketsArray = stringOfBrackets.toCharArray();
         int openBrackets = 0;
         StringBuilder buildCluster = new StringBuilder();
-        ArrayList<String> arrayOfClusters = new ArrayList<>();
+        List<String> arrayOfClusters = new ArrayList<>();
         for (char bracket : stringOfBracketsArray) {
             if (bracket == '(') {
                 buildCluster.append(bracket);

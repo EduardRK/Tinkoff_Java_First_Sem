@@ -3,16 +3,16 @@ package edu.hw3.task1;
 import edu.hw3.Validator;
 
 public class Task1 {
-    private Task1() {
-    }
-
     private static final int ASCII_CODE_FIRST_UPPER_CASE_LETTER = 65;
     private static final int ASCII_CODE_LAST_UPPER_CASE_LETTER = 90;
     private static final int ASCII_CODE_FIRST_LOWER_CASE_LETTER = 97;
     private static final int ASCII_CODE_LAST_LOWER_CASE_LETTER = 122;
 
+    private Task1() {
+    }
+
     public static String atbash(String message) {
-        if (Validator.isStringEmpty(message)) {
+        if (Validator.isStringNull(message) || message.isEmpty()) {
             return message;
         }
 
