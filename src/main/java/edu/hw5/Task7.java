@@ -12,7 +12,7 @@ public class Task7 {
     }
 
     public static boolean isStartsAndEndsWithSameCharacter(String string) {
-        String regex = "^[01]$|^0.*0$|^1.*1$";
+        String regex = "^[01]?$|^(0[01]*0)$|^(1[01]*1)$";
         return Pattern.matches(regex, string);
     }
 
