@@ -10,7 +10,7 @@ public class Task13 {
 
     public static List<Animal> animalsWhoseNameMoreThanTwoWords(List<Animal> animals) {
         return animals.stream()
-            .filter(animal -> (animal.name().split(" ").length) > 2)
+            .filter(animal -> (animal.name().split("\\s+").length) > 2)
             .collect(Collectors.toList());
     }
 }

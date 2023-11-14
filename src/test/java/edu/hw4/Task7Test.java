@@ -86,8 +86,13 @@ public class Task7Test {
             add(snegok);
         }};
 
-        Animal actual = Task7.kOldestAnimal(animals, -5);
-        Assertions.assertEquals(smallBird, actual);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Animal actual = Task7.kOldestAnimal(animals, -7);
+        });
+        
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Animal actual = Task7.kOldestAnimal(animals, -1);
+        });
     }
 
     @Test

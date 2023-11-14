@@ -90,12 +90,13 @@ public class Task2Test {
             add(smallBird);
         }};
 
-        List<Animal> actual = Task2.takeKHeaviest(animals, -2);
-        List<Animal> expected = new ArrayList<>() {{
-            add(smallBird);
-            add(liza);
-        }};
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            List<Animal> actual = Task2.takeKHeaviest(animals, -30);
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            List<Animal> actual = Task2.takeKHeaviest(animals, -2);
+        });
     }
 
     @Test

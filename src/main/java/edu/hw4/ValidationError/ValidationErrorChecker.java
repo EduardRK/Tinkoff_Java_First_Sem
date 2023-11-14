@@ -24,21 +24,25 @@ public class ValidationErrorChecker {
     private static final int FISH_MAX_WEIGHT = 35_000;
     private static final int SPIDER_MAX_HEIGHT = 40;
     private static final int SPIDER_MAX_WEIGHT = 10;
-    private static final Map<Animal.Type, Integer> MAX_HEIGHT_OF_ANIMAL = new HashMap<>() {{
-        put(Animal.Type.CAT, CAT_MAX_HEIGHT);
-        put(Animal.Type.DOG, DOG_MAX_HEIGHT);
-        put(Animal.Type.BIRD, BIRD_MAX_HEIGHT);
-        put(Animal.Type.FISH, FISH_MAX_HEIGHT);
-        put(Animal.Type.SPIDER, SPIDER_MAX_HEIGHT);
-    }};
+    private static final Map<Animal.Type, Integer> MAX_HEIGHT_OF_ANIMAL = new HashMap<>();
 
-    private static final Map<Animal.Type, Integer> MAX_WEIGHT_OF_ANIMAL = new HashMap<>() {{
-        put(Animal.Type.CAT, CAT_MAX_WEIGHT);
-        put(Animal.Type.DOG, DOG_MAX_WEIGHT);
-        put(Animal.Type.BIRD, BIRD_MAX_WEIGHT);
-        put(Animal.Type.FISH, FISH_MAX_WEIGHT);
-        put(Animal.Type.SPIDER, SPIDER_MAX_WEIGHT);
-    }};
+    static {
+        MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.CAT, CAT_MAX_HEIGHT);
+        MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.DOG, DOG_MAX_HEIGHT);
+        MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.BIRD, BIRD_MAX_HEIGHT);
+        MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.FISH, FISH_MAX_HEIGHT);
+        MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.SPIDER, SPIDER_MAX_HEIGHT);
+    }
+
+    private static final Map<Animal.Type, Integer> MAX_WEIGHT_OF_ANIMAL = new HashMap<>();
+
+    static {
+        MAX_WEIGHT_OF_ANIMAL.put(Animal.Type.CAT, CAT_MAX_WEIGHT);
+        MAX_WEIGHT_OF_ANIMAL.put(Animal.Type.DOG, DOG_MAX_WEIGHT);
+        MAX_WEIGHT_OF_ANIMAL.put(Animal.Type.BIRD, BIRD_MAX_WEIGHT);
+        MAX_WEIGHT_OF_ANIMAL.put(Animal.Type.FISH, FISH_MAX_WEIGHT);
+        MAX_WEIGHT_OF_ANIMAL.put(Animal.Type.SPIDER, SPIDER_MAX_WEIGHT);
+    }
 
     private ValidationErrorChecker() {
     }
