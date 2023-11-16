@@ -214,8 +214,11 @@ public class Task1Test {
             Assertions.assertTrue(Files.exists(path));
 
             Set<String> set = new HashSet<>(Set.of("Key", "Key1", "Key2", "Key4"));
+
             Set<String> keySet = diskMap.keySet();
             Assertions.assertEquals(set, keySet);
+
+
 
             Assertions.assertEquals("Value4", diskMap.get("Key4"));
 
