@@ -3,6 +3,7 @@ package edu.hw6;
 import edu.hw6.Task2.Task2;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,8 +22,8 @@ public class Task2Test {
 
     @Test
     @DisplayName("Creating new file")
-    public void creatingNewFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path path) throws IOException {
-        Path filePath = Path.of(path + "Tinkoff Bank Biggest Secret.txt");
+    public void creatingNewFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
+        Path filePath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret.txt");
         Assertions.assertTrue(Files.notExists(filePath));
         Task2.cloneFile(filePath);
         Assertions.assertTrue(Files.exists(filePath));
@@ -31,7 +32,7 @@ public class Task2Test {
     @Test
     @DisplayName("Creating some copy")
     public void creatingSomeCopyFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-        Path filePath = Path.of(dir + "/Tinkoff Bank Biggest Secret.txt");
+        Path filePath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret.txt");
         Task2.cloneFile(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath.toFile()))) {
             bufferedWriter.write(SECRET);
@@ -42,10 +43,10 @@ public class Task2Test {
             Task2.cloneFile(filePath);
         }
 
-        Path firstCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия.txt");
-        Path secondCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (2).txt");
-        Path thirdCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (3).txt");
-        Path fourthCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (4).txt");
+        Path firstCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия.txt");
+        Path secondCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (2).txt");
+        Path thirdCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (3).txt");
+        Path fourthCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (4).txt");
         List<Path> list =
             new ArrayList<>(List.of(filePath, firstCopyPath, secondCopyPath, thirdCopyPath, fourthCopyPath));
 
@@ -59,9 +60,9 @@ public class Task2Test {
     @Test
     @DisplayName("Directory has one copy file")
     public void directoryHasOneCopyFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-        Path otherCopy = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (3).txt");
+        Path otherCopy = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (3).txt");
         otherCopy.toFile().createNewFile();
-        Path filePath = Path.of(dir + "/Tinkoff Bank Biggest Secret.txt");
+        Path filePath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret.txt");
         Task2.cloneFile(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(filePath.toFile())))) {
             bufferedWriter.write(SECRET);
@@ -72,11 +73,11 @@ public class Task2Test {
             Task2.cloneFile(filePath);
         }
 
-        Path firstCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия.txt");
-        Path secondCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (2).txt");
-        Path thirdCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (3).txt");
-        Path fourthCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (4).txt");
-        Path fifthCopyPath = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (5).txt");
+        Path firstCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия.txt");
+        Path secondCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (2).txt");
+        Path thirdCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (3).txt");
+        Path fourthCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (4).txt");
+        Path fifthCopyPath = Path.of(dir + File.separator + "Tinkoff Bank Biggest Secret — копия (5).txt");
         List<Path> list = new ArrayList<>(List.of(
             fifthCopyPath,
             secondCopyPath,

@@ -2,6 +2,7 @@ package edu.hw6;
 
 import edu.hw6.Task1.DiskMap;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,11 +27,11 @@ public class Task1Test {
         @Test
         @DisplayName("Test methods")
         public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-            Map<String, String> diskMap = new DiskMap(dir.toString());
 
+            Map<String, String> diskMap = new DiskMap(dir.toString());
             Assertions.assertTrue(diskMap.isEmpty());
 
-            Path pathKey = Path.of(dir + "/Key");
+            Path pathKey = Path.of(dir + File.separator + "Key");
             Assertions.assertTrue(Files.notExists(pathKey));
             diskMap.put("Key", "Value");
             Assertions.assertTrue(Files.exists(pathKey));
@@ -78,7 +79,7 @@ public class Task1Test {
 
             diskMap.clear();
             for (String key : keySet) {
-                Assertions.assertTrue(Files.notExists(Path.of(dir + "/" + key)));
+                Assertions.assertTrue(Files.notExists(Path.of(dir + File.separator + key)));
             }
         }
     }
@@ -98,10 +99,10 @@ public class Task1Test {
             Assertions.assertFalse(diskMap.isEmpty());
 
             for (String key : otherMap.keySet()) {
-                Assertions.assertTrue(Files.exists(Path.of(dir + "/" + key)));
+                Assertions.assertTrue(Files.exists(Path.of(dir + File.separator + key)));
             }
 
-            Path pathKey = Path.of(dir + "/Key");
+            Path pathKey = Path.of(dir + File.separator + "Key");
             Assertions.assertTrue(Files.notExists(pathKey));
             diskMap.put("Key", "Value");
             Assertions.assertTrue(Files.exists(pathKey));
@@ -157,7 +158,7 @@ public class Task1Test {
 
             diskMap.clear();
             for (String key : keySet) {
-                Assertions.assertTrue(Files.notExists(Path.of(dir + "/" + key)));
+                Assertions.assertTrue(Files.notExists(Path.of(dir + File.separator + key)));
             }
         }
     }
@@ -175,9 +176,9 @@ public class Task1Test {
                 ));
                 Map<String, String> diskMap = new DiskMap(otherMap, dir.toString());
             }
-            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key1")));
-            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key2")));
-            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key3")));
+            Assertions.assertTrue(Files.exists(Path.of(dir + File.separator + "Key1")));
+            Assertions.assertTrue(Files.exists(Path.of(dir + File.separator + "Key2")));
+            Assertions.assertTrue(Files.exists(Path.of(dir + File.separator + "Key3")));
 
             Map<String, String> diskMap = new DiskMap(dir.toString(), true);
             Assertions.assertEquals("Value1", diskMap.get("Key1"));
@@ -185,7 +186,7 @@ public class Task1Test {
             Assertions.assertEquals("Value3", diskMap.get("Key3"));
 
             diskMap.remove("Key1");
-            Assertions.assertTrue(Files.notExists(Path.of(dir + "/Key1")));
+            Assertions.assertTrue(Files.notExists(Path.of(dir + File.separator + "Key1")));
         }
     }
 }
