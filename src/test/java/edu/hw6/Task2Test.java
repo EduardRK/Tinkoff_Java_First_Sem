@@ -22,7 +22,6 @@ public class Task2Test {
     @Test
     @DisplayName("Creating new file")
     public void creatingNewFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path path) throws IOException {
-        path.toFile().mkdirs();
         Path filePath = Path.of(path + "Tinkoff Bank Biggest Secret.txt");
         Assertions.assertTrue(Files.notExists(filePath));
         Task2.cloneFile(filePath);
@@ -32,7 +31,6 @@ public class Task2Test {
     @Test
     @DisplayName("Creating some copy")
     public void creatingSomeCopyFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-        dir.toFile().mkdirs();
         Path filePath = Path.of(dir + "/Tinkoff Bank Biggest Secret.txt");
         Task2.cloneFile(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath.toFile()))) {
@@ -61,7 +59,6 @@ public class Task2Test {
     @Test
     @DisplayName("Directory has one copy file")
     public void directoryHasOneCopyFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-        dir.toFile().mkdirs();
         Path otherCopy = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (3).txt");
         otherCopy.toFile().createNewFile();
         Path filePath = Path.of(dir + "/Tinkoff Bank Biggest Secret.txt");

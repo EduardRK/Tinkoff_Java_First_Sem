@@ -26,7 +26,6 @@ public class Task1Test {
         @Test
         @DisplayName("Test methods")
         public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-            dir.toFile().mkdirs();
             Map<String, String> diskMap = new DiskMap(dir.toString());
 
             Assertions.assertTrue(diskMap.isEmpty());
@@ -34,6 +33,7 @@ public class Task1Test {
             Path pathKey = Path.of(dir + "/Key");
             Assertions.assertTrue(Files.notExists(pathKey));
             diskMap.put("Key", "Value");
+            Assertions.assertTrue(Files.exists(pathKey));
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathKey.toFile()))) {
                 Assertions.assertEquals("Key:Value", bufferedReader.readLine());
             }
@@ -88,7 +88,6 @@ public class Task1Test {
         @Test
         @DisplayName("Test methods")
         public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
-            dir.toFile().mkdirs();
             Map<String, String> otherMap = new HashMap<>(Map.of(
                 "Key1", "Value1",
                 "Key2", "Value2",
@@ -97,6 +96,10 @@ public class Task1Test {
             Map<String, String> diskMap = new DiskMap(otherMap, dir.toString());
 
             Assertions.assertFalse(diskMap.isEmpty());
+
+            for (String key : otherMap.keySet()) {
+                Assertions.assertTrue(Files.exists(Path.of(dir + "/" + key)));
+            }
 
             Path pathKey = Path.of(dir + "/Key");
             Assertions.assertTrue(Files.notExists(pathKey));
@@ -164,7 +167,6 @@ public class Task1Test {
         @Test
         @DisplayName("Test methods")
         public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
-            dir.toFile().mkdirs();
             {
                 Map<String, String> otherMap = new HashMap<>(Map.of(
                     "Key1", "Value1",
@@ -173,6 +175,9 @@ public class Task1Test {
                 ));
                 Map<String, String> diskMap = new DiskMap(otherMap, dir.toString());
             }
+            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key1")));
+            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key2")));
+            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key3")));
 
             Map<String, String> diskMap = new DiskMap(dir.toString(), true);
             Assertions.assertEquals("Value1", diskMap.get("Key1"));
