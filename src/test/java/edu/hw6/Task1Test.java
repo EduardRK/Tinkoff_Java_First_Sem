@@ -210,8 +210,6 @@ public class Task1Test {
             Set<String> keySet = diskMap.keySet();
             Assertions.assertEquals(set, keySet);
 
-
-
             Assertions.assertEquals("Value4", diskMap.get("Key4"));
 
             diskMap.remove("Key4");
