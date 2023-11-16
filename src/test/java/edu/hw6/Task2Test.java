@@ -71,7 +71,7 @@ public class Task2Test {
     @Test
     @DisplayName("Directory has one of copy file")
     public void directoryHasOneOfCopyFile() throws IOException {
-        new File(DIR_PATH.toString() + "\\" + "Tinkoff Bank Biggest Secret — копия (5).txt").createNewFile();
+        new File(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия (5).txt").createNewFile();
 
         Task2.cloneFile(FILE_PATH);
         try (PrintWriter printWriter = new PrintWriter(FILE_PATH.toFile())) {

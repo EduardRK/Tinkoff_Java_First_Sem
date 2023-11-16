@@ -28,7 +28,7 @@ public final class Task2 {
 
         int currentCopyIndex = 0;
         if (files != null) {
-            for (File file : files) {
+            for (File ignored : files) {
                 if (Files.notExists(createCopyPath(path, currentCopyIndex))) {
                     break;
                 }

@@ -188,14 +188,6 @@ public class Task1Test {
         private static final Path DIR_PATH = Path.of("hw6_TestsDirectory\\Task1TestRead");
 
         @Test
-        @DisplayName("Read directory")
-        public void readDirectory() {
-            Assertions.assertTrue(Files.exists(DIR_PATH));
-            Map<String, String> diskMap = new DiskMap(DIR_PATH.toString(), true);
-            Assertions.assertTrue(Files.exists(DIR_PATH));
-        }
-
-        @Test
         @DisplayName("Test methods after read directory")
         public void testMethods() {
             Map<String, String> diskMap = new DiskMap(DIR_PATH.toString(), true);

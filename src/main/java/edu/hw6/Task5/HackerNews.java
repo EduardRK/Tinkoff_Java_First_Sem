@@ -29,7 +29,7 @@ public class HackerNews implements IHackerNews {
         if (topStories) {
             this.topStoriesURI = otherURI;
         } else {
-            this.newsURIWithoutExpansion = otherURI;
+            newsURIWithoutExpansion = otherURI;
         }
     }
 
