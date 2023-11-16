@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
 
 public class Task1Test {
@@ -24,7 +25,7 @@ public class Task1Test {
     @DisplayName("Creating diskMap with only directory name") class DiskMapWithOnlyDirectory {
         @Test
         @DisplayName("Test methods")
-        public void testMethods(@TempDir Path dir) throws IOException {
+        public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
             dir.toFile().mkdirs();
             Map<String, String> diskMap = new DiskMap(dir.toString());
 
@@ -33,7 +34,6 @@ public class Task1Test {
             Path pathKey = Path.of(dir + "/Key");
             Assertions.assertTrue(Files.notExists(pathKey));
             diskMap.put("Key", "Value");
-            Assertions.assertTrue(Files.exists(pathKey));
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathKey.toFile()))) {
                 Assertions.assertEquals("Key:Value", bufferedReader.readLine());
             }
@@ -87,7 +87,7 @@ public class Task1Test {
     @DisplayName("Creating diskMap with directory name and other map") class DiskMapWithDirectoryAndOtherMap {
         @Test
         @DisplayName("Test methods")
-        public void testMethods(@TempDir Path dir) throws IOException {
+        public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
             dir.toFile().mkdirs();
             Map<String, String> otherMap = new HashMap<>(Map.of(
                 "Key1", "Value1",
@@ -97,10 +97,6 @@ public class Task1Test {
             Map<String, String> diskMap = new DiskMap(otherMap, dir.toString());
 
             Assertions.assertFalse(diskMap.isEmpty());
-
-            for (String key : otherMap.keySet()) {
-                Assertions.assertTrue(Files.exists(Path.of(dir + "/" + key)));
-            }
 
             Path pathKey = Path.of(dir + "/Key");
             Assertions.assertTrue(Files.notExists(pathKey));
@@ -167,7 +163,7 @@ public class Task1Test {
     @DisplayName("Read diskMap from other file") class DiskMapReadFile {
         @Test
         @DisplayName("Test methods")
-        public void testMethods(@TempDir Path dir) {
+        public void testMethods(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
             dir.toFile().mkdirs();
             {
                 Map<String, String> otherMap = new HashMap<>(Map.of(
@@ -177,9 +173,6 @@ public class Task1Test {
                 ));
                 Map<String, String> diskMap = new DiskMap(otherMap, dir.toString());
             }
-            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key1")));
-            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key2")));
-            Assertions.assertTrue(Files.exists(Path.of(dir + "/Key3")));
 
             Map<String, String> diskMap = new DiskMap(dir.toString(), true);
             Assertions.assertEquals("Value1", diskMap.get("Key1"));

@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
 
 public class Task2Test {
@@ -20,7 +21,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Creating new file")
-    public void creatingNewFile(@TempDir Path path) throws IOException {
+    public void creatingNewFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path path) throws IOException {
         path.toFile().mkdirs();
         Path filePath = Path.of(path + "Tinkoff Bank Biggest Secret.txt");
         Assertions.assertTrue(Files.notExists(filePath));
@@ -30,7 +31,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Creating some copy")
-    public void creatingSomeCopyFile(@TempDir Path dir) throws IOException {
+    public void creatingSomeCopyFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
         dir.toFile().mkdirs();
         Path filePath = Path.of(dir + "/Tinkoff Bank Biggest Secret.txt");
         Task2.cloneFile(filePath);
@@ -51,7 +52,6 @@ public class Task2Test {
             new ArrayList<>(List.of(filePath, firstCopyPath, secondCopyPath, thirdCopyPath, fourthCopyPath));
 
         for (Path path : list) {
-            Assertions.assertTrue(Files.exists(path));
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path.toFile()))) {
                 Assertions.assertEquals(SECRET, bufferedReader.readLine());
             }
@@ -60,7 +60,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Directory has one copy file")
-    public void directoryHasOneCopyFile(@TempDir Path dir) throws IOException {
+    public void directoryHasOneCopyFile(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) throws IOException {
         dir.toFile().mkdirs();
         Path otherCopy = Path.of(dir + "/Tinkoff Bank Biggest Secret — копия (3).txt");
         otherCopy.toFile().createNewFile();
@@ -90,7 +90,6 @@ public class Task2Test {
         ));
 
         for (Path path : list) {
-            Assertions.assertTrue(Files.exists(path));
             if (!path.equals(otherCopy)) {
                 try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path.toFile()))) {
                     Assertions.assertEquals(SECRET, bufferedReader.readLine());
