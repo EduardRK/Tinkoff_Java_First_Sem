@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class Task2Test {
     private static final Path DIR_PATH = Path.of("src/main/resources/hw6_TestsDirectory/Task2Test");
-    private static final Path FILE_PATH = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret.txt");
+    private static final Path FILE_PATH = Path.of(DIR_PATH + "/Tinkoff Bank Biggest Secret.txt");
     private static final String SECRET = "This is a very, very big secret that no one should ever know";
 
     @Test
@@ -38,7 +38,7 @@ public class Task2Test {
             printWriter.write(SECRET);
         }
 
-        Path firstCopy = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия.txt");
+        Path firstCopy = Path.of(DIR_PATH + "/Tinkoff Bank Biggest Secret — копия.txt");
         Assertions.assertTrue(Files.notExists(firstCopy));
         Task2.cloneFile(FILE_PATH);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(firstCopy.toFile()))) {
@@ -46,7 +46,7 @@ public class Task2Test {
         }
         Assertions.assertTrue(Files.exists(firstCopy));
 
-        Path secondCopy = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия (2).txt");
+        Path secondCopy = Path.of(DIR_PATH + "/Tinkoff Bank Biggest Secret — копия (2).txt");
         Assertions.assertTrue(Files.notExists(secondCopy));
         Task2.cloneFile(FILE_PATH);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(secondCopy.toFile()))) {
@@ -54,7 +54,7 @@ public class Task2Test {
         }
         Assertions.assertTrue(Files.exists(secondCopy));
 
-        Path thirdCopy = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия (3).txt");
+        Path thirdCopy = Path.of(DIR_PATH + "/Tinkoff Bank Biggest Secret — копия (3).txt");
         Assertions.assertTrue(Files.notExists(thirdCopy));
         Task2.cloneFile(FILE_PATH);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(thirdCopy.toFile()))) {
@@ -84,7 +84,8 @@ public class Task2Test {
         }
 
         Assertions.assertTrue(Files.exists(FILE_PATH));
-        Assertions.assertTrue(Files.exists(Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия.txt")));
+        Path pathFile = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия.txt");
+        Assertions.assertTrue(Files.exists(pathFile));
         for (int i = 2; i < countCopy + 2; ++i) {
             Path path = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия (" + i + ").txt");
             Assertions.assertTrue(Files.exists(path));
@@ -97,7 +98,7 @@ public class Task2Test {
         }
 
         Files.delete(FILE_PATH);
-        Files.delete(Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия.txt"));
+        Files.delete(pathFile);
         for (int i = 2; i < countCopy + 2; ++i) {
             Files.delete(Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret — копия (" + i + ").txt"));
         }
