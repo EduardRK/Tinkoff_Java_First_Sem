@@ -62,12 +62,12 @@ public final class Task2 {
             return path;
         } else if (currentCopyIndex == 1) {
             return Path.of(
-                path.getParent() + "\\" + getFileName(path) + " — копия" + "." + getFileExtension(path)
+                path.getParent() + File.separator + getFileName(path) + " — копия" + "." + getFileExtension(path)
             );
         } else {
             return Path.of(
-                path.getParent() + "\\" + getFileName(path) + " — копия " + "(" + currentCopyIndex + ")" + "."
-                    + getFileExtension(path)
+                path.getParent() + File.separator + getFileName(path) + " — копия " + "(" + currentCopyIndex + ")"
+                    + "." + getFileExtension(path)
             );
         }
     }
@@ -76,7 +76,7 @@ public final class Task2 {
         try {
             new File(String.valueOf(path)).createNewFile();
         } catch (IOException e) {
-            LOGGER.info("Creat error: " + e);
+            LOGGER.info("Create error: " + e);
         }
     }
 

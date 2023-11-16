@@ -24,7 +24,7 @@ public class DiskMap implements Map<String, String> {
         directory = new DirectoryManager(dirName);
 
         for (String key : map.keySet()) {
-            directory.writeFile(Path.of(dirName + "\\" + key), map.get(key));
+            directory.writeFile(Path.of(dirName + File.separator + key), map.get(key));
         }
     }
 
@@ -80,7 +80,7 @@ public class DiskMap implements Map<String, String> {
     @Nullable
     @Override
     public String put(String key, String value) {
-        directory.writeFile(Path.of(dirName + "\\" + key), value);
+        directory.writeFile(Path.of(dirName + File.separator + key), value);
         return bufferMap.put(key, value);
     }
 
@@ -93,7 +93,7 @@ public class DiskMap implements Map<String, String> {
     @Override
     public void putAll(@NotNull Map<? extends String, ? extends String> m) {
         for (String key : m.keySet()) {
-            directory.writeFile(Path.of(dirName + "\\" + key), m.get(key));
+            directory.writeFile(Path.of(dirName + File.separator + key), m.get(key));
         }
         bufferMap.putAll(m);
     }

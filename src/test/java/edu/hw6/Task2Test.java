@@ -88,6 +88,7 @@ public class Task2Test {
         ));
 
         for (Path path : list) {
+
             if (!path.equals(otherCopy)) {
                 try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path.toFile()))) {
                     Assertions.assertEquals(SECRET, bufferedReader.readLine());
