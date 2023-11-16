@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 public class Task1Test {
     @Nested @DisplayName("DiskMap with directory name") public class onlyDirName {
-        private static final Path DIR_PATH = Path.of("Task1TestDirectory");
+        private static final Path DIR_PATH = Path.of("src/main/resources/hw6_TestsDirectory/Task1TestDirectory");
 
         @Test @DisplayName("Creation new DiskMap") public void creationNewDiskMap() throws IOException {
             Assertions.assertTrue(Files.notExists(DIR_PATH));
@@ -30,8 +30,8 @@ public class Task1Test {
             Files.delete(DIR_PATH);
         }
 
-        @Test @DisplayName("Test methods") public void testPutAndGet() throws IOException {
-            Path filePath = Path.of("Task1TestDirectory\\Key");
+        @Test @DisplayName("Test methods") public void testMethods() throws IOException {
+            Path filePath = Path.of("src/main/resources/hw6_TestsDirectory/Task1TestDirectory/Key");
             Map<String, String> diskMap = new DiskMap(DIR_PATH.toString());
 
             Assertions.assertTrue(diskMap.isEmpty());
@@ -96,7 +96,7 @@ public class Task1Test {
     }
 
     @Nested @DisplayName("DiskMap with directory name and map") public class dirNameAndMap {
-        private static final Path DIR_PATH = Path.of("Task1TestDirectory");
+        private static final Path DIR_PATH = Path.of("src/main/resources/hw6_TestsDirectory/Task1TestDirectory");
 
         @Test @DisplayName("Creation new DiskMap") public void creationNewDiskMap() throws IOException {
             Assertions.assertTrue(Files.notExists(DIR_PATH));
@@ -111,7 +111,7 @@ public class Task1Test {
         }
 
         @Test @DisplayName("Test methods") public void testPutAndGet() throws IOException {
-            Path filePath = Path.of("Task1TestDirectory\\Key");
+            Path filePath = Path.of("src/main/resources/hw6_TestsDirectory/Task1TestDirectory/Key");
             Map<String, String> map = new HashMap<>(Map.of("Key1", "Value1", "Key2", "Value2"));
             Map<String, String> diskMap = new DiskMap(map, DIR_PATH.toString());
 
@@ -185,7 +185,7 @@ public class Task1Test {
 
     @Nested
     @DisplayName("DiskMap read from directory") public class DiskMapReadFromDirectory {
-        private static final Path DIR_PATH = Path.of("hw6_TestsDirectory\\Task1TestRead");
+        private static final Path DIR_PATH = Path.of("src/main/resources/hw6_TestsDirectory/Task1TestRead");
 
         @Test
         @DisplayName("Test methods after read directory")

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class Task3Test {
-    private static final Path DIR_PATH = Path.of("hw6_TestsDirectory\\Task3Test");
+    private static final Path DIR_PATH = Path.of("src/main/resources/hw6_TestsDirectory/Task3Test");
 
     @Test
     @DisplayName("Find readable and regular txt")
@@ -34,9 +34,9 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/EmptyTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/SmallTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/VeryBigTxt.txt")
+            Path.of(DIR_PATH + "/EmptyTxt.txt"),
+            Path.of(DIR_PATH + "/SmallTxt.txt"),
+            Path.of(DIR_PATH + "/VeryBigTxt.txt")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }
@@ -62,7 +62,7 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/PNG.png")
+            Path.of(DIR_PATH + "/PNG.png")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }
@@ -88,10 +88,10 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/EmptyTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/SmallTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/VeryBigTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/File.pdf")
+            Path.of(DIR_PATH + "/EmptyTxt.txt"),
+            Path.of(DIR_PATH + "/SmallTxt.txt"),
+            Path.of(DIR_PATH + "/VeryBigTxt.txt"),
+            Path.of(DIR_PATH + "/File.pdf")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }
@@ -116,7 +116,7 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/VeryBigTxt.txt")
+            Path.of(DIR_PATH + "/VeryBigTxt.txt")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }
@@ -141,10 +141,10 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/SmallTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/EmptyTxt.txt"),
-            Path.of("hw6_TestsDirectory/Task3Test/File.pdf"),
-            Path.of("hw6_TestsDirectory/Task3Test/File_Name.java")
+            Path.of(DIR_PATH + "/SmallTxt.txt"),
+            Path.of(DIR_PATH + "/EmptyTxt.txt"),
+            Path.of(DIR_PATH + "/File.pdf"),
+            Path.of(DIR_PATH + "/File_Name.java")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }
@@ -168,7 +168,7 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/Directory")
+            Path.of(DIR_PATH + "/Directory")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }
@@ -193,7 +193,7 @@ public class Task3Test {
         }
 
         List<Path> expected = new ArrayList<>(List.of(
-            Path.of("hw6_TestsDirectory/Task3Test/File_Name.java")
+            Path.of(DIR_PATH + "/File_Name.java")
         ));
         Assertions.assertTrue(expected.containsAll(filesAfterFilter));
     }

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class Task2Test {
-    private static final Path DIR_PATH = Path.of("hw6_TestsDirectory\\Task2Test");
+    private static final Path DIR_PATH = Path.of("src/main/resources/hw6_TestsDirectory/Task2Test");
     private static final Path FILE_PATH = Path.of(DIR_PATH + "\\" + "Tinkoff Bank Biggest Secret.txt");
     private static final String SECRET = "This is a very, very big secret that no one should ever know";
 

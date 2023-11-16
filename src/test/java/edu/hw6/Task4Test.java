@@ -16,7 +16,7 @@ public class Task4Test {
     @Test
     @DisplayName("Write in file (File exist)")
     public void writeInFileExist() {
-        Path path = Path.of("hw6_TestsDirectory/Task4Test/File.txt");
+        Path path = Path.of("src/main/resources/hw6_TestsDirectory/Task4Test/File.txt");
         String string = "Programming is learned by writing programs. ― Brian Kernighan";
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path.toFile()))) {
@@ -43,7 +43,7 @@ public class Task4Test {
     @Test
     @DisplayName("Write in file (File not exist)")
     public void writeInFileNotExist() throws IOException {
-        Path path = Path.of("hw6_TestsDirectory/Task4Test/File2.txt");
+        Path path = Path.of("src/main/resources/hw6_TestsDirectory/Task4Test/File2.txt");
         String string = "Programming is learned by writing programs. ― Brian Kernighan";
 
         Assertions.assertTrue(Files.notExists(path));
