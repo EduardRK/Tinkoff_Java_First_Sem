@@ -23,7 +23,6 @@ public final class Task6 {
     }
 
     private static boolean digitsAreSame(int[] number) {
-        int countSameDigit = 0;
         int sameDigit = number[0];
         for (int i : number) {
             if (i != sameDigit) {
