@@ -1,10 +1,10 @@
 package edu.hw1;
 
 public final class Task1 {
+    private static final int SECONDS_IN_MINUTE = 60;
+
     private Task1() {
     }
-
-    private static final int SECONDS_IN_MINUTE = 60;
 
     private static boolean isTimestampCorrectFormat(String[] timestampArray) {
         return timestampArray.length == 2;

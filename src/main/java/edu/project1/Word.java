@@ -13,11 +13,11 @@ public class Word {
         return encryptedWord;
     }
 
-    public String getHiddenWord() {
-        return hiddenWord;
-    }
-
     public void setEncryptedWord(String encryptedWord) {
         this.encryptedWord = encryptedWord;
+    }
+
+    public String getHiddenWord() {
+        return hiddenWord;
     }
 }

@@ -1,10 +1,10 @@
 package edu.hw1;
 
 public final class Utility {
+    private static final int BASE_DECIMAL_SYSTEM = 10;
+
     private Utility() {
     }
-
-    private static final int BASE_DECIMAL_SYSTEM = 10;
 
     public static int countDigits(int number) {
         if (number != 0) {

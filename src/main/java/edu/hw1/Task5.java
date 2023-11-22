@@ -1,10 +1,10 @@
 package edu.hw1;
 
 public final class Task5 {
+    private static final int BASE_DECIMAL_SYSTEM = 10;
+
     private Task5() {
     }
-
-    private static final int BASE_DECIMAL_SYSTEM = 10;
 
     private static int createDescendant(int number) {
         int[] digits = Utility.splitIntoNumbers(number);

@@ -3,8 +3,8 @@ package edu.project1;
 import java.util.Scanner;
 
 public class Answer {
-    private char[] answer;
     private static final Scanner IN = new Scanner(System.in);
+    private char[] answer;
 
     public char[] getAnswerArray() {
         return answer;

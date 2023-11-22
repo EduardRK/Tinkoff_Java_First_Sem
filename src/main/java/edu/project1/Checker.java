@@ -1,10 +1,10 @@
 package edu.project1;
 
 public final class Checker {
+    private static final String LOOKUP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     private Checker() {
     }
-
-    private static final String LOOKUP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static boolean isCorrectDictionary(Dictionary dictionary) {
         for (String word : dictionary.getDictionary()) {

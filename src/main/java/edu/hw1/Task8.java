@@ -1,10 +1,10 @@
 package edu.hw1;
 
 public final class Task8 {
+    private static final int BOARD_SIZE = 8;
+
     private Task8() {
     }
-
-    private static final int BOARD_SIZE = 8;
 
     private static boolean isCorrectBoard(int[][] board) {
         if (board.length != BOARD_SIZE) {
