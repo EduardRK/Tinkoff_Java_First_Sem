@@ -3,9 +3,6 @@ package edu.hw1;
 import java.util.Arrays;
 
 public final class Task6 {
-    private Task6() {
-    }
-
     private static final int KAPREKAR_CONSTANT = 6174;
     private static final int BASE_DECIMAL_SYSTEM = 10;
     private static final int MIN_FOUR_DIGIT_NUMBER = 1000;
@@ -13,6 +10,9 @@ public final class Task6 {
     private static final int MIN_THREE_DIGIT_NUMBER = 100;
     private static final int MAX_THREE_DIGIT_NUMBER = 999;
     private static final int LAST_INDEX_OF_ARRAY_FOUR_DIGIT_NUMBER = 3;
+
+    private Task6() {
+    }
 
     private static boolean isCorrectFourDigitNumber(int number) {
         return (number > MIN_FOUR_DIGIT_NUMBER) && (number <= MAX_FOUR_DIGIT_NUMBER);

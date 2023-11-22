@@ -8,8 +8,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Positive number")
-    void positiveNumber()
-    {
+    void positiveNumber() {
         int actual = Task2.countDigits(564);
         int expected = 3;
         Assertions.assertEquals(expected, actual);
@@ -21,8 +20,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Zero")
-    void zero()
-    {
+    void zero() {
         int actual = Task2.countDigits(0);
         int expected = 1;
         Assertions.assertEquals(expected, actual);
@@ -30,8 +28,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Negative number")
-    void negativeNumber()
-    {
+    void negativeNumber() {
         int actual = Task2.countDigits(-89);
         int expected = 2;
         Assertions.assertEquals(expected, actual);
