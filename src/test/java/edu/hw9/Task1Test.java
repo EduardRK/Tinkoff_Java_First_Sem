@@ -50,9 +50,7 @@ public class Task1Test {
         List<Double> resultStats = new CopyOnWriteArrayList<>();
 
         for (String string : metrics) {
-            executorService1.submit(() -> {
-                collector.push(string, data);
-            });
+            executorService1.submit(() -> collector.push(string, data));
             executorService2.submit(() -> {
                 resultStats.add(collector.getStatistic());
             });

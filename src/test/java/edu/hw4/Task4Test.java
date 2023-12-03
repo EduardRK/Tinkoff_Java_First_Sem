@@ -31,8 +31,7 @@ public class Task4Test {
             add(smallBird);
         }};
         Animal actual = Task4.animalWithLongestName(animals);
-        Animal expected = veryBigName;
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(veryBigName, actual);
     }
 
     @Test
