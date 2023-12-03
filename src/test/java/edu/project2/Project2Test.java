@@ -333,9 +333,15 @@ public class Project2Test {
 
         Maze maze = new Maze(5, 5, grid);
         Solver solver = new MazeSolverBFS(maze);
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> solver.solve(new Coordinate(0, 0), new Coordinate(12, 12)));
+        Assertions.assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> solver.solve(new Coordinate(0, 0), new Coordinate(12, 12))
+        );
 
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> solver.solve(new Coordinate(10, 0), new Coordinate(4, 4)));
+        Assertions.assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> solver.solve(new Coordinate(10, 0), new Coordinate(4, 4))
+        );
     }
 
     @Test

@@ -89,7 +89,7 @@ public class Task7Test {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Animal actual = Task7.kOldestAnimal(animals, -7);
         });
-        
+
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Animal actual = Task7.kOldestAnimal(animals, -1);
         });

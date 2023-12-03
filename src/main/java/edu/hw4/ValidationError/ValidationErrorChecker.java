@@ -25,6 +25,7 @@ public class ValidationErrorChecker {
     private static final int SPIDER_MAX_HEIGHT = 40;
     private static final int SPIDER_MAX_WEIGHT = 10;
     private static final Map<Animal.Type, Integer> MAX_HEIGHT_OF_ANIMAL = new HashMap<>();
+    private static final Map<Animal.Type, Integer> MAX_WEIGHT_OF_ANIMAL = new HashMap<>();
 
     static {
         MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.CAT, CAT_MAX_HEIGHT);
@@ -33,8 +34,6 @@ public class ValidationErrorChecker {
         MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.FISH, FISH_MAX_HEIGHT);
         MAX_HEIGHT_OF_ANIMAL.put(Animal.Type.SPIDER, SPIDER_MAX_HEIGHT);
     }
-
-    private static final Map<Animal.Type, Integer> MAX_WEIGHT_OF_ANIMAL = new HashMap<>();
 
     static {
         MAX_WEIGHT_OF_ANIMAL.put(Animal.Type.CAT, CAT_MAX_WEIGHT);
