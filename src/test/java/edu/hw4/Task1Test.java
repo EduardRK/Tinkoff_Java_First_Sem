@@ -1,8 +1,8 @@
 package edu.hw4;
 
+import edu.hw4.Tasks.Task1;
 import java.util.ArrayList;
 import java.util.List;
-import edu.hw4.Tasks.Task1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
