@@ -11,7 +11,7 @@ public class StatisticCollector {
     public StatisticCollector() {
     }
 
-    public synchronized void push(String metricName, double[] values) {
+    public void push(String metricName, double[] values) {
         try {
             blockingQueue.put(StatisticFactory.createStatistic(metricName, values));
         } catch (InterruptedException e) {
