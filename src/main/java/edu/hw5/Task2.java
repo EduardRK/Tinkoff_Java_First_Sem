@@ -8,12 +8,12 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task2 {
-    private Task2() {
-    }
-
+public final class Task2 {
     private static final int COUNT_OF_MONTH_IN_YEAR = 12;
     private static final int THIRTEEN_DAY_IN_MONTH = 13;
+
+    private Task2() {
+    }
 
     public static List<LocalDate> allFridaysThirteenThisYear(int year) {
         List<LocalDate> fridaysThirteen = new ArrayList<>();

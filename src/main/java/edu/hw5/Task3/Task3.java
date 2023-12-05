@@ -3,7 +3,7 @@ package edu.hw5.Task3;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class Task3 {
+public final class Task3 {
     private Task3() {
     }
 
@@ -22,7 +22,6 @@ public class Task3 {
         dateFormatDayMonthYear.setNextDateFormat(dateFormatYearMonthDay);
         dateFormatYearMonthDay.setNextDateFormat(dateFormatTodayTomorrowYesterday);
         dateFormatTodayTomorrowYesterday.setNextDateFormat(dateFormatDaysAgoOrLater);
-        dateFormatDaysAgoOrLater.setNextDateFormat(null);
 
         return dateFormatDayMonthYear;
     }
