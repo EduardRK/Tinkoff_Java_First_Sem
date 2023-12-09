@@ -1,11 +1,8 @@
 package edu.project4;
 
-import java.nio.file.Path;
+import edu.project4.FractalFlame.RecordClasses.Rect;
 
 public final class Constants {
-    public static final Path SAVE_DIR = Path.of(
-        "C:/Users/poesh/IdeaProjects/Main/java-course-2023/"
-            + "project-template/src/main/resources/Project4_Results");
     public static final int WIDTH = 2560;
     public static final int HEIGHT = 1440;
     public static final int ITERATIONS_FOR_CENTER = 20;
@@ -13,6 +10,7 @@ public final class Constants {
     public static final double RECT_WIDTH = 2;
     public static final double RECT_Y = -1;
     public static final double RECT_HEIGHT = 2;
+    public static final Rect RECT = new Rect(RECT_X, RECT_Y, RECT_WIDTH, RECT_HEIGHT);
     public static final int COUNT_AFFINE_TRANSFORMATIONS = 15;
     public static final double GAMMA = 1.9;
     public static final long COUNT_SAMPLES = 3_000L;

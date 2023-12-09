@@ -9,6 +9,11 @@ public final class Main {
 
     public static void main(String[] args) {
         ArgsParser argsParser = ArgsParser.create(args);
-        FractalFlameGenerator.generate(argsParser.variationsType(), argsParser.imageFormat(), argsParser.parameters());
+        FractalFlameGenerator.generate(
+            argsParser.variationsType(),
+            argsParser.imageFormat(),
+            argsParser.parameters(),
+            argsParser.path()
+        );
     }
 }

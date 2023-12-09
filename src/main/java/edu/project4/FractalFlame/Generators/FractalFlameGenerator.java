@@ -1,6 +1,5 @@
 package edu.project4.FractalFlame.Generators;
 
-import edu.project4.Constants;
 import edu.project4.FractalFlame.Image.ImageClasses.FractalImage;
 import edu.project4.FractalFlame.Image.ImageClasses.ImageFormat;
 import edu.project4.FractalFlame.Image.ImageSaver;
@@ -29,9 +28,5 @@ public final class FractalFlameGenerator {
         imageProcessor.process(fractalImage);
 
         ImageSaver.save(fractalImage, imageFormat, path);
-    }
-
-    public static void generate(List<String> variations, ImageFormat imageFormat, List<Double> parameters) {
-        generate(variations, imageFormat, parameters, Constants.SAVE_DIR);
     }
 }

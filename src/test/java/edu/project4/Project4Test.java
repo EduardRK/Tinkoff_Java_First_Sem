@@ -27,7 +27,7 @@ public class Project4Test {
     })
     @DisplayName("Generate some fractal flame images")
     public void generateSomeFractalFlame(String variation, @TempDir Path path) {
-        String[] args = new String[] {variation};
+        String[] args = new String[] {path.toString(), variation};
         ArgsParser argsParser = ArgsParser.create(args);
         FractalFlameGenerator.generate(
             argsParser.variationsType(),
@@ -40,7 +40,7 @@ public class Project4Test {
     @Test
     @DisplayName("Test image formats")
     public void testImageFormats(@TempDir Path path) {
-        String[] args = new String[] {"JPEG"};
+        String[] args = new String[] {path.toString(), "JPEG"};
         ArgsParser argsParser = ArgsParser.create(args);
         FractalFlameGenerator.generate(
             argsParser.variationsType(),
@@ -49,7 +49,7 @@ public class Project4Test {
             path
         );
 
-        args = new String[] {"BMP"};
+        args = new String[] {path.toString(), "BMP"};
         argsParser = ArgsParser.create(args);
         FractalFlameGenerator.generate(
             argsParser.variationsType(),
@@ -61,15 +61,15 @@ public class Project4Test {
 
     @Test
     @DisplayName("Illegal function name")
-    public void illegalFunctionName() {
-        String[] args = new String[] {"qwer"};
-
+    public void illegalFunctionName(@TempDir Path path) {
+        String[] args = new String[] {path.toString(), "qwer"};
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             ArgsParser argsParser = ArgsParser.create(args);
             FractalFlameGenerator.generate(
                 argsParser.variationsType(),
                 argsParser.imageFormat(),
-                argsParser.parameters()
+                argsParser.parameters(),
+                argsParser.path()
             );
         });
     }
