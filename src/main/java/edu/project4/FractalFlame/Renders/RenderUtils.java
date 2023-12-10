@@ -34,10 +34,11 @@ public final class RenderUtils {
 
             if (i > 0) {
                 double angle = 0.0;
+                Coordinate rotateCoordinate;
                 for (int s = 0; s < Constants.SYMMETRY; angle += 2 * Math.PI / Constants.SYMMETRY, ++s) {
-                    coordinate = coordinate.rotate(angle);
-                    if (rect.contains(coordinate)) {
-                        Coordinate newCoordinate = getNewCoordinate(coordinate, rect);
+                    rotateCoordinate = coordinate.rotate(angle);
+                    if (rect.contains(rotateCoordinate)) {
+                        Coordinate newCoordinate = getNewCoordinate(rotateCoordinate, rect);
                         if (newCoordinate.x() < Constants.WIDTH && newCoordinate.y() < Constants.HEIGHT) {
                             Pixel pixel = fractalImage.pixel(newCoordinate);
                             synchronized (pixel) {
