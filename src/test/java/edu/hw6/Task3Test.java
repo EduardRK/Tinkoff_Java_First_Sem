@@ -1,6 +1,11 @@
 package edu.hw6;
 
 import edu.hw6.Task3.AbstractFilter;
+import edu.hw6.Task3.FilterGlobMatches;
+import edu.hw6.Task3.FilterLargerThan;
+import edu.hw6.Task3.FilterLessThan;
+import edu.hw6.Task3.FilterMagicNumber;
+import edu.hw6.Task3.FilterRegexContains;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -19,10 +24,11 @@ public class Task3Test {
     public void readableAndRegularTXT() {
         final AbstractFilter readable = Files::isReadable;
         final AbstractFilter regular = Files::isRegularFile;
+        final AbstractFilter globMatches = new FilterGlobMatches("*.txt");
 
         DirectoryStream.Filter<Path> filter = regular
             .and(readable)
-            .and(AbstractFilter.globMatches("*.txt"));
+            .and(globMatches);
 
         List<Path> filesAfterFilter = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(DIR_PATH, filter)) {
@@ -46,11 +52,13 @@ public class Task3Test {
     public void readableAndPNG() {
         final AbstractFilter readable = Files::isReadable;
         final AbstractFilter regular = Files::isRegularFile;
+        final AbstractFilter magicNumber = new FilterMagicNumber(0x89, 'P', 'N', 'G');
+        final AbstractFilter globMatches = new FilterGlobMatches("*.png");
 
         DirectoryStream.Filter<Path> filter = readable
             .and(regular)
-            .and(AbstractFilter.magicNumber(0x89, 'P', 'N', 'G'))
-            .and(AbstractFilter.globMatches("*.png"));
+            .and(magicNumber)
+            .and(globMatches);
 
         List<Path> filesAfterFilter = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(DIR_PATH, filter)) {
@@ -72,11 +80,13 @@ public class Task3Test {
     public void readableAndRegularTXTorPDF() {
         final AbstractFilter readable = Files::isReadable;
         final AbstractFilter regular = Files::isRegularFile;
+        final AbstractFilter globMatchesTxt = new FilterGlobMatches("*.txt");
+        final AbstractFilter globMatchesPdf = new FilterGlobMatches("*.pdf");
 
         DirectoryStream.Filter<Path> filter = regular
             .and(readable)
-            .and(AbstractFilter.globMatches("*.txt"))
-            .or(AbstractFilter.globMatches("*.pdf"));
+            .and(globMatchesTxt)
+            .or(globMatchesPdf);
 
         List<Path> filesAfterFilter = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(DIR_PATH, filter)) {
@@ -101,10 +111,11 @@ public class Task3Test {
     public void readableAndRegularFilesLarger2000Bytes() {
         final AbstractFilter readable = Files::isReadable;
         final AbstractFilter regular = Files::isRegularFile;
+        final AbstractFilter largerThan2000 = new FilterLargerThan(2000);
 
         DirectoryStream.Filter<Path> filter = regular
             .and(readable)
-            .and(AbstractFilter.largerThan(2000));
+            .and(largerThan2000);
 
         List<Path> filesAfterFilter = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(DIR_PATH, filter)) {
@@ -126,10 +137,11 @@ public class Task3Test {
     public void readableAndRegularFilesLess200Bytes() {
         final AbstractFilter readable = Files::isReadable;
         final AbstractFilter regular = Files::isRegularFile;
+        final AbstractFilter lessThan200 = new FilterLessThan(200);
 
         DirectoryStream.Filter<Path> filter = regular
             .and(readable)
-            .and(AbstractFilter.lessThan(200));
+            .and(lessThan200);
 
         List<Path> filesAfterFilter = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(DIR_PATH, filter)) {
@@ -178,10 +190,11 @@ public class Task3Test {
     public void fileNameContainsDash() {
         final AbstractFilter regular = Files::isRegularFile;
         final AbstractFilter readable = Files::isReadable;
+        final AbstractFilter regexContains = new FilterRegexContains("[-]");
 
         DirectoryStream.Filter<Path> filter = readable
             .or(regular)
-            .and(AbstractFilter.regexContains("[-]"));
+            .and(regexContains);
 
         List<Path> filesAfterFilter = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(DIR_PATH, filter)) {
