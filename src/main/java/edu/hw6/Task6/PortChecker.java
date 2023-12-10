@@ -32,7 +32,7 @@ public class PortChecker {
             .append(String.format(FORMATTER_PROTOCOL, "Protocol"))
             .append(String.format(FORMATTER_PORT, "Port"))
             .append("Service")
-            .append('\n');
+            .append(System.lineSeparator());
     }
 
     private static StringBuilder addListItem(StringBuilder stringBuilder, String protocol, int port) {
