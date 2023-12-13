@@ -29,12 +29,13 @@ public class Task1Test {
         "интеллект, Чем ниже интеллект, тем громче оскорбления"
     })
     @DisplayName("Test single request")
-    public void singleRequest(String request, String expectedResponse) {
+    public void singleRequest(String request, String expectedResponse) throws InterruptedException {
         Server server = new Server(PORT);
         Client client = new Client(PORT);
 
         Thread thread = new Thread(server::work);
         thread.start();
+        Thread.sleep(1000);
 
         executorService.submit(() -> Assertions.assertEquals(client.getResponse(request), expectedResponse));
         executorService.shutdown();
@@ -44,7 +45,7 @@ public class Task1Test {
 
     @Test
     @DisplayName("Test multi request")
-    public void multiRequest() {
+    public void multiRequest() throws InterruptedException {
         List<String> words = new ArrayList<>(List.of("личности", "оскорбления", "глупый", "интеллект", "wrong"));
         List<String> responses = new CopyOnWriteArrayList<>();
         Set<String> responsesSet = new HashSet<>(Set.of(
@@ -58,6 +59,7 @@ public class Task1Test {
         Server server = new Server(PORT);
         Thread thread = new Thread(server::work);
         thread.start();
+        Thread.sleep(1000);
 
         for (int i = 0; i < 100; ++i) {
             executorService.submit(() -> {
@@ -69,12 +71,12 @@ public class Task1Test {
         }
 
         executorService.close();
+        server.stopWork();
 
         for (String string : responses) {
             Assertions.assertTrue(responsesSet.contains(string));
         }
 
-        server.stopWork();
         Assertions.assertEquals(100, responses.size());
     }
 }
