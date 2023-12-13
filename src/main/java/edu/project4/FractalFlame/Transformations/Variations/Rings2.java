@@ -4,12 +4,13 @@ import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class Rings2 implements Parametric {
     private double value = 1;
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             value = iterator.next();
@@ -22,7 +23,7 @@ public class Rings2 implements Parametric {
     }
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         double theta = Math.atan(coordinate.x() / coordinate.y());
         double r = Math.sqrt(Math.pow(coordinate.x(), 2) + Math.pow(coordinate.y(), 2));
         double p = Math.pow(value, 2);

@@ -4,6 +4,7 @@ import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class Blob implements Parametric {
@@ -12,7 +13,7 @@ public class Blob implements Parametric {
     private double waves = 5;
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         double theta = Math.atan(coordinate.x() / coordinate.y());
         double r = Math.sqrt(Math.pow(coordinate.x(), 2) + Math.pow(coordinate.y(), 2));
         double multiplier = r * (low + (high - low) / waves * (Math.sin(waves * theta) + 1));
@@ -23,7 +24,7 @@ public class Blob implements Parametric {
     }
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             high = iterator.next();

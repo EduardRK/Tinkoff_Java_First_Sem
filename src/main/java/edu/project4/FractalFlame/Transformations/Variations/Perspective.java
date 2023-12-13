@@ -4,6 +4,7 @@ import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class Perspective implements Parametric {
@@ -13,7 +14,7 @@ public class Perspective implements Parametric {
     private double angleSin = 0.5;
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             angle = iterator.next();
@@ -31,7 +32,7 @@ public class Perspective implements Parametric {
     }
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         double p2 = dist;
         double multiplier = p2 / (p2 - coordinate.y() * angleSin);
         return new Coordinate(

@@ -5,6 +5,7 @@ import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class JuliaScope implements Parametric {
@@ -16,7 +17,7 @@ public class JuliaScope implements Parametric {
     private double lambda;
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
         double psi = threadLocalRandom.nextDouble(-1, 1);
 
@@ -42,7 +43,7 @@ public class JuliaScope implements Parametric {
     }
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
         double phi = Math.atan(coordinate.y() / coordinate.x());
         double r = Math.sqrt(Math.pow(coordinate.x(), 2) + Math.pow(coordinate.y(), 2));

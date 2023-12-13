@@ -21,7 +21,7 @@ public class AffineTransformationFactory {
             double e = threadLocalRandom.nextDouble(Constants.E_AFFINE_MIN, Constants.E_AFFINE_MAX);
             double f = threadLocalRandom.nextDouble(Constants.F_AFFINE_MIN, Constants.F_AFFINE_MAX);
 
-            if (isValidAffineTransformation(a, b, c, d, e, f)) {
+            if (isValidAffineTransformation(a, b, d, e)) {
                 return new AffineTransformation(a, b, c, d, e, f, new Color(
                     threadLocalRandom.nextInt(MAX_COLOR),
                     threadLocalRandom.nextInt(MAX_COLOR),
@@ -31,7 +31,7 @@ public class AffineTransformationFactory {
         }
     }
 
-    private boolean isValidAffineTransformation(double a, double b, double c, double d, double e, double f) {
+    private boolean isValidAffineTransformation(double a, double b, double d, double e) {
         return Math.pow(a, 2) + Math.pow(d, 2) < 1
             && Math.pow(b, 2) + Math.pow(e, 2) < 1
             && Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(d, 2) + Math.pow(e, 2) < (1 + Math.pow((a * e - b * d), 2));

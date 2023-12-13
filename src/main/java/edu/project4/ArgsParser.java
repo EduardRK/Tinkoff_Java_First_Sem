@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public record ArgsParser(Path path, List<String> variationsType, ImageFormat imageFormat, List<Double> parameters) {
     private static final Set<String> IMAGE_FORMATS =
@@ -14,7 +16,8 @@ public record ArgsParser(Path path, List<String> variationsType, ImageFormat ima
     private static final List<String> DEFAULT_TYPES = new ArrayList<>(List.of("curl", "exponential"));
     private static final List<Double> DEFAULT_PARAMETERS = new ArrayList<>();
 
-    public static ArgsParser create(String[] args) {
+    @Contract("_ -> new")
+    public static @NotNull ArgsParser create(String @NotNull [] args) {
         List<String> variations = new ArrayList<>();
         List<Double> parameters = new ArrayList<>();
         ImageFormat imageFormat1 = null;
@@ -45,7 +48,8 @@ public record ArgsParser(Path path, List<String> variationsType, ImageFormat ima
         throw new IllegalArgumentException("The path must be specified");
     }
 
-    private static ImageFormat setImageFormat(String imageFormat) {
+    @Contract(pure = true)
+    private static ImageFormat setImageFormat(@NotNull String imageFormat) {
         return switch (imageFormat) {
             case "PNG" -> ImageFormat.PNG;
             case "JPEG" -> ImageFormat.JPEG;

@@ -4,6 +4,7 @@ import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class PDJ implements Parametric {
@@ -13,7 +14,7 @@ public class PDJ implements Parametric {
     private double d = 0.7;
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         return new Coordinate(
             Math.sin(a * coordinate.y()) - Math.cosh(b * coordinate.x()),
             Math.sin(c * coordinate.x()) - Math.cos(d * coordinate.y())
@@ -26,7 +27,7 @@ public class PDJ implements Parametric {
     }
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             a = iterator.next();

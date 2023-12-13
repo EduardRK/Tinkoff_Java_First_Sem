@@ -4,6 +4,7 @@ import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class Ngon implements Parametric {
@@ -14,7 +15,7 @@ public class Ngon implements Parametric {
     private double p2 = 2 * Math.PI / sides;
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             power = iterator.next();
@@ -37,7 +38,7 @@ public class Ngon implements Parametric {
     }
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         double r = Math.sqrt(Math.pow(coordinate.x(), 2) + Math.pow(coordinate.y(), 2));
         double phi = Math.atan(coordinate.y() / coordinate.x());
         double t3 = phi - p2 * Math.floor(phi / p2);

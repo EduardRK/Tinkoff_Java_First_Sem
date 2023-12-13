@@ -55,93 +55,93 @@ public class TransformationFactory {
     @SuppressWarnings("CyclomaticComplexity")
     public Transformation create(@NotNull String typeTransformation, List<Double> parameters) {
         return switch (typeTransformation.toLowerCase()) {
-            case ("bent") -> new Bent();
-            case ("blob") -> {
+            case "bent" -> new Bent();
+            case "blob" -> {
                 Parametric parametric = new Blob();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("blur") -> new Blur();
-            case ("bubble") -> new Bubble();
-            case ("cosine") -> new Cosine();
-            case ("cross") -> new Cross();
-            case ("curl") -> {
+            case "blur" -> new Blur();
+            case "bubble" -> new Bubble();
+            case "cosine" -> new Cosine();
+            case "cross" -> new Cross();
+            case "curl" -> {
                 Parametric parametric = new Curl();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("cylinder") -> new Cylinder();
-            case ("diamond") -> new Diamond();
-            case ("disc") -> new Disc();
-            case ("ex") -> new Ex();
-            case ("exponential") -> new Exponential();
-            case ("eyefish") -> new Eyefish();
-            case ("fan") -> new Fan();
-            case ("fan2") -> {
+            case "cylinder" -> new Cylinder();
+            case "diamond" -> new Diamond();
+            case "disc" -> new Disc();
+            case "ex" -> new Ex();
+            case "exponential" -> new Exponential();
+            case "eyefish" -> new Eyefish();
+            case "fan" -> new Fan();
+            case "fan2" -> {
                 Parametric parametric = new Fan2();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("fisheye") -> new Fisheye();
-            case ("gaussian") -> new Gaussian();
-            case ("handkerchief") -> new Handkerchief();
-            case ("heart") -> new Heart();
-            case ("horseshoe") -> new Horseshoe();
-            case ("hyperbolic") -> new Hyperbolic();
-            case ("julia") -> new Julia();
-            case ("julian") -> {
+            case "fisheye" -> new Fisheye();
+            case "gaussian" -> new Gaussian();
+            case "handkerchief" -> new Handkerchief();
+            case "heart" -> new Heart();
+            case "horseshoe" -> new Horseshoe();
+            case "hyperbolic" -> new Hyperbolic();
+            case "julia" -> new Julia();
+            case "julian" -> {
                 Parametric parametric = new JuliaN();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("juliascope") -> {
+            case "juliascope" -> {
                 Parametric parametric = new JuliaScope();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("linear") -> new Linear();
-            case ("ngon") -> {
+            case "linear" -> new Linear();
+            case "ngon" -> {
                 Parametric parametric = new Ngon();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("noise") -> new Noise();
-            case ("pdj") -> {
+            case "noise" -> new Noise();
+            case "pdj" -> {
                 Parametric parametric = new PDJ();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("perspective") -> {
+            case "perspective" -> {
                 Parametric parametric = new Perspective();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("pie") -> {
+            case "pie" -> {
                 Parametric parametric = new Pie();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("polar") -> new Polar();
-            case ("popcorn") -> new Popcorn();
-            case ("power") -> new Power();
-            case ("rectangle") -> {
+            case "polar" -> new Polar();
+            case "popcorn" -> new Popcorn();
+            case "power" -> new Power();
+            case "rectangle" -> {
                 Parametric parametric = new Rectangles();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("rings") -> new Rings();
-            case ("rings2") -> {
+            case "rings" -> new Rings();
+            case "rings2" -> {
                 Parametric parametric = new Rings2();
                 parametric.setParameters(parameters);
                 yield parametric;
             }
-            case ("sinusoidal") -> new Sinusoidal();
-            case ("spherical") -> new Spherical();
-            case ("spiral") -> new Spiral();
-            case ("square") -> new Square();
-            case ("swirl") -> new Swirl();
-            case ("tangent") -> new Tangent();
-            case ("waves") -> new Waves();
+            case "sinusoidal" -> new Sinusoidal();
+            case "spherical" -> new Spherical();
+            case "spiral" -> new Spiral();
+            case "square" -> new Square();
+            case "swirl" -> new Swirl();
+            case "tangent" -> new Tangent();
+            case "waves" -> new Waves();
             default -> throw new IllegalArgumentException("Wrong transformation type");
         };
     }

@@ -9,6 +9,8 @@ import edu.project4.FractalFlame.Transformations.Types.Transformation;
 import edu.project4.FractalFlame.Transformations.Variations.AffineTransformation;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public final class RenderUtils {
 
@@ -54,27 +56,35 @@ public final class RenderUtils {
     }
 
     private static AffineTransformation getRandomAffineTransformation(
-        List<AffineTransformation> affineTransformationList,
-        ThreadLocalRandom threadLocalRandom
+        @NotNull List<AffineTransformation> affineTransformationList,
+        @NotNull ThreadLocalRandom threadLocalRandom
     ) {
         return affineTransformationList.get(threadLocalRandom.nextInt(affineTransformationList.size()));
     }
 
     private static Transformation getRandomVariation(
-        List<Transformation> variations,
-        ThreadLocalRandom threadLocalRandom
+        @NotNull List<Transformation> variations,
+        @NotNull ThreadLocalRandom threadLocalRandom
     ) {
         return variations.get(threadLocalRandom.nextInt(variations.size()));
     }
 
-    private static Coordinate getRandomCoordinate(Rect rect, ThreadLocalRandom threadLocalRandom) {
+    @Contract("_, _ -> new")
+    private static @NotNull Coordinate getRandomCoordinate(
+        @NotNull Rect rect,
+        @NotNull ThreadLocalRandom threadLocalRandom
+    ) {
         return new Coordinate(
             rect.x() + threadLocalRandom.nextDouble(0, 1) * rect.width(),
             rect.y() + threadLocalRandom.nextDouble(0, 1) * rect.height()
         );
     }
 
-    private static Coordinate getNewCoordinate(Coordinate coordinate, Rect rect) {
+    @Contract("_, _ -> new")
+    private static @NotNull Coordinate getNewCoordinate(
+        @NotNull Coordinate coordinate,
+        @NotNull Rect rect
+    ) {
         return new Coordinate(
             Constants.WIDTH
                 - (int) (((rect.getMaxX() - coordinate.x()) / (rect.getMaxX() - rect.x())) * Constants.WIDTH),

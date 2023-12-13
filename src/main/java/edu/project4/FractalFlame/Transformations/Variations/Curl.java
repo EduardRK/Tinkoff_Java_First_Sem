@@ -4,6 +4,7 @@ import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class Curl implements Parametric {
@@ -11,7 +12,7 @@ public class Curl implements Parametric {
     private double p2 = 2;
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             p1 = iterator.next();
@@ -27,7 +28,7 @@ public class Curl implements Parametric {
     }
 
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         double t1 = 1 + p1 * coordinate.x() + p2 * (Math.pow(coordinate.x(), 2) - Math.pow(coordinate.y(), 2));
         double t2 = p1 * coordinate.y() + 2 * p2 * coordinate.x() * coordinate.y();
         double multiplier = 1 / (Math.pow(t1, 2) + Math.pow(t2, 2));

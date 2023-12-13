@@ -1,9 +1,13 @@
 package edu.project4.FractalFlame.Image.ImageClasses;
 
 import edu.project4.FractalFlame.RecordClasses.Coordinate;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public record FractalImage(Pixel[] data, int width, int height) {
-    public static FractalImage create(int width, int height) {
+    @Contract("_, _ -> new")
+    public static @NotNull FractalImage create(int width, int height) {
         Pixel[] pixels = new Pixel[width * height];
         for (int i = 0; i < width * height; ++i) {
             pixels[i] = new Pixel();
@@ -16,14 +20,15 @@ public record FractalImage(Pixel[] data, int width, int height) {
             && y >= 0 && y < height;
     }
 
-    public Pixel pixel(int x, int y) {
+    @Contract(pure = true)
+    public @Nullable Pixel pixel(int x, int y) {
         if (!contains(x, y)) {
             return null;
         }
         return data[y * width + x];
     }
 
-    public Pixel pixel(Coordinate coordinate) {
+    public @Nullable Pixel pixel(@NotNull Coordinate coordinate) {
         if (!contains((int) coordinate.x(), (int) coordinate.y())) {
             return null;
         }

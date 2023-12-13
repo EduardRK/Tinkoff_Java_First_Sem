@@ -12,13 +12,14 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import javax.imageio.ImageIO;
+import org.jetbrains.annotations.NotNull;
 
 public final class ImageSaver {
     private ImageSaver() {
 
     }
 
-    public static void save(FractalImage fractalImage, ImageFormat imageFormat, Path path) {
+    public static void save(@NotNull FractalImage fractalImage, ImageFormat imageFormat, Path path) {
         BufferedImage bufferedImage =
             new BufferedImage(fractalImage.width(), fractalImage.height(), BufferedImage.TYPE_INT_RGB);
         Path savePath = getSavePath(imageFormat, path);
@@ -36,7 +37,7 @@ public final class ImageSaver {
         }
     }
 
-    private static Path getSavePath(ImageFormat imageFormat, Path path) {
+    private static @NotNull Path getSavePath(@NotNull ImageFormat imageFormat, @NotNull Path path) {
         File[] files = path.toFile().listFiles();
         String imageType = imageFormat.name().toLowerCase();
         String imagePath = path + "/image";

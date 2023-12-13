@@ -5,6 +5,7 @@ import edu.project4.FractalFlame.Transformations.Types.Parametric;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("MagicNumber")
 public class Pie implements Parametric {
@@ -14,7 +15,7 @@ public class Pie implements Parametric {
     private double twoPiOverSlices = 2 * Math.PI / slices;
 
     @Override
-    public void setParameters(List<Double> parameters) {
+    public void setParameters(@NotNull List<Double> parameters) {
         Iterator<Double> iterator = parameters.iterator();
         if (iterator.hasNext()) {
             slices = iterator.next();

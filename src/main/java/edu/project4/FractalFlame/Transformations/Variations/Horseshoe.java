@@ -2,10 +2,11 @@ package edu.project4.FractalFlame.Transformations.Variations;
 
 import edu.project4.FractalFlame.RecordClasses.Coordinate;
 import edu.project4.FractalFlame.Transformations.Types.Transformation;
+import org.jetbrains.annotations.NotNull;
 
 public class Horseshoe implements Transformation {
     @Override
-    public Coordinate apply(Coordinate coordinate) {
+    public Coordinate apply(@NotNull Coordinate coordinate) {
         double r = Math.sqrt(Math.pow(coordinate.x(), 2) + Math.pow(coordinate.y(), 2));
         return new Coordinate(
             (coordinate.x() - coordinate.y()) * (coordinate.x() + coordinate.y()) / r,
