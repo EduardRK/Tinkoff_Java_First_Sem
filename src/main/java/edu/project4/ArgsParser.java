@@ -14,7 +14,6 @@ public record ArgsParser(Path path, List<String> variationsType, ImageFormat ima
         new HashSet<>(Set.of(ImageFormat.PNG.name(), ImageFormat.BMP.name(), ImageFormat.JPEG.name()));
     private static final ImageFormat DEFAULT_IMAGE_FORMAT = ImageFormat.PNG;
     private static final List<String> DEFAULT_TYPES = new ArrayList<>(List.of("curl", "exponential"));
-    private static final List<Double> DEFAULT_PARAMETERS = new ArrayList<>();
 
     @Contract("_ -> new")
     public static @NotNull ArgsParser create(String @NotNull [] args) {

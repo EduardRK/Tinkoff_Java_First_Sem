@@ -22,7 +22,6 @@ public class JuliaN implements Parametric {
 
     @Override
     public Coordinate apply(@NotNull Coordinate coordinate) {
-        ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
         double phi = Math.atan(coordinate.y() / coordinate.x());
         double r = Math.sqrt(Math.pow(coordinate.x(), 2) + Math.pow(coordinate.y(), 2));
         double t = (phi + twoPiP3) / power;
