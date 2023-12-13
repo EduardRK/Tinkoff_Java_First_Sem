@@ -29,13 +29,12 @@ public class Task1Test {
         "интеллект, Чем ниже интеллект, тем громче оскорбления"
     })
     @DisplayName("Test single request")
-    public void singleRequest(String request, String expectedResponse) throws InterruptedException {
+    public void singleRequest(String request, String expectedResponse) {
         Server server = new Server(PORT);
         Client client = new Client(PORT);
 
         Thread thread = new Thread(server::work);
         thread.start();
-        Thread.sleep(1000);
 
         executorService.submit(() -> Assertions.assertEquals(client.getResponse(request), expectedResponse));
         executorService.shutdown();
