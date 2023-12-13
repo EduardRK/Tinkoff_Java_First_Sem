@@ -2,11 +2,10 @@ package edu.hw9.Task1.Statistic;
 
 import java.util.Arrays;
 
-public class StatisticMax implements Statistically {
-    private final double[] values;
+public class StatisticMax extends Statistic {
 
     public StatisticMax(double[] values) {
-        this.values = values;
+        super(values);
     }
 
     @Override

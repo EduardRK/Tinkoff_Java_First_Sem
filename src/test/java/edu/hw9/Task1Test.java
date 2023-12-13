@@ -1,9 +1,12 @@
 package edu.hw9;
 
-import edu.hw9.Task1.StatisticCollector;
+import edu.hw9.Task1.StatisticCollector.StatisticCollector;
+import edu.hw9.Task1.StatisticCollector.StatisticCollectorAllStats;
+import edu.hw9.Task1.StatisticCollector.StatisticCollectorOneStat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,7 +22,7 @@ public class Task1Test {
         ExecutorService executorService1 = Executors.newVirtualThreadPerTaskExecutor();
         ExecutorService executorService2 = Executors.newVirtualThreadPerTaskExecutor();
         List<String> metrics = new ArrayList<>(List.of("sum", "min", "max", "average"));
-        StatisticCollector collector = new StatisticCollector();
+        StatisticCollector<Double> collector = new StatisticCollectorOneStat();
         List<Double> resultStats = new CopyOnWriteArrayList<>();
 
         for (int i = 0; i < 1_000; ++i) {
@@ -38,15 +41,47 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test stats")
-    public void statsTest() {
+    @DisplayName("Test all stats 1")
+    public void allStatsTest1() {
+        ExecutorService executorService1 = Executors.newVirtualThreadPerTaskExecutor();
+        StatisticCollector<Map<String, Map<String, Double>>> collector = new StatisticCollectorAllStats();
+
+        double[] data = new double[] {-1, 1, 0, 0, 0.25, 1, 100, 120, 14.5, -191};
+        List<String> names = new ArrayList<>(List.of("test1", "test2", "test3"));
+
+        for (String name : names) {
+            executorService1.submit(() -> collector.push(name, data));
+        }
+        executorService1.close();
+
+        Assertions.assertEquals(3, collector.getStatistic().size());
+    }
+
+    @Test
+    @DisplayName("Test all stats 2")
+    public void allStatsTest2() {
+        ExecutorService executorService1 = Executors.newVirtualThreadPerTaskExecutor();
+        StatisticCollector<Map<String, Map<String, Double>>> collector = new StatisticCollectorAllStats();
+
+        for (int i = 0; i < 1_000; ++i) {
+            String name = "test" + i;
+            executorService1.submit(() -> collector.push(name, getRandomValues()));
+        }
+        executorService1.close();
+
+        Assertions.assertEquals(1_000, collector.getStatistic().size());
+    }
+
+    @Test
+    @DisplayName("Test one stats")
+    public void oneStatsTest() {
         ExecutorService executorService1 = Executors.newVirtualThreadPerTaskExecutor();
         ExecutorService executorService2 = Executors.newVirtualThreadPerTaskExecutor();
 
         List<String> metrics = new ArrayList<>(List.of("sum", "min", "max", "average"));
         double[] data = new double[] {-1, 1, 0, 0, 0.25, 1, 100, 120, 14.5, -191};
 
-        StatisticCollector collector = new StatisticCollector();
+        StatisticCollector<Double> collector = new StatisticCollectorOneStat();
         List<Double> resultStats = new CopyOnWriteArrayList<>();
 
         for (String string : metrics) {

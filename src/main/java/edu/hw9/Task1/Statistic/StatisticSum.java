@@ -2,11 +2,10 @@ package edu.hw9.Task1.Statistic;
 
 import java.util.Arrays;
 
-public class StatisticSum implements Statistically {
-    private final double[] values;
+public class StatisticSum extends Statistic {
 
     public StatisticSum(double[] values) {
-        this.values = values;
+        super(values);
     }
 
     @Override

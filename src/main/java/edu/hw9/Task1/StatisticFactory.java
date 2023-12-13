@@ -1,6 +1,12 @@
-package edu.hw9.Task1.Statistic;
+package edu.hw9.Task1;
 
-public abstract class StatisticFactory {
+import edu.hw9.Task1.Statistic.StatisticAverage;
+import edu.hw9.Task1.Statistic.StatisticMax;
+import edu.hw9.Task1.Statistic.StatisticMin;
+import edu.hw9.Task1.Statistic.StatisticSum;
+import edu.hw9.Task1.Statistic.Statistically;
+
+public final class StatisticFactory {
     private StatisticFactory() {
     }
 
