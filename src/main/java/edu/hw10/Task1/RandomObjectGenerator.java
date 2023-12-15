@@ -76,8 +76,8 @@ public class RandomObjectGenerator implements ObjectGenerator {
             if (parameter.getType().isPrimitive()) {
                 arguments[i] = threadLocalRandom.nextInt(min, max);
             } else if (canBeNull) {
-                int randomValue = threadLocalRandom.nextInt(-2, 2);
-                if (randomValue >= 1) {
+                int randomValue = threadLocalRandom.nextInt(0, 2);
+                if (randomValue == 1) {
                     arguments[i] = null;
                 } else {
                     arguments[i] = UUID.randomUUID().toString();
