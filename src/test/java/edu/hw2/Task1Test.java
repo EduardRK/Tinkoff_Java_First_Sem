@@ -13,81 +13,42 @@ public class Task1Test {
 
     @Test
     @DisplayName("Constant")
-    public void constatnTests() {
-        var actual = new Constant(3);
-        var expected = 3;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Constant(new Addition(3, 5));
-        expected = 8;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Constant(new Multiplication(9, -1));
-        expected = -9;
-        Assertions.assertEquals(expected, actual.evaluate());
+    public void constantTests() {
+        Assertions.assertEquals(3, new Constant(3).evaluate());
+        Assertions.assertEquals(8, new Constant(new Addition(3, 5)).evaluate());
     }
 
     @Test
     @DisplayName("Negate")
     public void NegateTests() {
-        var actual = new Negate(3);
-        var expected = -3;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Negate(new Addition(3, 5));
-        expected = -8;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Negate(new Exponent(9, 2));
-        expected = -81;
-        Assertions.assertEquals(expected, actual.evaluate());
+        Assertions.assertEquals(-3, new Negate(3).evaluate());
+        Assertions.assertEquals(-4, new Negate(new Multiplication(2, 2)).evaluate());
     }
 
     @Test
     @DisplayName("Addition")
     public void additionTests() {
-        var actual = new Addition(3, 1);
-        var expected = 4;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Addition(new Addition(3, 5), new Addition(-1, -1));
-        expected = 6;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Addition(new Multiplication(9, 2), new Constant(9));
-        expected = 27;
-        Assertions.assertEquals(expected, actual.evaluate());
+        Assertions.assertEquals(7, new Addition(3, 4).evaluate());
+        Assertions.assertEquals(10, new Addition(new Constant(6), 4).evaluate());
+        Assertions.assertEquals(5, new Addition(3, new Multiplication(1, 2)).evaluate());
+        Assertions.assertEquals(-1, new Addition(new Exponent(3, 1), new Negate(4)).evaluate());
     }
 
     @Test
     @DisplayName("Multiplication")
     public void MultiplicationTests() {
-        var actual = new Multiplication(3, 7);
-        var expected = 21;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Multiplication(new Addition(3, 5), new Negate(9));
-        expected = -72;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Multiplication(new Multiplication(9, -1), new Addition(3, 4));
-        expected = -63;
-        Assertions.assertEquals(expected, actual.evaluate());
+        Assertions.assertEquals(12, new Multiplication(3, 4).evaluate());
+        Assertions.assertEquals(24, new Multiplication(new Constant(6), 4).evaluate());
+        Assertions.assertEquals(6, new Multiplication(3, new Multiplication(1, 2)).evaluate());
+        Assertions.assertEquals(-12, new Multiplication(new Exponent(3, 1), new Negate(4)).evaluate());
     }
 
     @Test
     @DisplayName("Exponent")
     public void exponentTests() {
-        var actual = new Exponent(3, 2);
-        var expected = 9;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Exponent(new Addition(3, 5), 1);
-        expected = 8;
-        Assertions.assertEquals(expected, actual.evaluate());
-
-        actual = new Exponent(new Multiplication(9, -1), new Addition(1, new Negate(-1)));
-        expected = 81;
-        Assertions.assertEquals(expected, actual.evaluate());
+        Assertions.assertEquals(81, new Exponent(3, 4).evaluate());
+        Assertions.assertEquals(16, new Exponent(new Constant(2), 4).evaluate());
+        Assertions.assertEquals(9, new Exponent(3, new Multiplication(1, 2)).evaluate());
+        Assertions.assertEquals(1, new Exponent(new Addition(3, 1), new Negate(0)).evaluate());
     }
 }

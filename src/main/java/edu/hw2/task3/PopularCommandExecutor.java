@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 public final class PopularCommandExecutor {
     private final static Logger LOGGER = LogManager.getLogger();
-
     private final ConnectionManager manager;
     private final int maxAttempts;
 
@@ -15,16 +14,11 @@ public final class PopularCommandExecutor {
     }
 
     public void updatePackages(String command) throws Exception {
-        try {
-            tryExecute(command);
-        } catch (Exception e) {
-            LOGGER.info("Update failed");
-        }
+        tryExecute(command);
     }
 
     private void tryExecute(String command) throws Exception {
-        Connection successConnection = null;
-        Exception exception = new Exception();
+        Connection successConnection;
 
         for (int i = 0; i < maxAttempts; ++i) {
             try {
@@ -34,11 +28,10 @@ public final class PopularCommandExecutor {
                     successConnection.close();
                     return;
                 }
-            } catch (Exception e) {
-                exception = new Exception(e.getCause());
+            } catch (Exception ignored) {
             }
         }
-        throw exception;
+        throw new ConnectionException();
     }
 }
 

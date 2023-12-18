@@ -1,16 +1,18 @@
 package edu.hw2.task1;
 
+import org.jetbrains.annotations.NotNull;
+
 public record Exponent(double base, double power) implements Expr {
 
-    public Exponent(double base, Expr power) {
+    public Exponent(double base, @NotNull Expr power) {
         this(base, power.evaluate());
     }
 
-    public Exponent(Expr base, double power) {
+    public Exponent(@NotNull Expr base, double power) {
         this(base.evaluate(), power);
     }
 
-    public Exponent(Expr base, Expr power) {
+    public Exponent(@NotNull Expr base, @NotNull Expr power) {
         this(base.evaluate(), power.evaluate());
     }
 
