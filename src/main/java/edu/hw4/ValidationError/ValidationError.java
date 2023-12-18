@@ -11,10 +11,6 @@ public class ValidationError {
         this.errorField = errorMessage;
     }
 
-    public String getErrorField() {
-        return this.errorField;
-    }
-
     public static Set<ValidationError> setOfValidationErrors(Animal animal) {
         Set<ValidationError> validationErrors = new LinkedHashSet<>();
 
@@ -35,5 +31,9 @@ public class ValidationError {
         }
 
         return validationErrors;
+    }
+
+    public String getErrorField() {
+        return this.errorField;
     }
 }
