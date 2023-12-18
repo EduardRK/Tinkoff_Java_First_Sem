@@ -14,8 +14,8 @@ public final class Task1 {
             return -1;
         }
 
-        timestamp = timestamp.trim();
-        String[] timestampArray = timestamp.split(":");
+        String tempTimestamp = timestamp.trim();
+        String[] timestampArray = tempTimestamp.split(":");
 
         if (!isTimestampCorrectFormat(timestampArray)) {
             return -1;
