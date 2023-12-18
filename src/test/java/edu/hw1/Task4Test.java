@@ -2,46 +2,30 @@ package edu.hw1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class Task4Test {
 
-    @Test
-    @DisplayName("Not null string")
-    void notNullString() {
-        String actual = Task4.fixString("QWERTY");
-        String expected = "WQREYT";
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task4.fixString("09");
-        expected = "90";
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task4.fixString("1");
-        expected = "1";
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task4.fixString("hTsii  s aimex dpus rtni.g");
-        expected = "This is a mixed up string.";
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task4.fixString("123456");
-        expected = "214365";
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task4.fixString("badce");
-        expected = "abcde";
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @CsvSource(value = {
+        "QWERTY, WQREYT",
+        "09, 90",
+        "1, 1",
+        "hTsii  s aimex dpus rtni.g, This is a mixed up string.",
+        "123456, 214365",
+        "badce, abcde"
+    })
+    @DisplayName("Test fix string")
+    public void notNullString(String toFix, String expected) {
+        Assertions.assertEquals(expected, Task4.fixString(toFix));
     }
 
-    @Test
-    @DisplayName("Null string")
-    void nullString() {
-        String actual = Task4.fixString(null);
-        Assertions.assertNull(actual);
-
-        actual = Task4.fixString("");
-        String expected = "";
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Empty string")
+    public void nullString(String toFix) {
+        Assertions.assertEquals(toFix, Task4.fixString(toFix));
     }
 }

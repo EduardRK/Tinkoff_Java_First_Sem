@@ -5,10 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class Task8Test {
-
     @Test
     @DisplayName("Correct values")
-    void correctValues() {
+    public void correctValues() {
         int[][] board = {
             {0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -72,7 +71,7 @@ public class Task8Test {
 
     @Test
     @DisplayName("Incorrect board")
-    void incorrectBoard() {
+    public void incorrectBoard() {
         int[][] board = {
             {0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -98,7 +97,7 @@ public class Task8Test {
 
     @Test
     @DisplayName("Incorrect values")
-    void incorrectValues() {
+    public void incorrectValues() {
         int[][] board = {
             {0, 0, 0, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 1, 1, 0, 0},
@@ -122,5 +121,11 @@ public class Task8Test {
             {1, 0, 0, 0, 0, 0, 0, 0}
         };
         Assertions.assertFalse(Task8.knightBoardCapture(board));
+    }
+
+    @Test
+    @DisplayName("Null board")
+    public void nullBoard() {
+        Assertions.assertFalse(Task8.knightBoardCapture(null));
     }
 }
