@@ -2,39 +2,34 @@ package edu.hw1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class Task2Test {
-
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "564, 3",
+        "3587214, 7"
+    })
     @DisplayName("Positive number")
-    void positiveNumber() {
-        int actual = Task2.countDigits(564);
-        int expected = 3;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task2.countDigits(3587214);
-        expected = 7;
-        Assertions.assertEquals(expected, actual);
+    public void positiveNumber(int number, int expected) {
+        Assertions.assertEquals(expected, Task2.countDigits(number));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = "0, 1")
     @DisplayName("Zero")
-    void zero() {
-        int actual = Task2.countDigits(0);
-        int expected = 1;
-        Assertions.assertEquals(expected, actual);
+    public void zero(int number, int expected) {
+        Assertions.assertEquals(expected, Task2.countDigits(number));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "-89, 2",
+        "-9999999, 7"
+    })
     @DisplayName("Negative number")
-    void negativeNumber() {
-        int actual = Task2.countDigits(-89);
-        int expected = 2;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task2.countDigits(-9999999);
-        expected = 7;
-        Assertions.assertEquals(expected, actual);
+    public void negativeNumber(int number, int expected) {
+        Assertions.assertEquals(expected, Task2.countDigits(number));
     }
 }

@@ -2,111 +2,76 @@ package edu.hw1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class Task1Test {
+    private static final int ERROR_CODE = -1;
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "01:00, 60",
+        "13:56, 836",
+        "3:59, 239",
+        "123:10, 7390",
+        "0:0, 0",
+        "0:21, 21"
+    })
     @DisplayName("Inputs minutes and seconds")
-    void minutesAndSeconds() {
-        int actual = Task1.minutesToSeconds("01:00");
-        int expected = 60;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("13:56");
-        expected = 836;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("3:59");
-        expected = 239;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("123:10");
-        expected = 7390;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("0:0");
-        expected = 0;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("0:21");
-        expected = 21;
-        Assertions.assertEquals(expected, actual);
+    public void minutesAndSeconds(String timestamp, int expected) {
+        Assertions.assertEquals(expected, Task1.minutesToSeconds(timestamp));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "-01:00",
+        "13:-56",
+        "-3:-59"
+    })
     @DisplayName("Inputs negative minutes or seconds")
-    void negativeValues() {
-        int actual = Task1.minutesToSeconds("-01:00");
-        int expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("13:-56");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("-3:-59");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
+    public void negativeValues(String timestamp) {
+        Assertions.assertEquals(ERROR_CODE, Task1.minutesToSeconds(timestamp));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "01:90",
+        "13:1500"
+    })
     @DisplayName("Inputs incorrect minutes or seconds")
-    void incorrectValues() {
-        int actual = Task1.minutesToSeconds("01:90");
-        int expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("13:1500");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
+    public void incorrectValues(String timestamp) {
+        Assertions.assertEquals(ERROR_CODE, Task1.minutesToSeconds(timestamp));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "0sd1:90",
+        "131500",
+        "01:9:0",
+        "1dsa3:1500",
+        "dogfood",
+        "13:sdlj"
+    })
     @DisplayName("Inputs incorrect string")
-    void incorrectString() {
-        int actual = Task1.minutesToSeconds("0sd1:90");
-        int expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("131500");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("01:9:0");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("1dsa3:1500");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("dogfood");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("13:sdlj");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
+    public void incorrectString(String timestamp) {
+        Assertions.assertEquals(ERROR_CODE, Task1.minutesToSeconds(timestamp));
     }
 
-    @Test
-    @DisplayName("Inputs null string")
-    void nullString() {
-        int actual = Task1.minutesToSeconds("");
-        int expected = -1;
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Inputs empty and null string")
+    public void nullString(String timestamp) {
+        Assertions.assertEquals(ERROR_CODE, Task1.minutesToSeconds(timestamp));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "18:00 , 1080",
+        "  1315:00 , 78900"
+    })
     @DisplayName("Inputs string with whitespace")
-    void stringWithWhitespace() {
-        int actual = Task1.minutesToSeconds("18:00 ");
-        int expected = -1;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task1.minutesToSeconds("  1315:00 ");
-        expected = -1;
-        Assertions.assertEquals(expected, actual);
+    public void stringWithWhitespace(String timestamp, int expected) {
+        Assertions.assertEquals(expected, Task1.minutesToSeconds(timestamp));
     }
 }
