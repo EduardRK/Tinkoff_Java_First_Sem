@@ -1,12 +1,11 @@
 package edu.hw4;
 
 import edu.hw4.Tasks.Task4;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Task4Test {
     @Test
@@ -32,8 +31,7 @@ public class Task4Test {
             add(smallBird);
         }};
         Animal actual = Task4.animalWithLongestName(animals);
-        Animal expected = veryBigName;
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(veryBigName, actual);
     }
 
     @Test
