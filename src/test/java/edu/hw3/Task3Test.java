@@ -1,11 +1,11 @@
 package edu.hw3;
 
 import edu.hw3.task3.Task3;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Task3Test {
 
