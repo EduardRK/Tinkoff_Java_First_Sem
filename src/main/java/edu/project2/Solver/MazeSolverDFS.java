@@ -63,7 +63,7 @@ public class MazeSolverDFS implements Solver {
     }
 
     private boolean isValidCoordinate(Coordinate coordinate) {
-        return coordinate.x() >= 0 && coordinate.x() < maze.width()
-            && coordinate.y() >= 0 && coordinate.y() < maze.height();
+        return coordinate.x() >= 0 && coordinate.x() < maze.height()
+            && coordinate.y() >= 0 && coordinate.y() < maze.width();
     }
 }
