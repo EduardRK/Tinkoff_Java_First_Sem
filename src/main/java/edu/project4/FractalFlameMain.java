@@ -2,8 +2,8 @@ package edu.project4;
 
 import edu.project4.FractalFlame.Generators.FractalFlameGenerator;
 
-public final class Main {
-    private Main() {
+public final class FractalFlameMain {
+    private FractalFlameMain() {
 
     }
 
