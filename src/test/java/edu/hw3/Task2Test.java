@@ -1,83 +1,47 @@
 package edu.hw3;
 
-import edu.hw3.task2.InvalidBracketsSequence;
 import edu.hw3.task2.Task2;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class Task2Test {
+    @Contract(" -> new")
+    private static Arguments @NotNull [] getTestData() {
+        return new Arguments[] {
+            Arguments.of("()()()", new ArrayList<>(List.of("()", "()", "()"))),
+            Arguments.of("((()))", new ArrayList<>(List.of("((()))"))),
+            Arguments.of("((()))(())()()(()())", new ArrayList<>(List.of("((()))", "(())", "()", "()", "(()())"))),
+            Arguments.of("((())())(()(()()))", new ArrayList<>(List.of("((())())", "(()(()()))")))
+        };
+    }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource(value = "getTestData")
     @DisplayName("Example tests")
-    public void exampleTests() throws InvalidBracketsSequence {
-        List<String> actual = Task2.clusterize("()()()");
-        List<String> expected = new ArrayList<>() {{
-            add("()");
-            add("()");
-            add("()");
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task2.clusterize("((()))");
-        expected = new ArrayList<>() {{
-            add("((()))");
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task2.clusterize("((()))(())()()(()())");
-        expected = new ArrayList<>() {{
-            add("((()))");
-            add("(())");
-            add("()");
-            add("()");
-            add("(()())");
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task2.clusterize("((())())(()(()()))");
-        expected = new ArrayList<>() {{
-            add("((())())");
-            add("(()(()()))");
-        }};
-        Assertions.assertEquals(expected, actual);
+    public void exampleTests(String brackets, List<String> clusterizeBrackets) {
+        Assertions.assertEquals(clusterizeBrackets, Task2.clusterize(brackets));
     }
 
-    @Test
-    @DisplayName("Empty string")
-    public void emptyString() throws InvalidBracketsSequence {
-        List<String> actual = Task2.clusterize("");
-        List<String> expected = new ArrayList<>() {{
-            add("");
-        }};
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("Null string")
-    public void nullString() throws InvalidBracketsSequence {
-        List<String> actual = Task2.clusterize(null);
-        List<String> expected = new ArrayList<>() {{
-            add(null);
-        }};
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Null and empty string")
+    public void emptyString(String brackets) {
+        Assertions.assertEquals(brackets, Task2.clusterize(brackets).getFirst());
     }
 
     @Test
     @DisplayName("Invalid string")
-    public void invalidString() throws InvalidBracketsSequence {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            List<String> actual = Task2.clusterize("((12))");
-        });
-    }
-
-    @Test
-    @DisplayName("Invalid bracket sequence")
-    public void InvalidBracketsSequence() {
-        Assertions.assertThrows(InvalidBracketsSequence.class, () -> {
-            List<String> actual = Task2.clusterize("(()()))()");
-        });
+    public void invalidString() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Task2.clusterize("((12))"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Task2.clusterize("(()()))()"));
     }
 }

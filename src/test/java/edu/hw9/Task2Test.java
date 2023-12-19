@@ -29,6 +29,7 @@ public class Task2Test {
             Path path = Path.of(directory);
             Finder<Integer> finder = new DirectoryFinder(path);
             List<Path> actual = finder.find(n);
+
             Assertions.assertEquals(expectedSize, actual.size());
         }
     }
@@ -43,6 +44,7 @@ public class Task2Test {
             Path path = Path.of("src/main/resources/hw9_TestsDirectory/Task2Test/Directory1");
             Finder<Predicate<File>> finder = new FileFinder(path);
             List<Path> actual = finder.find(filter);
+
             Assertions.assertEquals(20, actual.size());
         }
 
@@ -53,6 +55,7 @@ public class Task2Test {
             Path path = Path.of("src/main/resources/hw9_TestsDirectory/Task2Test/Directory1");
             Finder<Predicate<File>> finder = new FileFinder(path);
             List<Path> actual = finder.find(filter);
+
             Assertions.assertEquals(61, actual.size());
         }
     }

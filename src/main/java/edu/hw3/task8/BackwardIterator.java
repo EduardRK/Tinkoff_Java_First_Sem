@@ -16,7 +16,7 @@ public class BackwardIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return (indexNextElement >= 0);
+        return indexNextElement >= 0;
     }
 
     @Override

@@ -1,11 +1,11 @@
 package edu.hw3.task4;
 
-import edu.hw3.Validator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 public class Task4 {
 
@@ -44,17 +44,18 @@ public class Task4 {
     private Task4() {
     }
 
-    public static String convertToRoman(int number) {
-        if (!Validator.isPositiveNumber(number)) {
+    public static @NotNull String convertToRoman(int number) {
+        if (number <= 0) {
             throw new IllegalArgumentException();
         }
 
         int modifiedNumber = number;
+
         List<Integer> keyArray = new ArrayList<>(ROMAN_DIGITS.keySet());
         Collections.sort(keyArray);
-        int keyArrayLength = keyArray.size();
+
         StringBuilder romanNumber = new StringBuilder();
-        int indexOfKey = keyArrayLength - 1;
+        int indexOfKey = keyArray.size() - 1;
 
         while (modifiedNumber > 0) {
             if (modifiedNumber >= keyArray.get(indexOfKey)) {

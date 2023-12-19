@@ -21,6 +21,7 @@ public class Task1Test {
     public void raceConditionTest() {
         ExecutorService executorService1 = Executors.newVirtualThreadPerTaskExecutor();
         ExecutorService executorService2 = Executors.newVirtualThreadPerTaskExecutor();
+
         List<String> metrics = new ArrayList<>(List.of("sum", "min", "max", "average"));
         StatisticCollector<Double> collector = new StatisticCollectorOneStat();
         List<Double> resultStats = new CopyOnWriteArrayList<>();
@@ -95,15 +96,19 @@ public class Task1Test {
 
         resultStats.sort(Comparator.naturalOrder());
         List<Double> expected = new ArrayList<>(List.of(-191D, 4.475, 44.75, 120D));
+
         Assertions.assertEquals(expected, resultStats);
     }
 
     private double[] getRandomValues() {
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+
         double[] values = new double[threadLocalRandom.nextInt(1_000)];
+
         for (int i = 0; i < values.length; ++i) {
             values[i] = threadLocalRandom.nextDouble(-100, 100);
         }
+
         return values;
     }
 }

@@ -1,12 +1,15 @@
 package edu.hw3.task5;
 
+import java.util.Objects;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Contact implements Comparable<Contact> {
     private final String firstName;
     private final String lastName;
 
-    public Contact(String fullName) {
+    @Contract(pure = true)
+    public Contact(@NotNull String fullName) {
         String[] splitFullName = fullName.split(" ");
         this.firstName = splitFullName[0];
         if (splitFullName.length == 2) {
@@ -31,5 +34,25 @@ public class Contact implements Comparable<Contact> {
         }
 
         return this.lastName.compareToIgnoreCase(other.lastName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Contact contact = (Contact) obj;
+        return Objects.equals(firstName, contact.firstName)
+            && Objects.equals(lastName, contact.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }

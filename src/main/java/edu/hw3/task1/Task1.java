@@ -1,7 +1,5 @@
 package edu.hw3.task1;
 
-import edu.hw3.Validator;
-
 public class Task1 {
     private static final int ASCII_CODE_FIRST_UPPER_CASE_LETTER = 65;
     private static final int ASCII_CODE_LAST_UPPER_CASE_LETTER = 90;
@@ -12,16 +10,17 @@ public class Task1 {
     }
 
     public static String atbash(String message) {
-        if (Validator.isStringNull(message) || message.isEmpty()) {
+        if (message == null || message.isEmpty()) {
             return message;
         }
 
         char[] messageCharArray = message.toCharArray();
-        int messageLength = messageCharArray.length;
-        char[] encodeMessageCharArray = new char[messageLength];
+        char[] encodeMessageCharArray = new char[messageCharArray.length];
         char messageCharArrayItem;
-        for (int i = 0; i < messageLength; ++i) {
+
+        for (int i = 0; i < messageCharArray.length; ++i) {
             messageCharArrayItem = messageCharArray[i];
+
             if (isUpperCaseLetter(messageCharArrayItem)) {
                 encodeMessageCharArray[i] = encodeUpperCaseLetter(messageCharArrayItem);
             } else if (isLowerCaseLetter(messageCharArrayItem)) {
@@ -30,17 +29,18 @@ public class Task1 {
                 encodeMessageCharArray[i] = messageCharArrayItem;
             }
         }
+
         return new String(encodeMessageCharArray);
     }
 
     private static boolean isUpperCaseLetter(char letter) {
-        return ((int) letter >= ASCII_CODE_FIRST_UPPER_CASE_LETTER)
-            && ((int) letter <= ASCII_CODE_LAST_UPPER_CASE_LETTER);
+        return (int) letter >= ASCII_CODE_FIRST_UPPER_CASE_LETTER
+            && (int) letter <= ASCII_CODE_LAST_UPPER_CASE_LETTER;
     }
 
     private static boolean isLowerCaseLetter(char letter) {
-        return ((int) letter >= ASCII_CODE_FIRST_LOWER_CASE_LETTER)
-            && ((int) letter <= ASCII_CODE_LAST_LOWER_CASE_LETTER);
+        return (int) letter >= ASCII_CODE_FIRST_LOWER_CASE_LETTER
+            && (int) letter <= ASCII_CODE_LAST_LOWER_CASE_LETTER;
     }
 
     private static char encodeUpperCaseLetter(char upperCaseLetter) {

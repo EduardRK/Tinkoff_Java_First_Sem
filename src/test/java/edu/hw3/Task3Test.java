@@ -3,77 +3,68 @@ package edu.hw3;
 import edu.hw3.task3.Task3;
 import java.util.HashMap;
 import java.util.Map;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class Task3Test {
-
-    @Test
-    @DisplayName("Example tests")
-    public void exampleTests() {
-        Map<Object, Integer> actual = Task3.freqDict(new String[] {"a", "bb", "a", "bb"});
-        Map<Object, Integer> expected = new HashMap<>() {{
-            put("bb", 2);
-            put("a", 2);
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task3.freqDict(new String[] {"this", "and", "that", "and"});
-        expected = new HashMap<>() {{
-            put("that", 1);
-            put("and", 2);
-            put("this", 1);
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task3.freqDict(new String[] {"код", "код", "код", "bug"});
-        expected = new HashMap<>() {{
-            put("код", 3);
-            put("bug", 1);
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task3.freqDict(new Integer[] {1, 1, 2, 2});
-        expected = new HashMap<>() {{
-            put(1, 2);
-            put(2, 2);
-        }};
-        Assertions.assertEquals(expected, actual);
+    @Contract(" -> new")
+    private static Arguments @NotNull [] getArguments() {
+        return new Arguments[] {
+            Arguments.of(new String[] {"a", "bb", "a", "bb"}, new HashMap<>(Map.of(
+                "bb", 2,
+                "a", 2
+            ))),
+            Arguments.of(new String[] {"this", "and", "that", "and"}, new HashMap<>(Map.of(
+                "that", 1,
+                "and", 2,
+                "this", 1
+            ))),
+            Arguments.of(new String[] {"код", "код", "код", "bug"}, new HashMap<>(Map.of(
+                "код", 3,
+                "bug", 1
+            ))),
+            Arguments.of(new Integer[] {1, 1, 2, 2}, new HashMap<>(Map.of(
+                1, 2,
+                2, 2
+            ))),
+            Arguments.of(new Double[] {1.3, 2.3, 3.3, 4.3, 1.3, 10D}, new HashMap<>(Map.of(
+                1.3, 2,
+                2.3, 1,
+                3.3, 1,
+                4.3, 1,
+                10D, 1
+            ))),
+            Arguments.of(new Float[] {1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F}, new HashMap<>(Map.of(
+                1F, 12
+            )))
+        };
     }
 
-    @Test
-    @DisplayName("Other cases")
-    public void otherCases() {
-        Map<Object, Integer> actual = Task3.freqDict(new Double[] {1.3, 2.3, 3.3, 4.3, 1.3, 10D});
-        Map<Object, Integer> expected = new HashMap<>() {{
-            put(1.3, 2);
-            put(2.3, 1);
-            put(3.3, 1);
-            put(4.3, 1);
-            put(10D, 1);
-        }};
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task3.freqDict(new Float[] {1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F, 1F});
-        expected = new HashMap<>() {{
-            put(1F, 12);
-        }};
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @MethodSource(value = "getArguments")
+    @DisplayName("Test create freq dictionary")
+    public void exampleTests(Object[] data, Map<Object, Integer> freqDict) {
+        Assertions.assertEquals(freqDict, Task3.freqDict(data));
     }
 
-    @Test
+    @ParameterizedTest
+    @EmptySource
     @DisplayName("Empty array")
-    public void emptyArray() {
-        Map<Object, Integer> actual = Task3.freqDict(new Character[] {});
-        Map<Object, Integer> expected = new HashMap<>();
-        Assertions.assertEquals(expected, actual);
+    public void emptyArray(Object[] data) {
+        Assertions.assertEquals(new HashMap<>(), Task3.freqDict(data));
     }
 
-    @Test
+    @ParameterizedTest
+    @NullSource
     @DisplayName("Null array")
-    public void nullArray() {
-        Map<Object, Integer> actual = Task3.freqDict(null);
-        Assertions.assertNull(actual);
+    public void nullArray(Object[] data) {
+        Assertions.assertNull(Task3.freqDict(data));
     }
 }

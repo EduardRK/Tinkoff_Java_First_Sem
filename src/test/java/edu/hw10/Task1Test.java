@@ -15,6 +15,7 @@ public class Task1Test {
 
         for (int i = 0; i < 1_000; ++i) {
             MyClass myClass = (MyClass) randomObjectGenerator.nextObject();
+
             Assertions.assertTrue(myClass.getValue() >= -1_000 && myClass.getValue() <= 5_000);
             Assertions.assertNotNull(myClass.getName());
         }
@@ -27,6 +28,7 @@ public class Task1Test {
 
         for (int i = 0; i < 1_000; ++i) {
             MyClass myClass = (MyClass) randomObjectGenerator.nextObject("create");
+
             Assertions.assertTrue(myClass.getValue() >= -1_000 && myClass.getValue() <= 5_000);
             Assertions.assertNotNull(myClass.getName());
         }
@@ -39,6 +41,7 @@ public class Task1Test {
 
         for (int i = 0; i < 1_000; ++i) {
             MyRecord myRecord = (MyRecord) randomObjectGenerator.nextObject();
+
             Assertions.assertTrue(myRecord.valueFirst() >= -10_000 && myRecord.valueFirst() <= 10_000);
             Assertions.assertTrue(myRecord.valueSecond() >= -10_000 && myRecord.valueSecond() <= 10_000);
             Assertions.assertNotNull(myRecord.string());
@@ -50,10 +53,6 @@ public class Task1Test {
     public void randomRecordFactoryMethod() {
         RandomObjectGenerator randomObjectGenerator = new RandomObjectGenerator(MyRecord.class);
 
-        for (int i = 0; i < 1_000; ++i) {
-            Assertions.assertThrows(Exception.class, () -> {
-                randomObjectGenerator.nextObject("create");
-            });
-        }
+        Assertions.assertThrows(Exception.class, () -> randomObjectGenerator.nextObject("create"));
     }
 }

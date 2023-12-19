@@ -22,6 +22,7 @@ public class Task2Test {
     @DisplayName("Test file cache")
     public void fileCache(@TempDir Path path) {
         CacheCalculator cacheCalculator = (CacheCalculator) CacheProxy.create(new CacheFibCalculator(), path);
+
         Assertions.assertEquals(10, cacheCalculator.calculate(10));
         Assertions.assertEquals(20, cacheCalculator.calculate(20));
         Assertions.assertEquals(30, cacheCalculator.calculate(30));
@@ -33,14 +34,16 @@ public class Task2Test {
             Path.of(path + File.separator + "calculate" + "_3" + ".cache").toFile(),
             Path.of(path + File.separator + "calculate" + "_4" + ".cache").toFile()
         ));
+
         Set<File> fileSet = new HashSet<>(Set.of(Objects.requireNonNull(path.toFile().listFiles())));
         Assertions.assertTrue(fileSet.containsAll(fileList));
     }
 
     @Test
-    @DisplayName("Test memoru cache")
+    @DisplayName("Test memory cache")
     public void memoryCache() {
         NonCacheCalculator nonCacheCalculator = (NonCacheCalculator) CacheProxy.create(new NonCacheFibCalculator());
+
         Assertions.assertEquals(10, nonCacheCalculator.calculate(10));
         Assertions.assertEquals(20, nonCacheCalculator.calculate(20));
         Assertions.assertEquals(30, nonCacheCalculator.calculate(30));
