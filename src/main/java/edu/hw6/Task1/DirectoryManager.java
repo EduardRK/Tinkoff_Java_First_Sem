@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public class DirectoryManager implements Directory {
     private final static Logger LOGGER = LogManager.getLogger();
@@ -34,7 +35,7 @@ public class DirectoryManager implements Directory {
     }
 
     @Override
-    public void writeFile(Path path, String string) {
+    public void writeFile(@NotNull Path path, String string) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(
             new FileWriter(path.toFile()))
         ) {

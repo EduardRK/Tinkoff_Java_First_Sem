@@ -46,7 +46,7 @@ public class Task1Test {
         @Test
         @DisplayName("One increment")
         public void oneIncrement() throws InterruptedException {
-            final int countThreads = 10;
+            final int countThreads = Runtime.getRuntime().availableProcessors();
             Counter counter = new Counter();
             List<Thread> threadList = new ArrayList<>();
             for (int i = 0; i < countThreads; ++i) {

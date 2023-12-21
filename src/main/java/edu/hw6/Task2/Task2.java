@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public final class Task2 {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -18,7 +19,7 @@ public final class Task2 {
     private Task2() {
     }
 
-    public static void cloneFile(Path path) {
+    public static void cloneFile(@NotNull Path path) {
         Path directoryPath = path.getParent();
         if (Files.notExists(path)) {
             createNewFile(path);
@@ -80,12 +81,12 @@ public final class Task2 {
         }
     }
 
-    private static String getFileName(Path path) {
+    private static @NotNull String getFileName(@NotNull Path path) {
         String fileName = String.valueOf(path.getFileName());
         return fileName.substring(0, fileName.lastIndexOf('.'));
     }
 
-    private static String getFileExtension(Path path) {
+    private static @NotNull String getFileExtension(@NotNull Path path) {
         String fileName = String.valueOf(path.getFileName());
         return fileName.substring(fileName.lastIndexOf('.') + 1);
     }

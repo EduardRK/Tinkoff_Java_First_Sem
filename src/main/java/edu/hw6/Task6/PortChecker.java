@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.SocketException;
+import org.jetbrains.annotations.NotNull;
 
 public class PortChecker {
     private static final String FORMATTER_PROTOCOL = "%-10s";
@@ -13,7 +14,7 @@ public class PortChecker {
     private PortChecker() {
     }
 
-    public static String informationAboutOwners() {
+    public static @NotNull String informationAboutOwners() {
         StringBuilder stringBuilder = listTitle();
 
         for (int port : Ports.PORTS.keySet()) {
@@ -27,7 +28,7 @@ public class PortChecker {
         return stringBuilder.toString();
     }
 
-    private static StringBuilder listTitle() {
+    private static @NotNull StringBuilder listTitle() {
         return new StringBuilder()
             .append(String.format(FORMATTER_PROTOCOL, "Protocol"))
             .append(String.format(FORMATTER_PORT, "Port"))
@@ -35,7 +36,7 @@ public class PortChecker {
             .append(System.lineSeparator());
     }
 
-    private static StringBuilder addListItem(StringBuilder stringBuilder, String protocol, int port) {
+    private static @NotNull StringBuilder addListItem(@NotNull StringBuilder stringBuilder, String protocol, int port) {
         return stringBuilder.append(String.format(FORMATTER_PROTOCOL, protocol))
             .append(String.format(FORMATTER_PORT, port))
             .append(Ports.PORTS.getOrDefault(port, NOT_AVAILABLE))

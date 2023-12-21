@@ -8,13 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public final class LogStatisticUtils {
     private LogStatisticUtils() {
     }
 
     public static Map<Object, Long> frequencyDictionary(
-        List<LogRecord> logRecordList,
+        @NotNull List<LogRecord> logRecordList,
         Function<LogRecord, Object> mapper
     ) {
         return logRecordList.stream()
@@ -22,7 +24,7 @@ public final class LogStatisticUtils {
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public static double averageResponseSize(List<LogRecord> logRecordList) {
+    public static double averageResponseSize(@NotNull List<LogRecord> logRecordList) {
         double allResponseSize = logRecordList.stream()
             .map(LogRecord::responseSizeBytes)
             .mapToDouble(Long::intValue)
@@ -30,11 +32,12 @@ public final class LogStatisticUtils {
         return allResponseSize / logRecordList.size();
     }
 
-    public static int countRequest(List<LogRecord> logRecordList) {
+    @Contract(pure = true)
+    public static int countRequest(@NotNull List<LogRecord> logRecordList) {
         return logRecordList.size();
     }
 
-    public static LocalDate startingDate(List<LogRecord> logRecordList) {
+    public static @NotNull LocalDate startingDate(@NotNull List<LogRecord> logRecordList) {
         OffsetDateTime offsetDateTime = logRecordList.stream()
             .min(Comparator.comparing(LogRecord::requestTime))
             .get()
@@ -43,7 +46,7 @@ public final class LogStatisticUtils {
         return LocalDate.of(offsetDateTime.getYear(), offsetDateTime.getMonth(), offsetDateTime.getDayOfMonth());
     }
 
-    public static LocalDate endDate(List<LogRecord> logRecordList) {
+    public static @NotNull LocalDate endDate(@NotNull List<LogRecord> logRecordList) {
         OffsetDateTime offsetDateTime = logRecordList.stream()
             .max(Comparator.comparing(LogRecord::requestTime))
             .get()

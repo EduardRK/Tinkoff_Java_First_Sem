@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 public class LogReporter implements Reporter {
     private static final String MARKDOWN = "markdown";
@@ -173,14 +174,14 @@ public class LogReporter implements Reporter {
             : AdocUtils.createTable(COUNT_BYTES_UPLOAD_FOR_EACH_DAY, table);
     }
 
-    private String formatNumber(double number) {
+    private @NotNull String formatNumber(double number) {
         DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
         symbols.setGroupingSeparator('_');
 
         return new DecimalFormat(NUMBER_FORMAT, symbols).format(number).replace(",", ".");
     }
 
-    private String formatNumber(long number) {
+    private @NotNull String formatNumber(long number) {
         DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
         symbols.setGroupingSeparator('_');
 

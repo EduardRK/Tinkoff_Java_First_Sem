@@ -1,7 +1,7 @@
 package edu.hw6.Task3;
 
-import java.io.IOException;
 import java.nio.file.Path;
+import org.jetbrains.annotations.NotNull;
 
 public class FilterLessThan implements AbstractFilter {
     private final int size;
@@ -11,7 +11,7 @@ public class FilterLessThan implements AbstractFilter {
     }
 
     @Override
-    public boolean accept(Path entry) throws IOException {
+    public boolean accept(@NotNull Path entry) {
         return entry.toFile().length() < size;
     }
 }

@@ -7,9 +7,9 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -38,10 +38,13 @@ public class Task2Test {
         Assertions.assertEquals(brackets, Task2.clusterize(brackets).getFirst());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "((12))",
+        "(()()))()"
+    })
     @DisplayName("Invalid string")
-    public void invalidString() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task2.clusterize("((12))"));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Task2.clusterize("(()()))()"));
+    public void invalidString(String brackets) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Task2.clusterize(brackets));
     }
 }

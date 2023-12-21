@@ -10,8 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-public class HackerNews implements IHackerNews {
+public class HackerNews implements News {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final int GROUP_OF_TITLE = 2;
     private static final String EXPANSION_JSON = ".json";
@@ -33,7 +35,7 @@ public class HackerNews implements IHackerNews {
         }
     }
 
-    private static long[] makeTopStoriesIDsArray(HttpResponse<String> response) {
+    private static long @NotNull [] makeTopStoriesIDsArray(@NotNull HttpResponse<String> response) {
         String[] stringArrayIDs = response.body().split(",");
 
         stringArrayIDs[0] = stringArrayIDs[0].substring(1);
@@ -50,11 +52,11 @@ public class HackerNews implements IHackerNews {
         return longArrayIDs;
     }
 
-    private static String makeNewsRequestString(long id) {
+    @Contract(pure = true) private static @NotNull String makeNewsRequestString(long id) {
         return newsURIWithoutExpansion + id + EXPANSION_JSON;
     }
 
-    private static String findTitle(HttpResponse<String> response) {
+    private static String findTitle(@NotNull HttpResponse<String> response) {
         String regex = "^.*(\"title\":\"(.+)(\",\"type\":)).*$";
         Matcher matcher = Pattern.compile(regex).matcher(response.body());
 

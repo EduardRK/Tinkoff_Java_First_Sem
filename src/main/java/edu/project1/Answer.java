@@ -1,6 +1,7 @@
 package edu.project1;
 
 import java.util.Scanner;
+import org.jetbrains.annotations.NotNull;
 
 public class Answer {
     private static final Scanner IN = new Scanner(System.in);
@@ -14,7 +15,7 @@ public class Answer {
         return answer[0];
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(@NotNull String answer) {
         this.answer = answer.toCharArray();
     }
 

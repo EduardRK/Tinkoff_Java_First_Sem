@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 
@@ -98,11 +100,11 @@ public final class Main {
             && isValidArgumentsSequence(args);
     }
 
-    private static boolean isValidArgumentsLength(String[] args) {
+    @Contract(pure = true) private static boolean isValidArgumentsLength(String @NotNull [] args) {
         return (args.length >= 2) && (args.length % 2 == 0) && (args.length <= MAX_ARGUMENTS);
     }
 
-    private static boolean isValidArgumentsCommands(String[] args) {
+    @Contract(pure = true) private static boolean isValidArgumentsCommands(String @NotNull [] args) {
         for (int i = 0; i < args.length; i += 2) {
             if (!COMMANDS.contains(args[i])) {
                 return false;
@@ -136,7 +138,7 @@ public final class Main {
         return Pattern.matches(regex, path);
     }
 
-    private static List<String> getArgumentList(String[] args) {
+    private static @NotNull List<String> getArgumentList(String @NotNull [] args) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < args.length; i += 2) {
             list.add(args[i]);

@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 import org.jetbrains.annotations.NotNull;
 
 public class PasswordHacker {
-    private static final int COUNT_THREADS = 12;
+    private static final int COUNT_THREADS = Runtime.getRuntime().availableProcessors();
     private static final List<String> ALPHABET = new ArrayList<>();
 
     static {

@@ -2,12 +2,14 @@ package edu.project3.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public final class MarkdownUtils {
     private MarkdownUtils() {
     }
 
-    public static String createTable(String header, List<List<String>> tableRows) {
+    public static @NotNull String createTable(String header, List<List<String>> tableRows) {
         if (!isValidTable(tableRows)) {
             throw new IllegalArgumentException("Wrong table");
         }
@@ -26,11 +28,12 @@ public final class MarkdownUtils {
         return stringBuilder.toString();
     }
 
-    private static String createHeader(String header) {
+    @Contract(pure = true)
+    private static @NotNull String createHeader(String header) {
         return "#### " + header + '\n';
     }
 
-    private static List<Integer> rowsSize(List<List<String>> tableRows) {
+    private static @NotNull List<Integer> rowsSize(@NotNull List<List<String>> tableRows) {
         List<Integer> sizeList = new ArrayList<>();
         int cols = tableRows.get(0).size();
 
@@ -45,7 +48,7 @@ public final class MarkdownUtils {
         return sizeList;
     }
 
-    private static String createTableRow(List<String> row, List<Integer> sizes) {
+    private static @NotNull String createTableRow(@NotNull List<String> row, List<Integer> sizes) {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < row.size() - 1; ++i) {
@@ -61,7 +64,7 @@ public final class MarkdownUtils {
         return stringBuilder.toString();
     }
 
-    private static String createTableLayout(List<Integer> sizes) {
+    private static @NotNull String createTableLayout(@NotNull List<Integer> sizes) {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < sizes.size() - 1; ++i) {
@@ -80,14 +83,14 @@ public final class MarkdownUtils {
         return stringBuilder.toString();
     }
 
-    private static String createTableCell(String string, int size) {
+    private static @NotNull String createTableCell(@NotNull String string, int size) {
         int spaces = size - string.length();
         int leftPad = spaces / 2;
         int rightPad = (leftPad * 2 == spaces) ? leftPad : leftPad + 1;
         return " ".repeat(leftPad) + string + " ".repeat(rightPad);
     }
 
-    static boolean isValidTable(List<List<String>> tableRows) {
+    static boolean isValidTable(@NotNull List<List<String>> tableRows) {
         int size = tableRows.get(0).size();
 
         for (List<String> list : tableRows) {

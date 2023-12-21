@@ -6,6 +6,7 @@ import edu.project2.Maze;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class MazeSolverBFS implements Solver {
     private final Maze maze;
@@ -14,7 +15,7 @@ public class MazeSolverBFS implements Solver {
         this.maze = maze;
     }
 
-    private void makeStartLengthMap(int[][] lengthMap) {
+    private void makeStartLengthMap(int @NotNull [] @NotNull [] lengthMap) {
         for (int[] ints : lengthMap) {
             Arrays.fill(ints, -1);
         }
@@ -22,9 +23,9 @@ public class MazeSolverBFS implements Solver {
 
     private void waveFilling(
         Cell[][] grid,
-        int[][] lengthMap,
+        int @NotNull [] @NotNull [] lengthMap,
         List<Cell> toVisit,
-        Cell currentCell,
+        @NotNull Cell currentCell,
         int waveLvl
     ) {
         int x = currentCell.row();
@@ -77,7 +78,7 @@ public class MazeSolverBFS implements Solver {
     }
 
     @Override
-    public List<Coordinate> solve(Coordinate start, Coordinate end) {
+    public List<Coordinate> solve(@NotNull Coordinate start, Coordinate end) {
         if (maze.grid()[start.x()][start.y()].isWall()) {
             throw new IllegalArgumentException("Start is wall");
         }

@@ -10,6 +10,33 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class Task8Test {
+
+    @Contract(" -> new")
+    private static Arguments @NotNull [] trueArguments() {
+        return new Arguments[] {
+            Arguments.of((Object) new int[][] {
+                {0, 0, 0, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 1, 0, 1, 0},
+                {0, 1, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1, 0, 0, 0}
+            }),
+            Arguments.of((Object) new int[][] {
+                {1, 0, 0, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0, 0, 0, 0}
+            })
+        };
+    }
+
     @Contract(" -> new")
     private static Arguments @NotNull [] falseArguments() {
         return new Arguments[] {
@@ -79,32 +106,6 @@ public class Task8Test {
                 {0, 0, 0, 0, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0},
                 {0, 3, 0, 0, 0, 1, 0, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0}
-            })
-        };
-    }
-
-    @Contract(" -> new")
-    private static Arguments @NotNull [] trueArguments() {
-        return new Arguments[] {
-            Arguments.of((Object) new int[][] {
-                {0, 0, 0, 1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 1, 0, 1, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1, 0, 0, 0}
-            }),
-            Arguments.of((Object) new int[][] {
-                {1, 0, 0, 0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
                 {1, 0, 0, 0, 0, 0, 0, 0}
             })
         };

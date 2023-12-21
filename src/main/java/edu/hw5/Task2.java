@@ -7,6 +7,7 @@ import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public final class Task2 {
     private static final int COUNT_OF_MONTH_IN_YEAR = 12;
@@ -15,7 +16,7 @@ public final class Task2 {
     private Task2() {
     }
 
-    public static List<LocalDate> allFridaysThirteenThisYear(int year) {
+    public static @NotNull List<LocalDate> allFridaysThirteenThisYear(int year) {
         List<LocalDate> fridaysThirteen = new ArrayList<>();
         LocalDate date = LocalDate.of(year, Month.JANUARY, THIRTEEN_DAY_IN_MONTH);
 
@@ -36,8 +37,8 @@ public final class Task2 {
         do {
             nextFridayThirteen = nextFridayThirteen.with(nextFriday);
         }
-        while ((nextFridayThirteen.getDayOfWeek() != DayOfWeek.FRIDAY)
-            || (nextFridayThirteen.getDayOfMonth() != THIRTEEN_DAY_IN_MONTH));
+        while (nextFridayThirteen.getDayOfWeek() != DayOfWeek.FRIDAY
+            || nextFridayThirteen.getDayOfMonth() != THIRTEEN_DAY_IN_MONTH);
 
         return nextFridayThirteen;
     }

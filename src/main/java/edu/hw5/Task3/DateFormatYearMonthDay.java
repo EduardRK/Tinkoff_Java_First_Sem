@@ -14,11 +14,12 @@ public class DateFormatYearMonthDay extends DateFormat {
 
     @Override
     public Optional<LocalDate> parseDateFormat(String dateFormat) {
-        if (isValidFormat(REGEX, dateFormat)) {
+        if (dateFormat != null && isValidFormat(REGEX, dateFormat)) {
             return Optional.of(LocalDate.parse(dateFormat, FORMATTER));
         } else if (nextDateFormat != null) {
             return nextDateFormat.parseDateFormat(dateFormat);
         }
+
         return Optional.empty();
     }
 }

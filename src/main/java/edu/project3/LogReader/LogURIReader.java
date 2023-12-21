@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 
@@ -75,7 +76,7 @@ public class LogURIReader implements LogReader {
         return logRecordList;
     }
 
-    private String[] gettingLogsByURI() {
+    private String @NotNull [] gettingLogsByURI() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(this.uri))

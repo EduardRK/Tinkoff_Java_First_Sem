@@ -1,5 +1,8 @@
 package edu.project2;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public final class Cell {
     private final int row;
     private final int col;
@@ -11,7 +14,8 @@ public final class Cell {
         this.type = type;
     }
 
-    public static Cell createWall(int row, int col) {
+    @Contract(value = "_, _ -> new", pure = true)
+    public static @NotNull Cell createWall(int row, int col) {
         return new Cell(row, col, Type.WALL);
     }
 

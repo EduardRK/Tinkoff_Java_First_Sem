@@ -2,16 +2,17 @@ package edu.project2;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public record Maze(int height, int width, Cell[][] grid) implements Render {
 
     @Override
-    public String render() {
+    public @NotNull String render() {
         return render(new ArrayList<>());
     }
 
     @Override
-    public String render(List<Coordinate> path) {
+    public @NotNull String render(List<Coordinate> path) {
         StringBuilder maze = new StringBuilder();
 
         maze.append(WALL.repeat(width + 2)).append(System.lineSeparator());

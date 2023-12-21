@@ -1,12 +1,14 @@
 package edu.project1;
 
+import org.jetbrains.annotations.NotNull;
+
 public final class Checker {
     private static final String LOOKUP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private Checker() {
     }
 
-    public static boolean isCorrectDictionary(Dictionary dictionary) {
+    public static boolean isCorrectDictionary(@NotNull Dictionary dictionary) {
         for (String word : dictionary.getDictionary()) {
             if ((word == null) || (word.length() < 2)) {
                 return false;
@@ -15,15 +17,15 @@ public final class Checker {
         return true;
     }
 
-    public static boolean isDictionaryEmpty(Dictionary dictionary) {
+    public static boolean isDictionaryEmpty(@NotNull Dictionary dictionary) {
         return (dictionary.getDictionary().length == 0) || (dictionary.getDictionary() == null);
     }
 
-    public static boolean isMisspell(Answer answer) {
+    public static boolean isMisspell(@NotNull Answer answer) {
         return (answer.getAnswerArray().length != 1) || (!LOOKUP.contains(answer.getAnswerString()));
     }
 
-    public static boolean isRightLetter(Answer answer, Word word) {
+    public static boolean isRightLetter(@NotNull Answer answer, @NotNull Word word) {
         char answerLetter = answer.getAnswerLetter();
         char[] hiddenWordArray = word.getHiddenWord().toCharArray();
         for (char letter : hiddenWordArray) {
@@ -34,7 +36,7 @@ public final class Checker {
         return false;
     }
 
-    public static boolean isEnd(Answer answer) {
+    public static boolean isEnd(@NotNull Answer answer) {
         return answer.getAnswerString().equals("End");
     }
 }

@@ -37,7 +37,7 @@ public class Task4Test {
     @Nested
     @DisplayName("Count pi multi thread")
     class multiThread {
-        private final static int COUNT_THREADS = 12;
+        private final static int COUNT_THREADS = Runtime.getRuntime().availableProcessors();
 
         @Test
         @DisplayName("10_000_000 simulations")

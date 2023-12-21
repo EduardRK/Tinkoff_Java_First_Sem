@@ -11,7 +11,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    private static final String END_MESSAGE = "end";
     private final ExecutorService executorService =
         Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     private final int port;
