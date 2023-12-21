@@ -43,7 +43,7 @@ public class Task8Test {
 
     @ParameterizedTest
     @MethodSource(value = "getArguments")
-    @DisplayName("Example test")
+    @DisplayName("Backward iterator test")
     public void exampleTest(Iterator<Object> actual, @NotNull Iterator<Object> expected) {
         Assertions.assertEquals(getList(expected), getList(actual));
     }

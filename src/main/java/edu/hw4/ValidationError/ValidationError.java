@@ -3,6 +3,7 @@ package edu.hw4.ValidationError;
 import edu.hw4.Animal;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
 
 public class ValidationError {
     private final String errorField;
@@ -11,7 +12,7 @@ public class ValidationError {
         this.errorField = errorMessage;
     }
 
-    public static Set<ValidationError> setOfValidationErrors(Animal animal) {
+    public static @NotNull Set<ValidationError> setOfValidationErrors(Animal animal) {
         Set<ValidationError> validationErrors = new LinkedHashSet<>();
 
         if (!ValidationErrorChecker.isAnimalAgeValid(animal)) {

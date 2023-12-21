@@ -3,7 +3,7 @@ package edu.hw3.task3;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Task3 {
+public final class Task3 {
     private Task3() {
     }
 

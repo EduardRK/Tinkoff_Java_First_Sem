@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
-public class Task4 {
+public final class Task4 {
 
     private static final int I_IN_DECIMAL = 1;
     private static final int IV_IN_DECIMAL = 4;

@@ -2,7 +2,6 @@ package edu.hw1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -54,10 +53,14 @@ public class Task7Test {
         Assertions.assertEquals(expected, Task7.rotateLeft(number, shift));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "-10, -9",
+        "-12, 5"
+    })
     @DisplayName("Negative number")
-    public void negativeNumber() {
-        Assertions.assertEquals(ERROR_CODE, Task7.rotateRight(-10, -9));
-        Assertions.assertEquals(ERROR_CODE, Task7.rotateLeft(-12, 5));
+    public void negativeNumber(int number, int shift) {
+        Assertions.assertEquals(ERROR_CODE, Task7.rotateRight(number, shift));
+        Assertions.assertEquals(ERROR_CODE, Task7.rotateLeft(number, shift));
     }
 }

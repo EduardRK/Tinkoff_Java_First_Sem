@@ -1,6 +1,6 @@
 package edu.hw3.task1;
 
-public class Task1 {
+public final class Task1 {
     private static final int ASCII_CODE_FIRST_UPPER_CASE_LETTER = 65;
     private static final int ASCII_CODE_LAST_UPPER_CASE_LETTER = 90;
     private static final int ASCII_CODE_FIRST_LOWER_CASE_LETTER = 97;

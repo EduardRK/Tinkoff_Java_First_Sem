@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class Task18 {
+public final class Task18 {
     private Task18() {
     }
 

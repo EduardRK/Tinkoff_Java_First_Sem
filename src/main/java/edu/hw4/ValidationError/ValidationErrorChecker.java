@@ -3,6 +3,7 @@ package edu.hw4.ValidationError;
 import edu.hw4.Animal;
 import java.util.HashMap;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 public class ValidationErrorChecker {
     private static final int ASCII_CODE_FIRST_UPPER_CASE_LETTER = 65;
@@ -50,29 +51,31 @@ public class ValidationErrorChecker {
         return isAnimalNameSymbolsValid(animal) && isAnimalNameLengthValid(animal);
     }
 
-    public static boolean isAnimalAgeValid(Animal animal) {
+    public static boolean isAnimalAgeValid(@NotNull Animal animal) {
         return (animal.age() > 0 && animal.age() <= MAX_AGE);
     }
 
-    public static boolean isAnimalHeightValid(Animal animal) {
+    public static boolean isAnimalHeightValid(@NotNull Animal animal) {
         return (animal.height() > 0 && animal.height() <= MAX_HEIGHT_OF_ANIMAL.get(animal.type()));
     }
 
-    public static boolean isAnimalWeightValid(Animal animal) {
+    public static boolean isAnimalWeightValid(@NotNull Animal animal) {
         return (animal.weight() > 0 && animal.weight() <= MAX_WEIGHT_OF_ANIMAL.get(animal.type()));
     }
 
-    private static boolean isAnimalNameLengthValid(Animal animal) {
+    private static boolean isAnimalNameLengthValid(@NotNull Animal animal) {
         return (animal.name().length() > 1 && animal.name().length() <= MAX_NAME_LENGTH);
     }
 
-    private static boolean isAnimalNameSymbolsValid(Animal animal) {
+    private static boolean isAnimalNameSymbolsValid(@NotNull Animal animal) {
         char[] animalNameArray = animal.name().toCharArray();
+
         for (char letter : animalNameArray) {
             if (!(isLetter(letter) || isSpecialSymbol(letter))) {
                 return false;
             }
         }
+
         return true;
     }
 

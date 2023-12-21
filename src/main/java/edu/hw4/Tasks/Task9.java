@@ -2,12 +2,13 @@ package edu.hw4.Tasks;
 
 import edu.hw4.Animal;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class Task9 {
+public final class Task9 {
     private Task9() {
     }
 
-    public static Integer numberOfAllPaws(List<Animal> animals) {
+    public static @NotNull Integer numberOfAllPaws(@NotNull List<Animal> animals) {
         return animals.stream()
             .mapToInt(Animal::paws)
             .sum();

@@ -6,7 +6,7 @@ import java.util.List;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class Task2 {
+public final class Task2 {
     private Task2() {
     }
 
