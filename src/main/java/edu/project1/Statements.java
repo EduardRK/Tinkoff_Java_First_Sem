@@ -20,12 +20,12 @@ public final class Statements implements SystemMessages {
         SystemMessages.forcedEndGame();
     }
 
-    public static void misspellLetterPhase(Answer answer, Word word) {
+    public static void misspellLetterPhase(Word word) {
         SystemMessages.misspellMessage();
         SystemMessages.theHiddenWordMessage(word);
     }
 
-    public static void wrongAnswerPhase(@NotNull Player player, Answer answer, Word word) {
+    public static void wrongAnswerPhase(@NotNull Player player, Word word) {
         player.giveWrongAnswer();
         SystemMessages.mistakeMessage(player);
         SystemMessages.theHiddenWordMessage(word);

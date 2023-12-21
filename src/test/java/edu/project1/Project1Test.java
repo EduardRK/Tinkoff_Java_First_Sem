@@ -18,7 +18,7 @@ public class Project1Test {
         String expectedEncryptedWord = word.getEncryptedWord();
 
         answer.setAnswer("qwe");
-        Statements.misspellLetterPhase(answer, word);
+        Statements.misspellLetterPhase(word);
 
         Assertions.assertTrue(Checker.isMisspell(answer));
         Assertions.assertEquals(expectedPlayerMistakes, player.getCountOfMistakes());
@@ -37,7 +37,7 @@ public class Project1Test {
         String expectedEncryptedWord = word.getEncryptedWord();
 
         answer.setAnswer("");
-        Statements.misspellLetterPhase(answer, word);
+        Statements.misspellLetterPhase(word);
 
         Assertions.assertTrue(Checker.isMisspell(answer));
         Assertions.assertEquals(expectedPlayerMistakes, player.getCountOfMistakes());
@@ -56,7 +56,7 @@ public class Project1Test {
         String expectedEncryptedWord = word.getEncryptedWord();
 
         answer.setAnswer("2");
-        Statements.misspellLetterPhase(answer, word);
+        Statements.misspellLetterPhase(word);
 
         Assertions.assertTrue(Checker.isMisspell(answer));
         Assertions.assertEquals(expectedPlayerMistakes, player.getCountOfMistakes());
@@ -147,7 +147,7 @@ public class Project1Test {
         String expectedEncryptedWord = "*****";
 
         answer.setAnswer("l");
-        Statements.wrongAnswerPhase(player, answer, word);
+        Statements.wrongAnswerPhase(player, word);
 
         Assertions.assertFalse(Checker.isRightLetter(answer, word));
         Assertions.assertEquals(expectedPlayerMistakes, player.getCountOfMistakes());
@@ -167,7 +167,7 @@ public class Project1Test {
         }
 
         answer.setAnswer("l");
-        Statements.wrongAnswerPhase(player, answer, word);
+        Statements.wrongAnswerPhase(player, word);
 
         Assertions.assertTrue(LoserChecker.isPlayerLost(player));
     }

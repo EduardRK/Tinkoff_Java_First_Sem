@@ -18,7 +18,7 @@ public final class MarkdownUtils {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(createHeader(header))
             .append('\n')
-            .append(createTableRow(tableRows.get(0), sizeList))
+            .append(createTableRow(tableRows.getFirst(), sizeList))
             .append(createTableLayout(sizeList));
 
         for (int i = 1; i < tableRows.size(); ++i) {
@@ -35,7 +35,7 @@ public final class MarkdownUtils {
 
     private static @NotNull List<Integer> rowsSize(@NotNull List<List<String>> tableRows) {
         List<Integer> sizeList = new ArrayList<>();
-        int cols = tableRows.get(0).size();
+        int cols = tableRows.getFirst().size();
 
         for (int col = 0; col < cols; ++col) {
             int maxSize = 0;
@@ -57,7 +57,7 @@ public final class MarkdownUtils {
         }
 
         stringBuilder.append("|")
-            .append(String.format("%" + sizes.get(sizes.size() - 1) + "s", row.get(row.size() - 1)))
+            .append(String.format("%" + sizes.getLast() + "s", row.getLast()))
             .append("|")
             .append('\n');
 
@@ -75,7 +75,7 @@ public final class MarkdownUtils {
         }
 
         stringBuilder.append("|")
-            .append("-".repeat(sizes.get(sizes.size() - 1) - 1))
+            .append("-".repeat(sizes.getLast() - 1))
             .append(":")
             .append("|")
             .append('\n');
@@ -91,7 +91,7 @@ public final class MarkdownUtils {
     }
 
     static boolean isValidTable(@NotNull List<List<String>> tableRows) {
-        int size = tableRows.get(0).size();
+        int size = tableRows.getFirst().size();
 
         for (List<String> list : tableRows) {
             if (list.size() != size) {

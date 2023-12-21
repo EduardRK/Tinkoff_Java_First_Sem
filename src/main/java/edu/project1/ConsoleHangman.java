@@ -21,10 +21,10 @@ public final class ConsoleHangman {
                         Statements.forcedEndGamePhase();
                         break;
                     }
-                    Statements.misspellLetterPhase(answer, word);
+                    Statements.misspellLetterPhase(word);
 
                 } else if (!Checker.isRightLetter(answer, word)) {
-                    Statements.wrongAnswerPhase(player, answer, word);
+                    Statements.wrongAnswerPhase(player, word);
                     if (LoserChecker.isPlayerLost(player)) {
                         Statements.losingPhase();
                         break;
