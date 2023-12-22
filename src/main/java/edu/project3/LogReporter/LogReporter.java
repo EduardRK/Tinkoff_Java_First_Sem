@@ -55,6 +55,7 @@ public class LogReporter implements Reporter {
                 ))
             )
         );
+
         return (!format.equals(ADOC)) ? MarkdownUtils.createTable(GENERAL_INFORMATION, table)
             : AdocUtils.createTable(GENERAL_INFORMATION, table);
     }
@@ -65,9 +66,8 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of("Ресурс", COUNT)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of("Ресурс", COUNT))));
+
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
                 objectLongEntry.getKey().toString(),
@@ -85,9 +85,7 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of("Код", "Имя", COUNT)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of("Код", "Имя", COUNT))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -111,9 +109,7 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of(DAY, COUNT_RESPONSE)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of(DAY, COUNT_RESPONSE))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -132,9 +128,7 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of("Тип запроса", COUNT_RESPONSE)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of("Тип запроса", COUNT_RESPONSE))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -159,9 +153,8 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of(DAY, "Количество выгруженных байт")))
-        );
+        List<List<String>> table =
+            new ArrayList<>(List.of(new ArrayList<>(List.of(DAY, "Количество выгруженных байт"))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(

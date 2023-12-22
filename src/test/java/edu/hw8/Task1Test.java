@@ -49,6 +49,7 @@ public class Task1Test {
     @DisplayName("Test multi request")
     public void multiRequest() {
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
         List<String> words = new ArrayList<>(List.of("личности", "оскорбления", "глупый", "интеллект", "wrong"));
         List<String> responses = new CopyOnWriteArrayList<>();
         Set<String> responsesSet = new HashSet<>(Set.of(

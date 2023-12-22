@@ -35,6 +35,7 @@ public class LogURIReader implements LogReader {
     public List<LogRecord> readLogs(LocalDate from, LocalDate to) {
         String[] logs = gettingLogsByURI();
         List<LogRecord> logRecordList = new ArrayList<>();
+
         for (String log : logs) {
             LogRecord logRecord = logParser.parse(log);
             if (LogTimeUtils.isLogBetweenFromAndTo(
@@ -46,6 +47,7 @@ public class LogURIReader implements LogReader {
                 logRecordList.add(logRecord);
             }
         }
+
         return logRecordList;
     }
 
@@ -53,6 +55,7 @@ public class LogURIReader implements LogReader {
     public List<LogRecord> readLogs(LocalDate dateTime, boolean isBefore) {
         String[] logs = gettingLogsByURI();
         List<LogRecord> logRecordList = new ArrayList<>();
+
         for (String log : logs) {
             LogRecord logRecord = logParser.parse(log);
             if (LogTimeUtils.isLogBeforeOrAfterDateTime(
@@ -63,6 +66,7 @@ public class LogURIReader implements LogReader {
                 logRecordList.add(logRecord);
             }
         }
+
         return logRecordList;
     }
 
@@ -70,9 +74,11 @@ public class LogURIReader implements LogReader {
     public List<LogRecord> readLogs() {
         String[] logs = gettingLogsByURI();
         List<LogRecord> logRecordList = new ArrayList<>();
+
         for (String log : logs) {
             logRecordList.add(logParser.parse(log));
         }
+
         return logRecordList;
     }
 

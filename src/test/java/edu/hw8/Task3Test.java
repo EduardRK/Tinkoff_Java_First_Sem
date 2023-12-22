@@ -43,10 +43,7 @@ public class Task3Test {
 
         PasswordHacker passwordHacker = getPasswordHacker();
         passwordHacker.hackingPasswords();
-        Map<String, String> actual = passwordHacker.getDecryptedPasswords();
-        Assertions.assertEquals(expected.entrySet().size(), actual.entrySet().size());
-        for (String key : expected.keySet()) {
-            Assertions.assertEquals(expected.get(key), actual.get(key));
-        }
+
+        Assertions.assertEquals(expected, passwordHacker.getDecryptedPasswords());
     }
 }

@@ -31,10 +31,12 @@ public class Task1Test {
                 ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
                 collector.push(metrics.get(threadLocalRandom.nextInt(0, metrics.size())), getRandomValues());
             });
+
             executorService2.submit(() -> {
                 resultStats.add(collector.getStatistic());
             });
         }
+
         executorService1.close();
         executorService2.close();
 
@@ -53,6 +55,7 @@ public class Task1Test {
         for (String name : names) {
             executorService1.submit(() -> collector.push(name, data));
         }
+
         executorService1.close();
 
         Assertions.assertEquals(3, collector.getStatistic().size());
@@ -68,6 +71,7 @@ public class Task1Test {
             String name = "test" + i;
             executorService1.submit(() -> collector.push(name, getRandomValues()));
         }
+
         executorService1.close();
 
         Assertions.assertEquals(1_000, collector.getStatistic().size());
@@ -91,6 +95,7 @@ public class Task1Test {
                 resultStats.add(collector.getStatistic());
             });
         }
+
         executorService1.close();
         executorService2.close();
 

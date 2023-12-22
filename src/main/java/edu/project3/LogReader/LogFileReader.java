@@ -32,6 +32,7 @@ public class LogFileReader implements LogReader {
     @Override
     public List<LogRecord> readLogs(LocalDate from, LocalDate to) {
         List<LogRecord> logRecordList = new ArrayList<>();
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath.toFile()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -49,12 +50,14 @@ public class LogFileReader implements LogReader {
             System.out.println(READ_ERROR + e);
             throw new RuntimeException(e.getMessage());
         }
+
         return logRecordList;
     }
 
     @Override
     public List<LogRecord> readLogs(LocalDate dateTime, boolean isBefore) {
         List<LogRecord> logRecordList = new ArrayList<>();
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath.toFile()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -72,12 +75,14 @@ public class LogFileReader implements LogReader {
             System.out.println(READ_ERROR + e);
             throw new RuntimeException(e.getMessage());
         }
+
         return logRecordList;
     }
 
     @Override
     public List<LogRecord> readLogs() {
         List<LogRecord> logRecordList = new ArrayList<>();
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath.toFile()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -88,6 +93,7 @@ public class LogFileReader implements LogReader {
             System.out.println(READ_ERROR + e);
             throw new RuntimeException(e);
         }
+
         return logRecordList;
     }
 }

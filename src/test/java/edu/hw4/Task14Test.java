@@ -3,101 +3,67 @@ package edu.hw4;
 import edu.hw4.Tasks.Task14;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class Task14Test {
-    @Test
-    @DisplayName("All animals")
-    public void allAnimals() {
-        Animal kik = new Animal("Kik", Animal.Type.DOG, Animal.Sex.M, 10, 70, 60, true);
-        Animal doggy = new Animal("Doggy", Animal.Type.DOG, Animal.Sex.M, 12, 30, 50, false);
-        Animal fisheron = new Animal("Fisheron", Animal.Type.FISH, Animal.Sex.M, 19, 100, 101, true);
-        Animal sam = new Animal("Sam", Animal.Type.CAT, Animal.Sex.M, 7, 49, 12, true);
-        Animal oz = new Animal("Oz", Animal.Type.BIRD, Animal.Sex.M, 21, 30, 8, false);
-        Animal broodMother = new Animal("Brood Mother", Animal.Type.SPIDER, Animal.Sex.F, 56, 150, 40, true);
-        Animal kokomi = new Animal("Kokomi", Animal.Type.FISH, Animal.Sex.F, 17, 160, 45, false);
-        Animal snegok = new Animal("Snegok", Animal.Type.CAT, Animal.Sex.M, 4, 24, 6, false);
-        Animal acula = new Animal("Acula", Animal.Type.FISH, Animal.Sex.M, 14, 121, 50, true);
-        Animal chicka = new Animal("Chicka", Animal.Type.BIRD, Animal.Sex.F, 2, 30, 4, false);
-        Animal kate = new Animal("Kate", Animal.Type.SPIDER, Animal.Sex.F, 3, 30, 4, true);
-        Animal buka = new Animal("Buka", Animal.Type.SPIDER, Animal.Sex.F, 1, 12, 2, true);
-        Animal liza = new Animal("Liza", Animal.Type.DOG, Animal.Sex.F, 1, 30, 4, true);
-        Animal veryBigName = new Animal("Very Big Name", Animal.Type.CAT, Animal.Sex.F, 6, 64, 8, true);
-        Animal smallBird = new Animal("Small Bird", Animal.Type.BIRD, Animal.Sex.F, 3, 10, 1, false);
-        Animal bigJadeSpider = new Animal("Big Jade Spider", Animal.Type.SPIDER, Animal.Sex.M, 9, 90, 85, true);
+    private static final Animal KIK = new Animal("Kik", Animal.Type.DOG, Animal.Sex.M, 10, 70, 60, true);
+    private static final Animal DOGGY = new Animal("Doggy", Animal.Type.DOG, Animal.Sex.M, 12, 30, 50, false);
+    private static final Animal FISHERON = new Animal("Fisheron", Animal.Type.FISH, Animal.Sex.M, 19, 100, 101, true);
+    private static final Animal SAM = new Animal("Sam", Animal.Type.CAT, Animal.Sex.M, 7, 49, 12, true);
+    private static final Animal OZ = new Animal("Oz", Animal.Type.BIRD, Animal.Sex.M, 21, 30, 8, false);
+    private static final Animal BROODA = new Animal("BroodMother", Animal.Type.SPIDER, Animal.Sex.F, 56, 150, 40, true);
+    private static final Animal KOKOMI = new Animal("Kokomi", Animal.Type.FISH, Animal.Sex.F, 17, 160, 45, false);
+    private static final Animal SNEGOK = new Animal("Snegok", Animal.Type.CAT, Animal.Sex.M, 3, 24, 6, false);
+    private static final Animal ACULA = new Animal("Acula", Animal.Type.FISH, Animal.Sex.M, 14, 121, 50, true);
+    private static final Animal CHICKA = new Animal("Chicka", Animal.Type.BIRD, Animal.Sex.F, 2, 30, 4, false);
+    private static final Animal KATE = new Animal("Kate", Animal.Type.SPIDER, Animal.Sex.F, 3, 30, 4, true);
+    private static final Animal BUKA = new Animal("Buka", Animal.Type.SPIDER, Animal.Sex.F, 1, 12, 2, true);
+    private static final Animal LIZA = new Animal("Liza", Animal.Type.DOG, Animal.Sex.F, 1, 30, 4, true);
+    private static final Animal VERY_BIG_NAME =
+        new Animal("Very Big Name Animal", Animal.Type.CAT, Animal.Sex.F, 6, 64, 8, true);
+    private static final Animal SMALL_BIRD = new Animal("SmallBird", Animal.Type.BIRD, Animal.Sex.F, 3, 10, 1, false);
+    private static final Animal BIG_JADE_SPIDER =
+        new Animal("Big Jade Spider", Animal.Type.SPIDER, Animal.Sex.M, 9, 90, 85, true);
 
-        List<Animal> animals = new ArrayList<>() {{
-            add(kik);
-            add(doggy);
-            add(acula);
-            add(chicka);
-            add(kate);
-            add(sam);
-            add(buka);
-            add(oz);
-            add(broodMother);
-            add(fisheron);
-            add(kokomi);
-            add(liza);
-            add(veryBigName);
-            add(smallBird);
-            add(snegok);
-            add(bigJadeSpider);
-        }};
+    private static final List<Animal> ANIMAL_LIST = new ArrayList<>(List.of(
+        KIK,
+        DOGGY,
+        ACULA,
+        CHICKA,
+        KATE,
+        SAM,
+        BUKA,
+        OZ,
+        BROODA,
+        FISHERON,
+        KOKOMI,
+        LIZA,
+        VERY_BIG_NAME,
+        SMALL_BIRD,
+        SNEGOK,
+        BIG_JADE_SPIDER
+    ));
 
-        boolean actual = Task14.isAnimalsHasDogWhoseHeightGreaterThanK(animals, 50);
-        Assertions.assertTrue(actual);
-
-        actual = Task14.isAnimalsHasDogWhoseHeightGreaterThanK(animals, 100);
-        Assertions.assertFalse(actual);
+    @Contract(" -> new")
+    private static Arguments @NotNull [] getArguments() {
+        return new Arguments[] {
+            Arguments.of(ANIMAL_LIST, 50, true),
+            Arguments.of(ANIMAL_LIST, 100, false),
+            Arguments.of(ANIMAL_LIST, -50, true),
+            Arguments.of(ANIMAL_LIST, 0, true)
+        };
     }
 
-    @Test
-    @DisplayName("Negative or zero k")
-    public void negativeOrZeroK() {
-        Animal kik = new Animal("Kik", Animal.Type.DOG, Animal.Sex.M, 10, 70, 60, true);
-        Animal doggy = new Animal("Doggy", Animal.Type.DOG, Animal.Sex.M, 12, 30, 50, false);
-        Animal fisheron = new Animal("Fisheron", Animal.Type.FISH, Animal.Sex.M, 19, 100, 101, true);
-        Animal sam = new Animal("Sam", Animal.Type.CAT, Animal.Sex.M, 7, 49, 12, true);
-        Animal oz = new Animal("Oz", Animal.Type.BIRD, Animal.Sex.M, 21, 30, 8, false);
-        Animal broodMother = new Animal("Brood Mother", Animal.Type.SPIDER, Animal.Sex.F, 56, 150, 40, true);
-        Animal kokomi = new Animal("Kokomi", Animal.Type.FISH, Animal.Sex.F, 17, 160, 45, false);
-        Animal snegok = new Animal("Snegok", Animal.Type.CAT, Animal.Sex.M, 4, 24, 6, false);
-        Animal acula = new Animal("Acula", Animal.Type.FISH, Animal.Sex.M, 14, 121, 50, true);
-        Animal chicka = new Animal("Chicka", Animal.Type.BIRD, Animal.Sex.F, 2, 30, 4, false);
-        Animal kate = new Animal("Kate", Animal.Type.SPIDER, Animal.Sex.F, 3, 30, 4, true);
-        Animal buka = new Animal("Buka", Animal.Type.SPIDER, Animal.Sex.F, 1, 12, 2, true);
-        Animal liza = new Animal("Liza", Animal.Type.DOG, Animal.Sex.F, 1, 30, 4, true);
-        Animal veryBigName = new Animal("Very Big Name", Animal.Type.CAT, Animal.Sex.F, 6, 64, 8, true);
-        Animal smallBird = new Animal("Small Bird", Animal.Type.BIRD, Animal.Sex.F, 3, 10, 1, false);
-        Animal bigJadeSpider = new Animal("Big Jade Spider", Animal.Type.SPIDER, Animal.Sex.M, 9, 90, 85, true);
-
-        List<Animal> animals = new ArrayList<>() {{
-            add(kik);
-            add(doggy);
-            add(acula);
-            add(chicka);
-            add(kate);
-            add(sam);
-            add(buka);
-            add(oz);
-            add(broodMother);
-            add(fisheron);
-            add(kokomi);
-            add(liza);
-            add(veryBigName);
-            add(smallBird);
-            add(snegok);
-            add(bigJadeSpider);
-        }};
-
-        boolean actual = Task14.isAnimalsHasDogWhoseHeightGreaterThanK(animals, -50);
-        boolean expected = true;
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task14.isAnimalsHasDogWhoseHeightGreaterThanK(animals, 0);
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @MethodSource(value = "getArguments")
+    @DisplayName("Is animals has dog whose height greater than K")
+    public void isAnimalsHasDogWhoseHeightGreaterThanK(List<Animal> animals, int k, boolean expected) {
+        Assertions.assertEquals(expected, Task14.isAnimalsHasDogWhoseHeightGreaterThanK(animals, k));
     }
 }

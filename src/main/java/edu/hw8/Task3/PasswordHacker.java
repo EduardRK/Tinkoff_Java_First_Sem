@@ -47,6 +47,7 @@ public class PasswordHacker {
             throw new RuntimeException(e);
         }
         executorService.shutdown();
+        executorService.close();
     }
 
     public Map<String, String> getDecryptedPasswords() {

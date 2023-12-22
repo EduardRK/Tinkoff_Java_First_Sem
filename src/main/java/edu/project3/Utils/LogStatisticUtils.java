@@ -29,6 +29,7 @@ public final class LogStatisticUtils {
             .map(LogRecord::responseSizeBytes)
             .mapToDouble(Long::intValue)
             .sum();
+
         return allResponseSize / logRecordList.size();
     }
 

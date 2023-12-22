@@ -16,11 +16,14 @@ public final class AdocUtils {
         StringBuilder stringBuilder = new StringBuilder().append(createHeader(header))
             .append(createAttributes())
             .append(createTableLayout());
+
         for (List<String> row : tableRows) {
             stringBuilder.append(createTableRow(row));
         }
+
         stringBuilder.append(createTableLayout())
             .append('\n');
+
         return stringBuilder.toString();
     }
 
@@ -41,11 +44,14 @@ public final class AdocUtils {
 
     private static @NotNull String createTableRow(@NotNull List<String> row) {
         StringBuilder stringBuilder = new StringBuilder();
+
         for (String string : row) {
             stringBuilder.append(string)
                 .append(",");
         }
+
         stringBuilder.append('\n');
+
         return stringBuilder.toString();
     }
 }
