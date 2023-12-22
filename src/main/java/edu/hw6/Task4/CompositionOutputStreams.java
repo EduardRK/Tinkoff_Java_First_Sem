@@ -13,6 +13,7 @@ import java.util.zip.CheckedOutputStream;
 import java.util.zip.Checksum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public final class CompositionOutputStreams {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -20,7 +21,7 @@ public final class CompositionOutputStreams {
     private CompositionOutputStreams() {
     }
 
-    public static void fileWrite(Path path, String string) throws IOException {
+    public static void fileWrite(Path path, @NotNull String string) throws IOException {
         try (OutputStream outputStream = Files.newOutputStream(path)) {
             Checksum checksum = new CRC32();
             checksum.update(string.getBytes());

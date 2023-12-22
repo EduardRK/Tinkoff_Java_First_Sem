@@ -31,7 +31,7 @@ public class Task2Test {
         "300, 222232244629420445529739893461909967206666939096499764990979600"
     })
     public void fibonacciNumber(long actualNth, BigDecimal expected) {
-        FibonacciCounter fibonacciCounter = new FibonacciCounter(12);
+        FibonacciCounter fibonacciCounter = new FibonacciCounter(Runtime.getRuntime().availableProcessors());
         Assertions.assertEquals(expected, fibonacciCounter.calculateNthNumber(actualNth));
     }
 }

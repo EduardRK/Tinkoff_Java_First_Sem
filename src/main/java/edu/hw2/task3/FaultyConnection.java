@@ -5,12 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FaultyConnection implements Connection {
-    private final static Logger LOGGER = LogManager.getLogger();
-    private final int numberShouldBeSuccessfulConnections = 3;
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Random RANDOM = new Random();
+    private static final int CHANCE_SUCCESSFUL_CONNECTIONS = 3;
 
     public FaultyConnection() throws Exception {
-        int possibilityConnect = new Random().nextInt(numberShouldBeSuccessfulConnections);
-        if (possibilityConnect % numberShouldBeSuccessfulConnections != 0) {
+        if (RANDOM.nextInt(CHANCE_SUCCESSFUL_CONNECTIONS) % CHANCE_SUCCESSFUL_CONNECTIONS != 0) {
             throw new ConnectionException();
         }
     }

@@ -1,5 +1,7 @@
 package edu.project1;
 
+import org.jetbrains.annotations.NotNull;
+
 public final class Statements implements SystemMessages {
     private Statements() {
     }
@@ -9,7 +11,7 @@ public final class Statements implements SystemMessages {
         SystemMessages.rulesMessage();
     }
 
-    public static void inputLetterPhase(Answer answer) {
+    public static void inputLetterPhase(@NotNull Answer answer) {
         SystemMessages.guessALetterMessage();
         answer.readGuessLetter();
     }
@@ -18,12 +20,12 @@ public final class Statements implements SystemMessages {
         SystemMessages.forcedEndGame();
     }
 
-    public static void misspellLetterPhase(Answer answer, Word word) {
+    public static void misspellLetterPhase(Word word) {
         SystemMessages.misspellMessage();
         SystemMessages.theHiddenWordMessage(word);
     }
 
-    public static void wrongAnswerPhase(Player player, Answer answer, Word word) {
+    public static void wrongAnswerPhase(@NotNull Player player, Word word) {
         player.giveWrongAnswer();
         SystemMessages.mistakeMessage(player);
         SystemMessages.theHiddenWordMessage(word);

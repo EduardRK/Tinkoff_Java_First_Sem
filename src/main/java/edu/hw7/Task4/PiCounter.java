@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
+import org.jetbrains.annotations.NotNull;
 
 public final class PiCounter {
     private static final int R = 1;
@@ -49,7 +50,7 @@ public final class PiCounter {
         return COEFFICIENT * (circleCount.doubleValue() / simulations);
     }
 
-    private static boolean isCoordinateInCircle(Coordinate coordinate) {
+    private static boolean isCoordinateInCircle(@NotNull Coordinate coordinate) {
         return (Math.pow(coordinate.x() - CENTER_OF_THE_CIRCLE.x(), 2)
             + Math.pow(coordinate.y() - CENTER_OF_THE_CIRCLE.y(), 2)) <= Math.pow(R, 2);
     }

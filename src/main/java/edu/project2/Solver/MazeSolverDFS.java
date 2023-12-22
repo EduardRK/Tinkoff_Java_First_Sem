@@ -4,6 +4,7 @@ import edu.project2.Coordinate;
 import edu.project2.Maze;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class MazeSolverDFS implements Solver {
     private final static List<Character> DIRECTIONS = new ArrayList<>(List.of('U', 'D', 'R', 'L'));
@@ -14,7 +15,7 @@ public class MazeSolverDFS implements Solver {
     }
 
     @Override
-    public List<Coordinate> solve(Coordinate start, Coordinate end) {
+    public List<Coordinate> solve(@NotNull Coordinate start, Coordinate end) {
         if (maze.grid()[start.x()][start.y()].isWall()) {
             throw new IllegalArgumentException("Start is wall");
         }
@@ -62,7 +63,7 @@ public class MazeSolverDFS implements Solver {
         return false;
     }
 
-    private boolean isValidCoordinate(Coordinate coordinate) {
+    private boolean isValidCoordinate(@NotNull Coordinate coordinate) {
         return coordinate.x() >= 0 && coordinate.x() < maze.height()
             && coordinate.y() >= 0 && coordinate.y() < maze.width();
     }

@@ -21,6 +21,7 @@ public class Task1Test {
     public void raceConditionTest() {
         ExecutorService executorService1 = Executors.newVirtualThreadPerTaskExecutor();
         ExecutorService executorService2 = Executors.newVirtualThreadPerTaskExecutor();
+
         List<String> metrics = new ArrayList<>(List.of("sum", "min", "max", "average"));
         StatisticCollector<Double> collector = new StatisticCollectorOneStat();
         List<Double> resultStats = new CopyOnWriteArrayList<>();
@@ -30,10 +31,12 @@ public class Task1Test {
                 ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
                 collector.push(metrics.get(threadLocalRandom.nextInt(0, metrics.size())), getRandomValues());
             });
+
             executorService2.submit(() -> {
                 resultStats.add(collector.getStatistic());
             });
         }
+
         executorService1.close();
         executorService2.close();
 
@@ -52,6 +55,7 @@ public class Task1Test {
         for (String name : names) {
             executorService1.submit(() -> collector.push(name, data));
         }
+
         executorService1.close();
 
         Assertions.assertEquals(3, collector.getStatistic().size());
@@ -67,6 +71,7 @@ public class Task1Test {
             String name = "test" + i;
             executorService1.submit(() -> collector.push(name, getRandomValues()));
         }
+
         executorService1.close();
 
         Assertions.assertEquals(1_000, collector.getStatistic().size());
@@ -90,20 +95,25 @@ public class Task1Test {
                 resultStats.add(collector.getStatistic());
             });
         }
+
         executorService1.close();
         executorService2.close();
 
         resultStats.sort(Comparator.naturalOrder());
         List<Double> expected = new ArrayList<>(List.of(-191D, 4.475, 44.75, 120D));
+
         Assertions.assertEquals(expected, resultStats);
     }
 
     private double[] getRandomValues() {
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+
         double[] values = new double[threadLocalRandom.nextInt(1_000)];
+
         for (int i = 0; i < values.length; ++i) {
             values[i] = threadLocalRandom.nextDouble(-100, 100);
         }
+
         return values;
     }
 }

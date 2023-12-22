@@ -2,6 +2,7 @@ package edu.project1;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public interface SystemMessages {
 
@@ -22,7 +23,7 @@ public interface SystemMessages {
         LOGGER.info("Guess the letter:");
     }
 
-    static void mistakeMessage(Player player) {
+    static void mistakeMessage(@NotNull Player player) {
         LOGGER.info("Missed, mistake " + player.getCountOfMistakes() + " out of 5.");
     }
 
@@ -30,7 +31,7 @@ public interface SystemMessages {
         LOGGER.info("You have committed a misspell, try again.");
     }
 
-    static void theHiddenWordMessage(Word word) {
+    static void theHiddenWordMessage(@NotNull Word word) {
         LOGGER.info("The word: " + word.getEncryptedWord());
     }
 

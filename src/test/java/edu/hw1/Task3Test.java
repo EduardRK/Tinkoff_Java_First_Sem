@@ -1,63 +1,65 @@
 package edu.hw1;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class Task3Test {
+    @Contract(" -> new")
+    private static Arguments @NotNull [] getNestableArguments() {
+        return new Arguments[] {
+            Arguments.of(new int[] {2, 3, 4}, new int[] {1, 2, 3, 5}),
+            Arguments.of(new int[] {1, 2, 9, 12}, new int[] {-100, 100})
+        };
+    }
 
-    @Test
+    @Contract(" -> new")
+    private static Arguments @NotNull [] getNotNestableArguments() {
+        return new Arguments[] {
+            Arguments.of(new int[] {1}, new int[] {9}),
+            Arguments.of(new int[] {2, 3}, new int[] {2, 3}),
+            Arguments.of(new int[] {1, 3, 90, 100}, new int[] {40, 49, 100, 101})
+        };
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "getNestableArguments")
     @DisplayName("Nestable")
-    public void nestable() {
-        int[] firstArray = {2, 3, 4};
-        int[] secondArray = {1, 2, 3, 5};
+    public void nestable(int[] firstArray, int[] secondArray) {
         Assertions.assertTrue(Task3.isNestable(firstArray, secondArray));
-
-        firstArray = new int[] {1, 2, 9, 12};
-        secondArray = new int[] {-100, 100};
         Assertions.assertTrue(Task3.isNestable(firstArray, secondArray));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource(value = "getNotNestableArguments")
     @DisplayName("Not nestable")
-    public void notNestable() {
-        int[] firstArray = new int[] {1};
-        int[] secondArray = new int[] {9};
+    public void notNestable(int[] firstArray, int[] secondArray) {
         Assertions.assertFalse(Task3.isNestable(firstArray, secondArray));
-
-        firstArray = new int[] {2, 3};
-        secondArray = new int[] {2, 3};
         Assertions.assertFalse(Task3.isNestable(firstArray, secondArray));
-
-        firstArray = new int[] {1, 3, 90, 100};
-        secondArray = new int[] {40, 49, 100, 101};
         Assertions.assertFalse(Task3.isNestable(firstArray, secondArray));
     }
 
-    @Test
+    @ParameterizedTest
+    @EmptySource
     @DisplayName("Empty arrays")
-    public void emptyArrays() {
-        int[] firstArray = {};
-        int[] secondArray = {1, 2, 3, 5};
-        Assertions.assertTrue(Task3.isNestable(firstArray, secondArray));
-
-        firstArray = new int[] {1};
-        secondArray = new int[] {};
-        Assertions.assertFalse(Task3.isNestable(firstArray, secondArray));
-
-        firstArray = new int[] {};
-        secondArray = new int[] {};
-        Assertions.assertFalse(Task3.isNestable(firstArray, secondArray));
+    public void emptyArrays(int[] emptyArray) {
+        Assertions.assertTrue(Task3.isNestable(emptyArray, new int[] {1, 2, 3, 4}));
+        Assertions.assertFalse(Task3.isNestable(new int[] {1, 2, 3, 4}, emptyArray));
+        Assertions.assertFalse(Task3.isNestable(emptyArray, emptyArray));
     }
 
-    @Test
+    @ParameterizedTest
+    @NullSource
     @DisplayName("Null arrays")
-    public void nullArrays() {
-        int[] array = {1, 2, 3, 5};
-        Assertions.assertFalse(Task3.isNestable(null, array));
-
-        Assertions.assertFalse(Task3.isNestable(array, null));
-
+    public void nullArrays(int[] nullArray) {
+        Assertions.assertFalse(Task3.isNestable(nullArray, new int[] {1, 2, 3, 4}));
+        Assertions.assertFalse(Task3.isNestable(new int[] {1, 2, 3, 4}, nullArray));
         Assertions.assertFalse(Task3.isNestable(null, null));
     }
 }

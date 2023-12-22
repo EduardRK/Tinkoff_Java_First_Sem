@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 public class LogReporter implements Reporter {
     private static final String MARKDOWN = "markdown";
@@ -54,6 +55,7 @@ public class LogReporter implements Reporter {
                 ))
             )
         );
+
         return (!format.equals(ADOC)) ? MarkdownUtils.createTable(GENERAL_INFORMATION, table)
             : AdocUtils.createTable(GENERAL_INFORMATION, table);
     }
@@ -64,9 +66,8 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of("Ресурс", COUNT)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of("Ресурс", COUNT))));
+
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
                 objectLongEntry.getKey().toString(),
@@ -84,9 +85,7 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of("Код", "Имя", COUNT)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of("Код", "Имя", COUNT))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -110,9 +109,7 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of(DAY, COUNT_RESPONSE)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of(DAY, COUNT_RESPONSE))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -131,9 +128,7 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of("Тип запроса", COUNT_RESPONSE)))
-        );
+        List<List<String>> table = new ArrayList<>(List.of(new ArrayList<>(List.of("Тип запроса", COUNT_RESPONSE))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -158,9 +153,8 @@ public class LogReporter implements Reporter {
         List<Map.Entry<Object, Long>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<List<String>> table = new ArrayList<>(
-            List.of(new ArrayList<>(List.of(DAY, "Количество выгруженных байт")))
-        );
+        List<List<String>> table =
+            new ArrayList<>(List.of(new ArrayList<>(List.of(DAY, "Количество выгруженных байт"))));
 
         for (Map.Entry<Object, Long> objectLongEntry : list) {
             table.add(new ArrayList<>(List.of(
@@ -173,14 +167,14 @@ public class LogReporter implements Reporter {
             : AdocUtils.createTable(COUNT_BYTES_UPLOAD_FOR_EACH_DAY, table);
     }
 
-    private String formatNumber(double number) {
+    private @NotNull String formatNumber(double number) {
         DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
         symbols.setGroupingSeparator('_');
 
         return new DecimalFormat(NUMBER_FORMAT, symbols).format(number).replace(",", ".");
     }
 
-    private String formatNumber(long number) {
+    private @NotNull String formatNumber(long number) {
         DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
         symbols.setGroupingSeparator('_');
 

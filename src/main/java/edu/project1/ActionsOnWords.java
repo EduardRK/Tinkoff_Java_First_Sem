@@ -1,17 +1,19 @@
 package edu.project1;
 
+import org.jetbrains.annotations.NotNull;
+
 public final class ActionsOnWords {
     private ActionsOnWords() {
     }
 
-    private static int[] appendElementInArray(int[] array, int element) {
+    private static int @NotNull [] appendElementInArray(int @NotNull [] array, int element) {
         int[] updateArray = new int[array.length + 1];
         System.arraycopy(array, 0, updateArray, 0, array.length);
         updateArray[array.length] = element;
         return updateArray;
     }
 
-    private static int[] findIndexesGuessLetterInHiddenWord(Word word, Answer answer) {
+    private static int[] findIndexesGuessLetterInHiddenWord(@NotNull Word word, Answer answer) {
         String hiddenWord = word.getHiddenWord();
         int[] arrayOfIndexes = new int[0];
         char[] arrayOfLetters = hiddenWord.toCharArray();

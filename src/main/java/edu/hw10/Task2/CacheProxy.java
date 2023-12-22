@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
 
 public class CacheProxy implements InvocationHandler {
     private static final String CACHE_EXTENSION = ".cache";
@@ -27,7 +28,7 @@ public class CacheProxy implements InvocationHandler {
         this.cache = new HashMap<>();
     }
 
-    public static Object create(Object classObject, Path dir) {
+    public static @NotNull Object create(@NotNull Object classObject, Path dir) {
         return Proxy.newProxyInstance(
             classObject.getClass().getClassLoader(),
             classObject.getClass().getInterfaces(),
@@ -35,12 +36,12 @@ public class CacheProxy implements InvocationHandler {
         );
     }
 
-    public static Object create(Object classObject) {
+    public static @NotNull Object create(Object classObject) {
         return create(classObject, null);
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, @NotNull Method method, Object[] args) throws Throwable {
         Annotation[] annotations = method.getAnnotations();
         Annotation cacheAnnotation = Arrays.stream(annotations)
             .filter(annotation -> annotation instanceof Cache)
@@ -82,7 +83,7 @@ public class CacheProxy implements InvocationHandler {
         }
     }
 
-    private Path getSavePath(Method method, Path path) {
+    private Path getSavePath(@NotNull Method method, @NotNull Path path) {
         File[] files = path.toFile().listFiles();
         Path newPath = Path.of(dir.toString() + File.separator + method.getName() + CACHE_EXTENSION);
 

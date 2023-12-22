@@ -11,7 +11,7 @@ public class DateFormatTodayTomorrowYesterday extends DateFormat {
 
     @Override
     public Optional<LocalDate> parseDateFormat(String dateFormat) {
-        if (isValidFormat(REGEX, dateFormat)) {
+        if (dateFormat != null && isValidFormat(REGEX, dateFormat)) {
             Matcher matcher = Pattern.compile(REGEX).matcher(dateFormat);
 
             if (matcher.find()) {
@@ -27,6 +27,7 @@ public class DateFormatTodayTomorrowYesterday extends DateFormat {
         } else if (nextDateFormat != null) {
             return nextDateFormat.parseDateFormat(dateFormat);
         }
+
         return Optional.empty();
     }
 }

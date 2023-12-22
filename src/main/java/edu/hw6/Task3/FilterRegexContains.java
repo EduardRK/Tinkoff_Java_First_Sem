@@ -1,8 +1,8 @@
 package edu.hw6.Task3;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
+import org.jetbrains.annotations.NotNull;
 
 public class FilterRegexContains implements AbstractFilter {
     private final String subString;
@@ -12,7 +12,7 @@ public class FilterRegexContains implements AbstractFilter {
     }
 
     @Override
-    public boolean accept(Path entry) throws IOException {
+    public boolean accept(@NotNull Path entry) {
         String regex = "^.*(" + Pattern.quote(subString) + ").*$";
         return Pattern.matches(regex, entry.toString());
     }

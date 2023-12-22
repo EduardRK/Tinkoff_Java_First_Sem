@@ -4,20 +4,20 @@ import edu.hw7.Task2.Task2;
 import java.math.BigInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class Task2Test {
-    @Test
-    @DisplayName("Correct calculation")
-    public void correctCalculation() {
-        BigInteger actual = Task2.factorialParallel(5);
-        BigInteger expected = new BigInteger("120");
-
-        Assertions.assertEquals(expected, actual);
-
-        actual = Task2.factorialParallel(10);
-        expected = new BigInteger("3628800");
-
-        Assertions.assertEquals(expected, actual);
+    @ParameterizedTest
+    @CsvSource(value = {
+        "1, 1",
+        "5, 120",
+        "10, 3628800",
+        "20, 2432902008176640000"
+    })
+    @DisplayName("Correct calculation multi threads")
+    public void correctCalculationMultiThreads(int number, BigInteger expected) {
+        Assertions.assertEquals(expected, Task2.factorialParallel(number));
+        Assertions.assertEquals(expected, Task2.factorialNotParallel(number));
     }
 }

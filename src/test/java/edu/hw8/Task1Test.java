@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +19,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class Task1Test {
     private static final int PORT = 8080;
-    private final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime()
-        .availableProcessors());
+
+    @BeforeAll
+    public static void before() {
+        Server server = new Server(PORT);
+        Thread thread = new Thread(server::work);
+        thread.start();
+    }
 
     @ParameterizedTest
     @CsvSource(value = {
@@ -30,21 +36,20 @@ public class Task1Test {
     })
     @DisplayName("Test single request")
     public void singleRequest(String request, String expectedResponse) {
-        Server server = new Server(PORT);
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         Client client = new Client(PORT);
 
-        Thread thread = new Thread(server::work);
-        thread.start();
-
         executorService.submit(() -> Assertions.assertEquals(client.getResponse(request), expectedResponse));
-        executorService.shutdown();
 
-        server.stopWork();
+        executorService.shutdown();
+        executorService.close();
     }
 
     @Test
     @DisplayName("Test multi request")
-    public void multiRequest() throws InterruptedException {
+    public void multiRequest() {
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
         List<String> words = new ArrayList<>(List.of("личности", "оскорбления", "глупый", "интеллект", "wrong"));
         List<String> responses = new CopyOnWriteArrayList<>();
         Set<String> responsesSet = new HashSet<>(Set.of(
@@ -55,11 +60,6 @@ public class Task1Test {
             "На это ответить нечего"
         ));
 
-        Server server = new Server(PORT);
-        Thread thread = new Thread(server::work);
-        thread.start();
-        Thread.sleep(1000);
-
         for (int i = 0; i < 100; ++i) {
             executorService.submit(() -> {
                 ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
@@ -69,8 +69,8 @@ public class Task1Test {
             });
         }
 
+        executorService.shutdown();
         executorService.close();
-        server.stopWork();
 
         for (String string : responses) {
             Assertions.assertTrue(responsesSet.contains(string));

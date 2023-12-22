@@ -5,6 +5,7 @@ import edu.project2.Maze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import org.jetbrains.annotations.NotNull;
 
 public class MazeGeneratorPrim implements Generator {
     private final static Random RANDOM = new Random();
@@ -47,7 +48,7 @@ public class MazeGeneratorPrim implements Generator {
         return new Maze(height, width, grid);
     }
 
-    private void makeStartGrid(Cell[][] grid) {
+    private void makeStartGrid(Cell @NotNull [] @NotNull [] grid) {
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[0].length; ++j) {
                 grid[i][j] = Cell.createWall(i, j);
@@ -56,10 +57,10 @@ public class MazeGeneratorPrim implements Generator {
     }
 
     private void createRandomPassageFromCell(
-        List<Character> directions,
+        @NotNull List<Character> directions,
         Cell[][] grid,
         List<Cell> visitedCells,
-        Cell currentCell
+        @NotNull Cell currentCell
     ) {
         int xCell = currentCell.row();
         int yCell = currentCell.col();

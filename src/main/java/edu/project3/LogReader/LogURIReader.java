@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 
@@ -34,6 +35,7 @@ public class LogURIReader implements LogReader {
     public List<LogRecord> readLogs(LocalDate from, LocalDate to) {
         String[] logs = gettingLogsByURI();
         List<LogRecord> logRecordList = new ArrayList<>();
+
         for (String log : logs) {
             LogRecord logRecord = logParser.parse(log);
             if (LogTimeUtils.isLogBetweenFromAndTo(
@@ -45,6 +47,7 @@ public class LogURIReader implements LogReader {
                 logRecordList.add(logRecord);
             }
         }
+
         return logRecordList;
     }
 
@@ -52,6 +55,7 @@ public class LogURIReader implements LogReader {
     public List<LogRecord> readLogs(LocalDate dateTime, boolean isBefore) {
         String[] logs = gettingLogsByURI();
         List<LogRecord> logRecordList = new ArrayList<>();
+
         for (String log : logs) {
             LogRecord logRecord = logParser.parse(log);
             if (LogTimeUtils.isLogBeforeOrAfterDateTime(
@@ -62,6 +66,7 @@ public class LogURIReader implements LogReader {
                 logRecordList.add(logRecord);
             }
         }
+
         return logRecordList;
     }
 
@@ -69,13 +74,15 @@ public class LogURIReader implements LogReader {
     public List<LogRecord> readLogs() {
         String[] logs = gettingLogsByURI();
         List<LogRecord> logRecordList = new ArrayList<>();
+
         for (String log : logs) {
             logRecordList.add(logParser.parse(log));
         }
+
         return logRecordList;
     }
 
-    private String[] gettingLogsByURI() {
+    private String @NotNull [] gettingLogsByURI() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(this.uri))

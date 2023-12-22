@@ -2,9 +2,10 @@ package edu.hw5;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class Task6Test {
     @ParameterizedTest
@@ -38,19 +39,21 @@ public class Task6Test {
         Assertions.assertFalse(Task6.isStringContainsSubsequence(string, subsequence));
     }
 
-    @Test
+    @ParameterizedTest
+    @EmptySource
     @DisplayName("Empty tests")
-    public void emptyTests() {
-        String string = "";
-        String subsequence = "";
-        Assertions.assertTrue(Task6.isStringContainsSubsequence(string, subsequence));
+    public void emptyTests(String string) {
+        Assertions.assertTrue(Task6.isStringContainsSubsequence(string, string));
+        Assertions.assertTrue(Task6.isStringContainsSubsequence("sfqxeq", string));
+        Assertions.assertFalse(Task6.isStringContainsSubsequence(string, "kscg"));
+    }
 
-        string = "sfqxeq";
-        subsequence = "";
-        Assertions.assertTrue(Task6.isStringContainsSubsequence(string, subsequence));
-
-        string = "";
-        subsequence = "kscg";
-        Assertions.assertFalse(Task6.isStringContainsSubsequence(string, subsequence));
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("Null test")
+    public void nullTest(String string) {
+        Assertions.assertFalse(Task6.isStringContainsSubsequence(string, string));
+        Assertions.assertFalse(Task6.isStringContainsSubsequence("qwerty", string));
+        Assertions.assertFalse(Task6.isStringContainsSubsequence(string, "qwerty"));
     }
 }

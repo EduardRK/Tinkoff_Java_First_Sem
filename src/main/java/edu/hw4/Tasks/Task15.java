@@ -4,13 +4,14 @@ import edu.hw4.Animal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
-public class Task15 {
+public final class Task15 {
     private Task15() {
     }
 
     public static Map<Animal.Type, Integer> totalWeightOfAnimalEachTypeAgedFromKtoL(
-        List<Animal> animals,
+        @NotNull List<Animal> animals,
         int k,
         int l
     ) {

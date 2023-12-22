@@ -4,12 +4,13 @@ import edu.hw4.Animal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
-public class Task17 {
+public final class Task17 {
     private Task17() {
     }
 
-    public static boolean isSpidersBiteOftenDogs(List<Animal> animals) {
+    public static boolean isSpidersBiteOftenDogs(@NotNull List<Animal> animals) {
         Map<Animal.Type, Integer> countDogsAndSpiders = animals.stream()
             .filter(animal -> animal.type() == Animal.Type.DOG || animal.type() == Animal.Type.SPIDER)
             .collect(Collectors.toMap(Animal::type, animal -> 1, Integer::sum));

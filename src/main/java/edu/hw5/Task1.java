@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.jetbrains.annotations.NotNull;
 
 public final class Task1 {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
@@ -34,6 +35,7 @@ public final class Task1 {
 
             averageSession = averageSession.plus(Duration.between(start, end));
         }
+
         return averageSession.dividedBy(sessions.size());
     }
 
@@ -41,12 +43,13 @@ public final class Task1 {
         return averageSession(List.of(sessions));
     }
 
-    private static boolean isValidSessions(List<String> sessions) {
+    private static boolean isValidSessions(@NotNull List<String> sessions) {
         for (String session : sessions) {
             if (!Pattern.matches(REGEX, session)) {
                 return false;
             }
         }
+
         return true;
     }
 

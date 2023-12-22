@@ -11,11 +11,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    private static final String END_MESSAGE = "end";
     private final ExecutorService executorService =
         Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     private final int port;
-    private boolean isWork = true;
+    private final boolean isWork = true;
 
     public Server(int port) {
         this.port = port;
@@ -53,10 +52,6 @@ public class Server {
             throw new RuntimeException(e);
 
         }
-    }
-
-    public void stopWork() {
-        isWork = false;
     }
 }
 

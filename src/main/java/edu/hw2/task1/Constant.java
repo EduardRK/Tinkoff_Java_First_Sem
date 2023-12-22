@@ -1,7 +1,9 @@
 package edu.hw2.task1;
 
+import org.jetbrains.annotations.NotNull;
+
 public record Constant(double number) implements Expr {
-    public Constant(Expr number) {
+    public Constant(@NotNull Expr number) {
         this(number.evaluate());
     }
 

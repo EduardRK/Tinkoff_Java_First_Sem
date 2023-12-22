@@ -4,17 +4,18 @@ import edu.hw4.Animal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
-public class Task6 {
+public final class Task6 {
     private Task6() {
     }
 
-    public static Map<Animal.Type, Animal> heaviestAnimalEachType(List<Animal> animals) {
+    public static Map<Animal.Type, Animal> heaviestAnimalEachType(@NotNull List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.toMap(
                 Animal::type,
                 animal -> animal,
-                (o1, o2) -> o1.weight() > o2.weight() ? o1 : o2
+                (animal1, animal2) -> animal1.weight() > animal2.weight() ? animal1 : animal2
             ));
     }
 }

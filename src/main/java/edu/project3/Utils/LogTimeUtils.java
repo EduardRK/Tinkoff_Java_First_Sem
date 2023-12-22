@@ -2,12 +2,13 @@ package edu.project3.Utils;
 
 import edu.project3.LogRecord;
 import java.time.OffsetDateTime;
+import org.jetbrains.annotations.NotNull;
 
 public final class LogTimeUtils {
     private LogTimeUtils() {
     }
 
-    public static boolean isLogBetweenFromAndTo(LogRecord logRecord, OffsetDateTime from, OffsetDateTime to) {
+    public static boolean isLogBetweenFromAndTo(@NotNull LogRecord logRecord, OffsetDateTime from, OffsetDateTime to) {
         return logRecord.requestTime().isAfter(from)
             && logRecord.requestTime().isBefore(to);
     }

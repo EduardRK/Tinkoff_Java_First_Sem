@@ -46,13 +46,16 @@ public class Task1Test {
         @Test
         @DisplayName("One increment")
         public void oneIncrement() throws InterruptedException {
-            final int countThreads = 10;
+            final int countThreads = Runtime.getRuntime().availableProcessors();
+
             Counter counter = new Counter();
             List<Thread> threadList = new ArrayList<>();
+
             for (int i = 0; i < countThreads; ++i) {
                 threadList.add(new Thread(counter::increment));
                 threadList.getLast().start();
             }
+
             for (Thread thread : threadList) {
                 thread.join();
             }
@@ -65,8 +68,10 @@ public class Task1Test {
         public void multipleIncrement() throws InterruptedException {
             final int countThreads = 10;
             final int countIncrements = 30;
+
             Counter counter = new Counter();
             List<Thread> threadList = new ArrayList<>();
+
             for (int i = 0; i < countThreads; ++i) {
                 threadList.add(new Thread(() -> {
                     for (int j = 0; j < countIncrements; ++j) {
@@ -75,6 +80,7 @@ public class Task1Test {
                 }));
                 threadList.getLast().start();
             }
+
             for (Thread thread : threadList) {
                 thread.join();
             }

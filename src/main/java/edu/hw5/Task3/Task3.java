@@ -2,6 +2,7 @@ package edu.hw5.Task3;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 public final class Task3 {
     private Task3() {
@@ -13,7 +14,7 @@ public final class Task3 {
         return dateFormat.parseDateFormat(string);
     }
 
-    private static DateFormat createChainOfResponsibility() {
+    private static @NotNull DateFormat createChainOfResponsibility() {
         DateFormat dateFormatDayMonthYear = new DateFormatDayMonthYear();
         DateFormat dateFormatYearMonthDay = new DateFormatYearMonthDay();
         DateFormat dateFormatTodayTomorrowYesterday = new DateFormatTodayTomorrowYesterday();

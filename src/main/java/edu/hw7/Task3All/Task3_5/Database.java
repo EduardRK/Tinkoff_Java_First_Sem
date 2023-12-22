@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 public class Database implements PersonDatabase {
     private final Map<Integer, Person> idMap = new HashMap<>();
@@ -22,7 +23,7 @@ public class Database implements PersonDatabase {
 
     }
 
-    public Database(List<Person> people) {
+    public Database(@NotNull List<Person> people) {
         idMap.putAll(people.stream()
             .collect(Collectors.toMap(Person::id, person -> person)));
 
@@ -93,7 +94,7 @@ public class Database implements PersonDatabase {
         }
     }
 
-    private void addPersonToMap(Map<Object, List<Person>> map, Object key, Person person) {
+    private void addPersonToMap(@NotNull Map<Object, List<Person>> map, Object key, Person person) {
         List<Person> people = map.getOrDefault(key, new ArrayList<>());
         if (!people.contains(person)) {
             people.add(person);
@@ -104,14 +105,14 @@ public class Database implements PersonDatabase {
     private void addPeopleToMap(
         Map<Object, List<Person>> map,
         Function<Person, Object> keyFunction,
-        List<Person> people
+        @NotNull List<Person> people
     ) {
         for (Person person : people) {
             addPersonToMap(map, keyFunction.apply(person), person);
         }
     }
 
-    private void deletePersonFromMap(Map<Object, List<Person>> map, Object key, Person person) {
+    private void deletePersonFromMap(@NotNull Map<Object, List<Person>> map, Object key, Person person) {
         List<Person> people = map.getOrDefault(key, new ArrayList<>());
         people.remove(person);
         map.put(key, people);
