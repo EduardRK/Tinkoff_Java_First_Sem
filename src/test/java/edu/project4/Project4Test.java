@@ -2,9 +2,9 @@ package edu.project4;
 
 import edu.project4.FractalFlame.Generators.FractalFlameGenerator;
 import java.nio.file.Path;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,9 +26,8 @@ public class Project4Test {
         "blob"
     })
     @DisplayName("Generate some fractal flame images")
-    public void generateSomeFractalFlame(String variation, @TempDir Path path) {
-        String[] args = new String[] {path.toString(), variation};
-        ArgsParser argsParser = ArgsParser.create(args);
+    public void generateSomeFractalFlame(String variation, @TempDir @NotNull Path path) {
+        ArgsParser argsParser = ArgsParser.create(new String[] {path.toString(), variation});
         FractalFlameGenerator.generate(
             argsParser.variationsType(),
             argsParser.imageFormat(),
@@ -37,20 +36,15 @@ public class Project4Test {
         );
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "JPEG",
+        "PNG",
+        "BMP"
+    })
     @DisplayName("Test image formats")
-    public void testImageFormats(@TempDir Path path) {
-        String[] args = new String[] {path.toString(), "JPEG"};
-        ArgsParser argsParser = ArgsParser.create(args);
-        FractalFlameGenerator.generate(
-            argsParser.variationsType(),
-            argsParser.imageFormat(),
-            argsParser.parameters(),
-            path
-        );
-
-        args = new String[] {path.toString(), "BMP"};
-        argsParser = ArgsParser.create(args);
+    public void testImageFormats(String fileType, @TempDir @NotNull Path path) {
+        ArgsParser argsParser = ArgsParser.create(new String[] {path.toString(), fileType});
         FractalFlameGenerator.generate(
             argsParser.variationsType(),
             argsParser.imageFormat(),
@@ -59,12 +53,15 @@ public class Project4Test {
         );
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "qwer",
+        "qwRITY"
+    })
     @DisplayName("Illegal function name")
-    public void illegalFunctionName(@TempDir Path path) {
-        String[] args = new String[] {path.toString(), "qwer"};
+    public void illegalFunctionName(String typeName, @TempDir @NotNull Path path) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            ArgsParser argsParser = ArgsParser.create(args);
+            ArgsParser argsParser = ArgsParser.create(new String[] {path.toString(), typeName});
             FractalFlameGenerator.generate(
                 argsParser.variationsType(),
                 argsParser.imageFormat(),

@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -105,7 +106,7 @@ public class Task1Test {
         Assertions.assertEquals(expected, resultStats);
     }
 
-    private double[] getRandomValues() {
+    private double @NotNull [] getRandomValues() {
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
 
         double[] values = new double[threadLocalRandom.nextInt(1_000)];
