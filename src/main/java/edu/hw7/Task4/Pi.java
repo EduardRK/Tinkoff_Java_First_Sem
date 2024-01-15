@@ -2,7 +2,6 @@ package edu.hw7.Task4;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +17,7 @@ public class Pi {
     private static final long DEFAULT_ITERATIONS_COUNT = 1_000_000_000;
     private final int countThreads;
     private final long countIterations;
-    private Optional<Double> cachePiValue = Optional.empty();
+    private double cachePiValue = 0;
 
     public Pi() {
         this(Runtime.getRuntime().availableProcessors(), DEFAULT_ITERATIONS_COUNT);
@@ -38,11 +37,11 @@ public class Pi {
     }
 
     public double getPi() {
-        if (cachePiValue.isEmpty()) {
-            cachePiValue = Optional.of(countPi());
+        if (cachePiValue == 0) {
+            cachePiValue = countPi();
         }
 
-        return cachePiValue.get();
+        return cachePiValue;
     }
 
     private double countPi() {
