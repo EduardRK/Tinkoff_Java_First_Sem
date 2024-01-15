@@ -1,5 +1,6 @@
 package edu.hw7;
 
+import edu.hw7.Task4.Pi;
 import edu.hw7.Task4.PiCounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -20,9 +21,21 @@ public class Task4Test {
             "1_000_000_000"
         })
         @DisplayName("Test pi counting")
-        public void tenMillionsSimulations(long simulations) {
+        public void piCounting(long simulations) {
             double pi = PiCounter.countPi(simulations, COUNT_THREADS);
             Assertions.assertTrue(3.14 - 0.15 <= pi && 3.14 + 0.15 >= pi);
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = {
+            "10_000_000",
+            "100_000_000",
+            "1_000_000_000"
+        })
+        @DisplayName("Test pi counting")
+        public void getPi(long simulations) {
+            Pi pi = new Pi(COUNT_THREADS, simulations);
+            Assertions.assertTrue(3.14 - 0.15 <= pi.getPi() && 3.14 + 0.15 >= pi.getPi());
         }
     }
 
@@ -38,9 +51,21 @@ public class Task4Test {
             "1_000_000_000"
         })
         @DisplayName("Test pi counting")
-        public void tenMillionsSimulations(long simulations) {
+        public void piCounting(long simulations) {
             double pi = PiCounter.countPi(simulations, COUNT_THREADS);
             Assertions.assertTrue(3.14 - 0.15 <= pi && 3.14 + 0.15 >= pi);
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = {
+            "10_000_000",
+            "100_000_000",
+            "1_000_000_000"
+        })
+        @DisplayName("Test pi counting")
+        public void getPi(long simulations) {
+            Pi pi = new Pi(simulations);
+            Assertions.assertTrue(3.14 - 0.15 <= pi.getPi() && 3.14 + 0.15 >= pi.getPi());
         }
     }
 }
