@@ -15,7 +15,7 @@ public class Pi {
     private static final double LOWER_BOUND_Y = CENTER_OF_THE_CIRCLE.y() - R;
     private static final double UPPER_BOUND_Y = CENTER_OF_THE_CIRCLE.y() + R;
     private static final int COEFFICIENT = 4;
-    private static final long DEFAULT_ITERATIONS_COUNT = 100_000_000;
+    private static final long DEFAULT_ITERATIONS_COUNT = 1_000_000_000;
     private final int countThreads;
     private final long countIterations;
     private Optional<Double> cachePiValue = Optional.empty();
