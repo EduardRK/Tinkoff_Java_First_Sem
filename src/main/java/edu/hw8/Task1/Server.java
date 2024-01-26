@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
+    private static final KeyWords KEY_WORDS = new KeyWords();
     private final ExecutorService executorService =
         Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     private final int port;
@@ -37,7 +38,8 @@ public class Server {
 
                             String request = bufferedReader.readLine();
 
-                            bufferedWriter.write(KeyWords.KEY_WORDS.getOrDefault(request, "На это ответить нечего"));
+                            bufferedWriter.write(KEY_WORDS.answerByKeyWord(request)
+                                .orElse("На это ответить нечего"));
                             bufferedWriter.newLine();
                             bufferedWriter.flush();
 

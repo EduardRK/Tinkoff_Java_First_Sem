@@ -1,24 +1,27 @@
 package edu.hw8.Task1;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 public final class KeyWords {
-    public static final Map<String, String> KEY_WORDS = new HashMap<>();
+    private static final List<String> KEY_WORDS = new ArrayList<>();
 
     static {
-        KEY_WORDS.put("личности", "Не переходи на личности там, где их нет");
-        KEY_WORDS.put(
-            "оскорбления",
-            "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами"
-        );
-        KEY_WORDS.put(
-            "глупый",
-            "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма."
-        );
-        KEY_WORDS.put("интеллект", "Чем ниже интеллект, тем громче оскорбления");
+        KEY_WORDS.add("Не переходи на личности там, где их нет");
+        KEY_WORDS.add("Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами");
+        KEY_WORDS.add(
+            "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма.");
+        KEY_WORDS.add("Чем ниже интеллект, тем громче оскорбления");
     }
 
-    private KeyWords() {
+    public KeyWords() {
+    }
+
+    public @NotNull Optional<String> answerByKeyWord(String keyWord) {
+        return KEY_WORDS.stream()
+            .filter(string -> string.lines().anyMatch(string1 -> string1.equals(keyWord)))
+            .findFirst();
     }
 }
